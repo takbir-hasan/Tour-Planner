@@ -1,0 +1,215 @@
+/* Navbar styling */
+.navbar {
+    background-color: #0D1456 !important;
+}
+
+
+.navbar-toggler-icon {
+    color: orange;
+}
+
+.navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #FFA500 !important;
+    background-color: #002b80;
+    border-radius: 20px;
+}
+
+.header-card{
+    font-weight: bold; 
+    font-family: sans-serif; 
+    font-size: 47px; 
+    color: white;
+}
+.header-card-details{
+    font-size: 17px;
+    color:white;
+    font-family: monospace;
+    margin-left: auto;
+}
+
+/* Tour and Planner text styling */
+.tour {
+    color: orange !important;
+    font-weight: bold;
+    margin-left: 1px;
+}
+
+.planner {
+    color: white !important;
+}
+
+/* Nav options styling */
+.nav-options {
+    color: white;
+    transition: all 0.3s ease;
+    padding: 10px;
+}
+
+.nav-options:hover {
+    color: orange;
+    
+}
+.nav-item.active {
+    color: orange !important;
+    background-color: #002b80;
+    border-radius: 20px;
+}
+
+.cover {
+    margin-top: -50px;
+    background: url(../images/hotel\ cover_resized.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center; /* Center vertically */
+    justify-content: flex-start; /* Align to the left */
+    height: 80vh; /* Set height to full viewport height */
+    padding-left: 100px; /* Adjust padding as needed */
+}
+
+
+@media screen and (max-width: 768px) {
+    .cover {
+        padding-left: 20px; /* Adjust padding for smaller screens */
+    }
+
+    .cover h1 {
+        font-size: 2.5rem; /* Adjust font size for smaller screens */
+    }
+}
+.search-container {
+    display: flex;
+    flex-direction: column; /* Change to column for smaller devices */
+    justify-content: center;
+    align-items: center; /* Center items horizontally */
+    position: relative;
+    width: 100%;
+    background: linear-gradient(to bottom, transparent 80%, white 20%);
+    padding: 20px;
+    text-align: center;
+    margin-top: -70px; /* Adjust the value to match the height of the header */
+}
+
+.search-container input[type="text"],
+.search-container input[type="date"],
+.search-container button {
+    padding: 15px;
+    border: 3px solid #FFB700;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+.search-container button {
+    color:white;
+    background-color: #0D1456;
+}
+@media (max-width: 768px) {
+    .search-container {
+        flex-direction: column;
+        background: linear-gradient(to bottom, transparent 85%, white 15%) !important;
+        
+    }
+    
+}
+
+@media (min-width: 768px) {
+    .search-container {
+        flex-direction: row; /* Ensure row direction for larger devices */
+        background: linear-gradient(to bottom, transparent 50%, white 50%);
+    }
+
+}
+
+
+/* footer */
+
+footer a{
+    text-decoration: none;
+}
+footer a:hover{
+    text-decoration: underline;
+}
+.body{
+    background: rgb(31, 25, 97);
+}
+
+
+
+/* Media queries for responsive design */
+@media (max-width: 500px) {
+    .navbar-brand.logo {
+        font-size: 21px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 12px;
+        margin-right: 11px;
+    }
+    .header-card{
+        font-size: 22px;
+    }
+    .navbar-brand.logo {
+        margin-left: 0px; /* Adjust the left margin as needed */
+    }
+    .header-card {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 501px) {
+    .navbar-brand.logo {
+        font-size: 29px;
+        margin: 3px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 15px;
+        margin-right: 14px;
+    }
+    
+}
+
+@media (min-width: 768px) {
+    .navbar-brand.logo {
+        font-size: 34px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px;
+        margin-right: 20px;
+    }
+    .header-card{
+        font-size: 35px;
+    }
+    .header-outer  {
+        padding-left: 30px; /* Adjust the left margin as needed */
+        padding-right: 30px;
+    }
+    
+}
+
+@media (min-width: 992px) {
+    .navbar-brand.logo {
+        font-size: 33px;
+        margin-left: 12px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 20px;
+        margin-right: 25px;
+    }
+    .header-card{
+        font-size: 45px;
+    }
+    .header-outer {
+        padding-left: 40px; /* Adjust the left margin as needed */
+        padding-right: 40px;
+    }
+   
+    
+}
