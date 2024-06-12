@@ -1,70 +1,89 @@
 <!DOCTYPE html>
-<!-- Created By CodingLab - www.codinglabweb.com -->
-<html lang="en" dir="ltr">
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form | Tour Planner</title>
     <link rel="stylesheet" href="RegisterPage.css">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 <body>
   <div class="container">
     <div class="title">Registration</div>
     <div class="content">
-      <form action="#">
+      <form id="registrationForm">
         <div class="user-details">
           <div class="input-box">
             <span class="details">Full Name</span>
-            <input type="text" placeholder="Enter your name" required>
+            <input type="text" id="fullName" placeholder="Enter your name" required>
           </div>
           <div class="input-box">
             <span class="details">Username</span>
-            <input type="text" placeholder="Enter your username" required>
+            <input type="text" id="username" placeholder="Enter your username" required>
           </div>
           <div class="input-box">
             <span class="details">Email</span>
-            <input type="text" placeholder="Enter your email" required>
+            <input type="text" id="email" placeholder="Enter your email" required>
+            <span class="error-message" id="emailError"></span>
           </div>
           <div class="input-box">
             <span class="details">Phone Number</span>
-            <input type="text" placeholder="Enter your number" required>
+            <input type="text" id="phoneNumber" placeholder="Enter your number" required>
+            <span class="error-message" id="phoneError"></span>
           </div>
-          
           <div class="input-box">
             <span class="details">Password</span>
-            <input type="text" placeholder="Enter your password" required>
+            <input type="password" id="password" placeholder="Enter your password" required>
           </div>
           <div class="input-box">
             <span class="details">Confirm Password</span>
-            <input type="text" placeholder="Confirm your password" required>
+            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
           </div>
+          <div class="input-box">
+            <span class="details">Address</span>
+            <input type="text" id="address" placeholder="Enter your address" required>
         </div>
-        <div class="gender-details">
-          <input type="radio" name="gender" id="dot-1">
-          <input type="radio" name="gender" id="dot-2">
-          <input type="radio" name="gender" id="dot-3">
+        
+        </div>
+        <div class="gender-details" id="genderDetails">
+          <input type="radio" name="gender" id="dot-1" value="Male" checked>
+          <input type="radio" name="gender" id="dot-2" value="Female">
+          <input type="radio" name="gender" id="dot-3" value="Prefer not to say">
           <span class="gender-title">Gender</span>
           <div class="category">
             <label for="dot-1">
-            <span class="dot one"></span>
-            <span class="gender">Male</span>
-          </label>
-          <label for="dot-2">
-            <span class="dot two"></span>
-            <span class="gender">Female</span>
-          </label>
-          <label for="dot-3">
-            <span class="dot three"></span>
-            <span class="gender">Prefer not to say</span>
+              <span class="dot one"></span>
+              <span class="gender">Male</span>
+            </label>
+            <label for="dot-2">
+              <span class="dot two"></span>
+              <span class="gender">Female</span>
+            </label>
+            <label for="dot-3">
+              <span class="dot three"></span>
+              <span class="gender">Prefer not to say</span>
             </label>
           </div>
         </div>
+            
+        <div class="col-md-3 text-center">
+          <label id="profile-photo-label" class="profile-photo-label">
+              <img src="image0.jpeg" alt="Profile Photo" class="profile-photo img-fluid rounded-circle">
+              <span class="profile-photo-edit-icon"><i class="fas fa-camera"></i></span><b>[Optional]</b>
+          </label>
+          <input type="file" id="profile-photo" class="d-none" aria-describedby="profile-photo-help">
+        </div>
+      
         <div class="button">
           <input type="submit" value="SignUp">
+        </div>
+        <div class="login-link">
+          <p>Already Have an Account? <a href="LoginPage.html">Login</a></p>
         </div>
       </form>
     </div>
   </div>
 
+  <script src="RegistrationPage.js"></script>
 </body>
 </html>
