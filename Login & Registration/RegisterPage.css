@@ -123,6 +123,21 @@ form .input-box span.details{
   /* transform: scale(0.99); */
   background: #e5b908;
   }
+
+  .login-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-link a {
+    color: #007bff; /* Customize this color as needed */
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
  @media(max-width: 584px){
  .container{
   max-width: 100%;
