@@ -68,6 +68,7 @@
             
         </div>
     </header>
+
     <!-- Main Content -->
     <main>
       <div class="cover ps-3 ps-lg-5">
@@ -78,49 +79,17 @@
     </div>
     <div class="search-container">
         <div class="container row justify-content-center">
-            <input type="text" placeholder="Where are you going?" class="col-lg-4">
-            <input placeholder="Check-in Date" class="textbox-n col-lg-3" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" /> 
-            <input placeholder="Check-out Date" class="textbox-n col-lg-3" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" />                
-            <button class="col-lg-2">Search</button>
+            <input type="text" id="destination" placeholder="Where are you going?" class="col-lg-4">
+            <input placeholder="Check-in Date" class="textbox-n col-lg-3" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="checkin-date" /> 
+            <input placeholder="Check-out Date" class="textbox-n col-lg-3" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="checkout-date" />                
+            <button id="search-btn" class="col-lg-2">Search</button>
         </div>
     </div>
     
-        <div class="ps-3 ps-lg-5 mt-5 mb-2"><h5 class="mb-5 ms-2" style="color:black; font-weight: bold;">Top Destinations</h5></div>
-        <div>
-            <div class="mx-3 mx-lg-5 row" >
-                <div class="col-md-4">
-                    <img src="../images/pexels-souvenirpixels-1592461.jpg" class="img-fluid" alt="Image 1">
-                </div>
-                <div class="col-md-4">
-                    <img src="../images/pexels-xue-guangjian-815005-1687845.jpg" class="img-fluid" alt="Image 2">
-                </div>
-                <div class="col-md-4">
-                    <img src="../images/pexels-pixabay-158063.jpg" class="img-fluid" alt="Image 3">
-                </div>
-            </div>
-            <div class="mx-3 mx-lg-5 row mt-3">
-                <div class="col-md-4">
-                    <img src="../images/panam.jpg" class="img-fluid" alt="Image 4">
-                </div>
-                <div class="col-md-4">
-                    <img src="../images/river.jpg" class="img-fluid" alt="Image 5">
-                </div>
-                <div class="col-md-4">
-                    <img src="../images/sea.jpg" class="img-fluid" alt="Image 6">
-                </div>
-            </div>
-            <div class="mx-3 mx-lg-5 row mt-3">
-                <div class="col-md-4">
-                    <img src="../images/sylhet.jpg" class="img-fluid" alt="Image 7">
-                </div>
-                <div class="col-md-4">
-                    <img src="../images/pexels-jeremy-bishop-1260133-2422915.jpg" class="img-fluid" alt="Image 8">
-                </div>
-                <div class="col-md-4">
-                    <img src="../images/pexels-dom-gould-105501-325807.jpg" class="img-fluid" alt="Image 9">
-                </div>
-            </div>
-        </div>
+    <div class="ps-3 ps-lg-5 mt-5 mb-2" id="top-destinations-title"><h5 class="mb-5 ms-2" style="color:black; font-weight: bold;">Top Destinations</h5></div>
+    <div id="suggestions" class="container row"></div>
+    <div id="results" class="container row"></div>
+    
     </main>
 
     <!-- Footer Section -->
@@ -200,7 +169,7 @@
                             <a href="#!" class="text-reset">Hospital</a>
                         </p>
                         <p>
-                            <a href="#!" class="text-reset">Reastaurant</a>
+                            <a href="#!" class="text-reset">Restaurant</a>
                         </p>
                         <p>
                             <a href="#!" class="text-reset">Resort</a>
@@ -212,7 +181,7 @@
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                         <!-- Links -->
                         <h6 class="text-uppercase fw-bold mb-4">Contact US</h6>
-                        <p class="mx-2"><i style="color:#00a5fd;" class="fas fa-home"></i>Jashore University of Science and Technology</p>
+                        <p class="mx-2"><i style="color:#00a5fd; padding-right: 1rem;" class="fas fa-home"></i>Jashore University of Science and Technology</p>
                         <div style="margin-left: -22px;">
                             <ul type="none">
                                 <li>
@@ -250,10 +219,13 @@
         <!-- Copyright -->
     </footer>
     <!-- Footer -->
-    
+
     <!-- Bootstrap JS (required for Bootstrap's JavaScript components) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Custom JS -->
+    <script src="HotelBooking.js"></script>
 
 </body>
 </html>
