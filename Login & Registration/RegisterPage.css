@@ -5,8 +5,48 @@
   box-sizing: border-box;
   font-family: 'Nunito', sans-serif;
 }
+:root{
+  --orange: #ffa500;
+  --mycolor: #0D1456;
+}
+*{
+  font-family: 'Nunito', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box ;
+  text-transform: capitalize;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  transition: all .2s linear;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #0D1456;
+  color: var(--orange);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  padding: 2rem 9%;
+}
+
+header .logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  
+}
+
+header .logo span {
+  color: var(--orange);
+}
+
 body{
-  height: 100vh;
+  height: 105vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,6 +78,34 @@ body{
   width: 100%;
   border-radius: 5px;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+.user-details .input-box select {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  background-color: #fff; 
+  appearance: none; 
+  -webkit-appearance: none; 
+  -moz-appearance: none; 
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%239b59b6" d="M2 0L0 2h4z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px;
+}
+
+.user-details .input-box select:focus,
+.user-details .input-box select:valid {
+  border-color: #9b59b6;
+}
+
+.user-details .input-box select option {
+  padding: 10px;
 }
 .content form .user-details{
   display: flex;
@@ -120,7 +188,7 @@ form .input-box span.details{
    background: #0D1456;
  }
  form .button input:hover{
-  /* transform: scale(0.99); */
+ 
   background: #e5b908;
   }
 
@@ -130,7 +198,7 @@ form .input-box span.details{
 }
 
 .login-link a {
-    color: #007bff; /* Customize this color as needed */
+    color: #007bff; 
     text-decoration: none;
 }
 
