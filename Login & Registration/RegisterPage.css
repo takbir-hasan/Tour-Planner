@@ -21,7 +21,7 @@
   transition: all .2s linear;
 }
 header {
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   left: 0;
   right: 0;
@@ -50,13 +50,16 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
+  /* flex-direction: column; */
   padding: 10px;
   background: #0D1456;
 }
 .container{
-  max-width: 700px;
+ /* max-width: 700px; */
   width: 100%;
+  height: 120%;
   background-color: #fff;
+  margin: 170px 100px 50px 50px;
   padding: 25px 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);

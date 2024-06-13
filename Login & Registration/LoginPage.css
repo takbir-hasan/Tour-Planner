@@ -22,7 +22,7 @@
   transition: all .2s linear;
 }
 header {
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
