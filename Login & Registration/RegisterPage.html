@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+  <header>
+    <a href="../HomePage/homepage.html" class="logo"><span>Tour</span> Planner</a>
+  </header>
   <div class="container">
     <div class="title">Registration</div>
     <div class="content">
@@ -42,7 +45,18 @@
           <div class="input-box">
             <span class="details">Address</span>
             <input type="text" id="address" placeholder="Enter your address" required>
-        </div>
+          </div>
+          <div class="input-box">
+            <span class="details">Role</span>
+            <select id="role" required>
+                <option value="" disabled selected>Select your role</option>
+                <option value="user">User</option>
+                <option value="transport-driver">Transport Driver</option>
+                <option value="guide">Guide</option>
+                <option value="hotel-manager">Hotel Manager</option>
+            </select>
+            <span class="error-message" id="roleError"></span>
+          </div>
         
         </div>
         <div class="gender-details" id="genderDetails">

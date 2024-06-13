@@ -5,6 +5,46 @@
   box-sizing: border-box;
   font-family: 'Nunito', sans-serif;
 }
+
+:root{
+  --orange: #ffa500;
+  --mycolor: #0D1456;
+}
+*{
+  font-family: 'Nunito', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box ;
+  text-transform: capitalize;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  transition: all .2s linear;
+}
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #0D1456;
+  color: var(--orange);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  padding: 2rem 9%;
+}
+
+header .logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #FFFFFF;
+  
+}
+
+header .logo span {
+  color: var(--orange);
+}
 body {
   height: 100vh;
   display: flex;
@@ -94,7 +134,7 @@ form .button input:hover {
 }
 
 .signup-link a {
-  color: #007bff; /* Customize this color as needed */
+  color: #007bff; 
   text-decoration: none;
 }
 
