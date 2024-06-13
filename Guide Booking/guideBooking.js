@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // Function to fetch top-rated guides
     function fetchTopRatedGuides() {
-        const apiUrl = 'http://localhost:3000/guides';
+        const apiUrl = 'https://666ab8167013419182d0a481.mockapi.io/guides/guides';
 
         $.ajax({
             url: apiUrl,
@@ -18,8 +18,8 @@ $(document).ready(function () {
     }
 
     // Function to fetch guides based on search parameters
-    function fetchGuides(location, date) {
-        const apiUrl = 'http://localhost:3000/guides';
+    function fetchGuides(destination, date) {
+        const apiUrl = 'https://666ab8167013419182d0a481.mockapi.io/guides/guides';
 
         $.ajax({
             url: apiUrl,
@@ -28,7 +28,7 @@ $(document).ready(function () {
                 // Filter guides based on location and available dates
                 const filteredGuides = response.filter(guide => {
                     return (
-                        guide.location.toLowerCase() === location.toLowerCase() &&
+                        guide.location.toLowerCase() === destination.toLowerCase() &&
                         guide.availableDates.includes(date)
                     );
                 });
@@ -55,16 +55,14 @@ $(document).ready(function () {
         }
 
         guides.forEach(guide => {
-            // Construct the image path relative to the 'images' folder on your server
-            const imagePath = `http://localhost:3000/${guide.image}`;
-
             const guideCard = `
                 <div class="card col-md-4">
-                    <img src="${imagePath}" class="card-img-top" alt="${guide.name}">
+                    <img src="${guide.image}" class="card-img-top" alt="${guide.name}">
                     <div class="card-body">
                         <h5 class="card-title">${guide.name}</h5>
                         <p class="card-text"><strong>Location:</strong> ${guide.location}</p>
                         <p class="card-text"><strong>Rating:</strong> ${guide.rating}</p>
+                        <p class="card-text"><strong>Price:</strong> ${guide.pricePerDay} BDT</p>
                     </div>
                 </div>
             `;
@@ -90,10 +88,10 @@ $(document).ready(function () {
 
     // Event listener for search button
     $('#search-btn').on('click', function () {
-        const location = $('#destination').val();
+        const destination = $('#destination').val();
         const date = $('#date').val();
-        if (location && date) {
-            fetchGuides(location, date);
+        if (destination && date) {
+            fetchGuides(destination, date);
         } else {
             alert('Please fill in all fields.');
         }
