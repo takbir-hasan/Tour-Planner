@@ -32,7 +32,7 @@ header {
   z-index: 1000;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 2rem 9%;
 }
 
@@ -63,6 +63,7 @@ body {
   padding: 25px 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  margin-top: 100px;
 }
 
 .container .title {
