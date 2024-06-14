@@ -6,21 +6,23 @@
   font-family: 'Nunito', sans-serif;
 }
 
-:root{
+:root {
   --orange: #ffa500;
   --mycolor: #0D1456;
 }
-*{
+
+* {
   font-family: 'Nunito', sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing:border-box ;
+  box-sizing: border-box;
   text-transform: capitalize;
   outline: none;
   border: none;
   text-decoration: none;
   transition: all .2s linear;
 }
+
 header {
   position: relative;
   top: 0;
@@ -39,12 +41,12 @@ header .logo {
   font-size: 2.5rem;
   font-weight: bold;
   color: #FFFFFF;
-  
 }
 
 header .logo span {
   color: var(--orange);
 }
+
 body {
   height: 100vh;
   display: flex;
@@ -53,6 +55,7 @@ body {
   padding: 10px;
   background: #0D1456;
 }
+
 .container {
   max-width: 400px;
   width: 100%;
@@ -61,6 +64,7 @@ body {
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);
 }
+
 .container .title {
   font-size: 25px;
   font-weight: 500;
@@ -68,6 +72,7 @@ body {
   position: relative;
   padding-bottom: 10px;
 }
+
 .container .title::before {
   content: "";
   position: absolute;
@@ -79,19 +84,23 @@ body {
   border-radius: 5px;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
+
 .content form .user-details {
   display: flex;
   flex-direction: column;
   margin: 20px 0 12px 0;
 }
+
 form .user-details .input-box {
   margin-bottom: 15px;
 }
+
 form .input-box span.details {
   display: block;
   font-weight: 500;
   margin-bottom: 5px;
 }
+
 .user-details .input-box input {
   height: 45px;
   width: 100%;
@@ -103,14 +112,17 @@ form .input-box span.details {
   border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
+
 .user-details .input-box input:focus,
 .user-details .input-box input:valid {
   border-color: #9b59b6;
 }
+
 form .button {
   height: 45px;
   margin: 35px 0;
 }
+
 form .button input {
   height: 100%;
   width: 100%;
@@ -124,6 +136,7 @@ form .button input {
   transition: all 0.3s ease;
   background: #0D1456;
 }
+
 form .button input:hover {
   background: #e5b908;
 }
@@ -134,7 +147,7 @@ form .button input:hover {
 }
 
 .signup-link a {
-  color: #007bff; 
+  color: #007bff;
   text-decoration: none;
 }
 
@@ -142,8 +155,90 @@ form .button input:hover {
   text-decoration: underline;
 }
 
-@media(max-width: 584px) {
+@media(max-width: 768px) {
+  header {
+    padding: 1rem 5%;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  header .logo {
+    font-size: 2rem;
+  }
+
   .container {
-    max-width: 100%;
+    padding: 20px;
+  }
+
+  .container .title {
+    font-size: 20px;
+  }
+
+  .content form .user-details {
+    margin: 15px 0 10px 0;
+  }
+
+  form .button {
+    margin: 25px 0;
+  }
+
+  form .input-box span.details {
+    font-size: 14px;
+  }
+
+  .user-details .input-box input {
+    height: 40px;
+    font-size: 14px;
+  }
+
+  form .button input {
+    font-size: 16px;
+  }
+
+  .signup-link {
+    margin-top: 15px;
+  }
+}
+
+@media(max-width: 576px) {
+  header {
+    padding: 1rem 3%;
+  }
+
+  header .logo {
+    font-size: 1.8rem;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .container .title {
+    font-size: 18px;
+  }
+
+  .content form .user-details {
+    margin: 10px 0 8px 0;
+  }
+
+  form .button {
+    margin: 20px 0;
+  }
+
+  form .input-box span.details {
+    font-size: 12px;
+  }
+
+  .user-details .input-box input {
+    height: 35px;
+    font-size: 12px;
+  }
+
+  form .button input {
+    font-size: 14px;
+  }
+
+  .signup-link {
+    margin-top: 10px;
   }
 }
