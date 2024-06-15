@@ -135,7 +135,7 @@ form .button input:hover {
 }
 
 .signup-link a {
-  color: #007bff; 
+  color: #007bff; /* Customize this color as needed */
   text-decoration: none;
 }
 

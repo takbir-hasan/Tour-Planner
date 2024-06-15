@@ -66,9 +66,6 @@ profilePhotoInput.addEventListener('change', function(event) {
 });
 
 
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const genderDetails = document.getElementById('genderDetails');
 
@@ -78,3 +75,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     });
 });
+
+

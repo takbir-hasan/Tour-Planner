@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile | Tour Planner</title>
+    <link rel="stylesheet" href="EditProfile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+  <header>
+    <a href="../HomePage/homepage.html" class="logo"><span>Tour</span> Planner</a>
+  </header>
+  <div class="container">
+    <div class="title">Edit Profile</div>
+    <div class="content">
+      <form id="editProfileForm">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Full Name</span>
+            <input type="text" id="fullName" placeholder="Enter your name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" id="email" placeholder="Enter your email" required>
+            <span class="error-message" id="emailError"></span>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" id="phoneNumber" placeholder="Enter your number" required>
+            <span class="error-message" id="phoneError"></span>
+          </div>
+          <div class="input-box">
+            <span class="details">Address</span>
+            <input type="text" id="address" placeholder="Enter your address" required>
+          </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <label id="profile-photo-label" class="profile-photo-label">
+              <img src="image0.jpeg" alt="Profile Photo" class="profile-photo img-fluid rounded-circle">
+              <span class="profile-photo-edit-icon"></span><b>[Optional]</b>
+            </label>
+            <input type="file" id="profile-photo" class="d-none" aria-describedby="profile-photo-help">
+          </div>
+        <div class="button">
+          <input type="submit" value="Update Profile"id="updateProfileBtn">
+        </div>
+        <div class="current-profile-link" style="text-align: center;">
+            <p>Don't want to make changes? Go to your <a href="UserProfile.html">Current Profile</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="EditProfile.js"></script>
+</body>
+</html>
