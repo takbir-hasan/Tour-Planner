@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const roleError = document.getElementById('roleError');
         roleError.textContent = '';
        
+       
+       
         if (!emailPattern.test(email)) {
             document.getElementById('emailError').textContent = 'Please enter a valid email address.';
             valid = false;
@@ -37,6 +39,9 @@ document.addEventListener('DOMContentLoaded', function() {
             roleError.textContent = 'Please select your role.';
             valid = false;
         }
+
+
+
         if(valid){
         localStorage.setItem('fullName', fullName);
         localStorage.setItem('username', username);
@@ -51,3 +56,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
