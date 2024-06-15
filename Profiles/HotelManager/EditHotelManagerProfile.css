@@ -1,0 +1,179 @@
+body {
+      background-color:rgb(255, 255, 255);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .cont {
+      background:rgb(114, 204, 237);
+      padding: 30px;
+      margin-bottom: 50px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+
+  
+/* Navbar styling */
+.navbar {
+    background-color: #0D1456 !important;
+}
+
+
+.navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #FFA500 !important;
+    background-color: #002b80;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.navbar-nav .logout:hover{
+    color: #ff0101 !important;
+    background-color: #002b80;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.header-card{
+    font-weight: bold; 
+    font-family: sans-serif; 
+    font-size: 47px; 
+    color: white;
+}
+.header-card-details{
+    font-size: 17px;
+    color:white;
+    font-family: monospace;
+    margin-left: auto;
+}
+
+/* Tour and Planner text styling */
+.tour {
+    color: orange !important;
+    font-weight: bold;
+    margin-left: 1px;
+}
+
+.planner {
+    color: white !important;
+}
+
+/* Nav options styling */
+.nav-options {
+    color: white;
+    transition: all 0.3s ease;
+    padding: 10px;
+}
+
+.nav-options:hover {
+    color: orange;
+    
+}
+.nav-item.active {
+    color: orange !important;
+    background-color: #002b80;
+    border-radius: 20px;
+}
+
+
+
+/* Media queries for header responsive design */
+@media (max-width: 500px) {
+    .navbar-brand.logo {
+        font-size: 21px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 12px;
+        margin-right: 11px;
+    }
+    .header-card{
+        font-size: 22px;
+    }
+    .navbar-brand.logo {
+        margin-left: 0px; /* Adjust the left margin as needed */
+    }
+}
+
+@media (min-width: 501px) {
+    .navbar-brand.logo {
+        font-size: 29px;
+        margin: 3px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 15px;
+        margin-right: 14px;
+    }
+    .header-card{
+        font-size: 30px;
+    }
+   
+    
+}
+
+@media (min-width: 768px) {
+    .navbar-brand.logo {
+        font-size: 34px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px;
+        margin-right: 20px;
+    }
+    .header-card{
+        font-size: 35px;
+    }
+    .header-outer  {
+        padding-left: 30px; /* Adjust the left margin as needed */
+        padding-right: 30px;
+    }
+    
+}
+
+@media (min-width: 992px) {
+    .navbar-brand.logo {
+        font-size: 33px;
+        margin-left: 12px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 20px;
+        margin-right: 25px;
+    }
+    .navbar-nav .nav-link .logout {
+        font-size: 20px;
+        margin-left: 25px;
+        /* align-items: end; */
+    }
+   
+
+    .header-card{
+        font-size: 45px;
+    }
+    .header-outer {
+        padding-left: 40px; /* Adjust the left margin as needed */
+        padding-right: 40px;
+    }
+   
+    
+}
+
+
+
+
+/* footer */
+
+footer a{
+    text-decoration: none;
+}
+footer a:hover{
+    text-decoration: underline;
+}
+.body{
+    background: rgb(31, 25, 97);
+}
+
