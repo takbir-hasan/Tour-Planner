@@ -16,7 +16,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   outline: none;
   border: none;
   text-decoration: none;
@@ -64,7 +64,7 @@ body {
   padding: 25px 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-  margin-top: 100px;
+  margin-top: 350px;
   
 }
 
@@ -385,7 +385,6 @@ form .button input:hover {
     flex-direction: column;
   }
  
-}
   .content form .user-details {
     margin: 15px 0 10px 0;
   }
