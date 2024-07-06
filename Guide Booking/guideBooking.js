@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // Function to fetch top-rated guides
     function fetchTopRatedGuides() {
-        const apiUrl = 'https://666ab8167013419182d0a481.mockapi.io/guides/guides';
+        const apiUrl = 'http://localhost:3000/api/guides';
 
         $.ajax({
             url: apiUrl,
@@ -19,8 +19,8 @@ $(document).ready(function () {
 
     // Function to fetch guides based on search parameters
     function fetchGuides(destination, date) {
-        const apiUrl = 'https://666ab8167013419182d0a481.mockapi.io/guides/guides';
-
+        const apiUrl = 'http://localhost:3000/api/guides';
+        
         $.ajax({
             url: apiUrl,
             method: 'GET',

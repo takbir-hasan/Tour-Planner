@@ -250,33 +250,41 @@ footer a:hover {
 /* Add this CSS to your existing stylesheet */
 
 /* Grid View for Suggestions and Results */
+#suggestions,
+#results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the grid items */
+    margin: auto;
+}
+
 #suggestions .card,
 #results .card {
-  flex: 0 0 calc(33.333% - 30px); /* Adjusted width for three cards in a row */
-  max-width: calc(33.333% - 30px); /* Adjusted width for three cards in a row */
-  margin: 15px; /* Space between cards */
+    flex: 0 0 calc(33.333% - 30px); /* Adjusted width for three cards in a row */
+    max-width: calc(33.333% - 30px); /* Adjusted width for three cards in a row */
+    margin: 15px; /* Space between cards */
 }
 
 @media (max-width: 768px) {
-  #suggestions .card,
-  #results .card {
-    flex: 0 0 100%; /* For smaller screens, display one card per row */
-    max-width: 100%; /* For smaller screens, display one card per row */
-  }
+    #suggestions .card,
+    #results .card {
+        flex: 0 0 100%; /* For smaller screens, display one card per row */
+        max-width: 100%; /* For smaller screens, display one card per row */
+    }
 }
 
 @media (min-width: 769px) and (max-width: 991px) {
-  #suggestions .card,
-  #results .card {
-    flex: 0 0 calc(50% - 30px); /* For medium screens, display two cards per row */
-    max-width: calc(50% - 30px); /* For medium screens, display two cards per row */
-  }
+    #suggestions .card,
+    #results .card {
+        flex: 0 0 calc(50% - 30px); /* For medium screens, display two cards per row */
+        max-width: calc(50% - 30px); /* For medium screens, display two cards per row */
+    }
 }
 
 /* Additional CSS for spacing between cards */
 .row {
-  margin-left: -15px;
-  margin-right: -15px;
+    margin-left: -15px;
+    margin-right: -15px;
 }
 
 /* Add this CSS to your existing stylesheet */
