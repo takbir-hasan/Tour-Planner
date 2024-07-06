@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  const apiUrl = 'https://666949c82e964a6dfed47b5e.mockapi.io/tour-planner/hotels';
+  const apiUrl = 'http://localhost:3000/api/hotels';
 
   // Function to fetch top-rated hotels
   function fetchTopRatedHotels() {
@@ -23,14 +23,24 @@ $(document).ready(function () {
       url: apiUrl,
       method: 'GET',
       success: function (response) {
+        console.log('Response:', response);
+        console.log('Destination:', destination);
+        console.log('Check-in Date:', checkinDate);
+        console.log('Check-out Date:', checkoutDate);
+
         // Filter hotels based on place and availability
         const filteredHotels = response.filter(hotel => {
-          return (
-            hotel.location.toLowerCase().includes(destination.toLowerCase()) &&
-            new Date(hotel.availableFrom) <= new Date(checkinDate) &&
-            new Date(hotel.availableTo) >= new Date(checkoutDate)
-          );
+          const isLocationMatch = hotel.location.toLowerCase().includes(destination.toLowerCase());
+          const isAvailable = new Date(hotel.availableFrom.split('-').join('/')) <= new Date(checkinDate) && new Date(hotel.availableTo.split('-').join('/')) >= new Date(checkoutDate);
+          
+          console.log('Hotel:', hotel);
+          console.log('isLocationMatch:', isLocationMatch);
+          console.log('isAvailable:', isAvailable);
+          
+          return isLocationMatch && isAvailable;
         });
+
+        console.log('Filtered Hotels:', filteredHotels);
 
         // Display filtered hotels
         displayResults(filteredHotels);
