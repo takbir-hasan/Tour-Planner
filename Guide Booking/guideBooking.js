@@ -20,22 +20,24 @@ $(document).ready(function () {
     // Function to fetch guides based on search parameters
     function fetchGuides(destination, date) {
         const apiUrl = 'http://localhost:3000/api/guides';
-        
+    
         $.ajax({
             url: apiUrl,
             method: 'GET',
             success: function (response) {
                 // Filter guides based on location and available dates
                 const filteredGuides = response.filter(guide => {
+                    const guideDates = guide.availableDates.map(date => new Date(date).toISOString().split('T')[0]);
+                    const searchDate = new Date(date).toISOString().split('T')[0];
                     return (
                         guide.location.toLowerCase() === destination.toLowerCase() &&
-                        guide.availableDates.includes(date)
+                        guideDates.includes(searchDate)
                     );
                 });
-
+    
                 // Sort filtered guides by rating
                 const sortedGuides = filteredGuides.sort((a, b) => b.rating - a.rating);
-
+    
                 // Display filtered and sorted guides
                 displayResults(sortedGuides);
             },
@@ -85,6 +87,46 @@ $(document).ready(function () {
         displayGuides(resultsContainer, results);
         resultsContainer.show();
     }
+
+    // Function to fetch place suggestions
+  function fetchPlaceSuggestions(query) {
+    $.ajax({
+      url: 'http://localhost:3000/api/guides',
+      method: 'GET',
+      success: function (response) {
+        // Filter guides based on place query
+        const placeSuggestions = response.filter(guide =>
+          guide.location.toLowerCase().includes(query.toLowerCase())
+        );
+
+        // Display place suggestions
+        displayPlaceSuggestions(placeSuggestions.map(guide => guide.location));
+      },
+      error: function (error) {
+        console.error('Error fetching place suggestions:', error);
+      },
+    });
+  }
+
+  // Function to display place suggestions
+  function displayPlaceSuggestions(suggestions) {
+    const datalist = $('#place-suggestions');
+    datalist.empty(); // Clear previous suggestions
+
+    suggestions.forEach(suggestion => {
+      const option = `<option value="${suggestion}"></option>`;
+      datalist.append(option);
+    });
+  }
+
+  // Event listener for destination input field
+  $('#destination').on('input', function () {
+    const query = $(this).val();
+    if (query.length > 2) { // Fetch suggestions after 3 characters
+      fetchPlaceSuggestions(query);
+    }
+  });
+
 
     // Event listener for search button
     $('#search-btn').on('click', function () {

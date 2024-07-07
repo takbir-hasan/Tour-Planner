@@ -76,7 +76,7 @@
     <main>
         <div class="search-container">
             <div class="container text-center">
-                <input type="text" id="destination" placeholder="Where are you going?" class="col-lg-4"><input placeholder="Select Date" class="textbox-n col-lg-3" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" /><button id = "search-btn">Search</button>
+                <input type="text" id="destination" list="place-suggestions" placeholder="Where are you going?" class="col-lg-4"><datalist id="place-suggestions"></datalist><input placeholder="Select Date" class="textbox-n col-lg-3" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date"><button id="search-btn" class="col-lg-2">Search</button>
             </div>
         </div>
 

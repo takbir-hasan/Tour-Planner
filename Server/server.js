@@ -4,13 +4,24 @@ const cors = require('cors'); // Import cors middleware
 const guidesRoutes = require('./routes/guides');
 const hotelsRoutes = require('./routes/hotels');
 const transportsRoutes = require('./routes/transports');
+const connectDB = require('./db'); // Import the database connection function
 
 
 const app = express();
 const port = 3000;
 
+// Connect to MongoDB
+try {
+    connectDB();
+} catch (error) {
+    console.error('Error in connecting to MongoDB:', error);
+}
+
 // Use cors middleware to allow all origins during development
 app.use(cors());
+app.use(express.json()); // Parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..')));
