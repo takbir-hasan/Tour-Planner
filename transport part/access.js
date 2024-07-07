@@ -1,5 +1,5 @@
 $(document).ready(function () {
-      const apiUrl = 'https://666949c82e964a6dfed47b5e.mockapi.io/tour-planner/transports';
+      const apiUrl = 'http://localhost:3000/api/transports';
     
       // Function to fetch top-rated transports
       function fetchTopRatedTransports() {
