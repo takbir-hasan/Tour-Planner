@@ -1,10 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const transportsData = require('../data/transportsData'); // Ensure this path is correct
+const Hotel = require('../models/Transport'); // Assuming this is where your Hotel model is defined
 
-// Route to fetch all transports
-router.get('/', (req, res) => {
-    res.json(transportsData);
+// Route to fetch all Hotels
+router.get('/', async (req, res) => {
+    try {
+        const hotels = await Hotel.find();
+        //console.log('hotels fetched:', hotels); // Log fetched hotels to console
+        res.json(hotels);
+    } catch (err) {
+        console.error('Error fetching hotels:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
 });
 
 module.exports = router;
