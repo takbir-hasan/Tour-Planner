@@ -61,6 +61,7 @@ $(document).ready(function () {
               <p class="card-text"><strong>Price:</strong> $${hotel.price}/night</p>
               <p class="card-text"><strong>Rating:</strong> ${hotel.rating}</p>
               <a href="#" class="btn btn-primary">Book</a>
+              <a href="#" class="btn btn-warning">Show Reviews</a>
             </div>
           </div>
         `;

@@ -60,6 +60,8 @@ $(document).ready(function () {
                 <p class="card-text"><strong>Price:</strong> $${transport.price}/trip</p>
                 <p class="card-text"><strong>Rating:</strong> ${transport.rating}</p>
                 <p class="card-text"><strong>Max Passengers:</strong> ${transport.maxPassengers}</p>
+                <a href="#" class="btn btn-primary">Book</a>
+                 <a href="#" class="btn btn-warning">Show Reviews</a>
               </div>
             </div>
           `;
