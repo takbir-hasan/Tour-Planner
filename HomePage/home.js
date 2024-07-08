@@ -53,7 +53,7 @@ $(document).ready(function () {
   
       hotels.forEach(hotel => {
         const hotelCard = `
-          <div class="card col-md-4 ">
+          <div class="card col-md-4 text-center">
             <img src="${hotel.image}" class="card-img-top" alt="${hotel.name}">
             <div class="card-body">
               <h5 class="card-title">${hotel.name}</h5>
