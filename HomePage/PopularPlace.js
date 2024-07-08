@@ -1,17 +1,17 @@
 const places = [
     {
         name: "Cox's Bazar",
-        location: "Jashore City, Bangladesh",
+        location: "Cox's Bazar, Bangladesh",
         image: "nature1.jpg"
     },
+    // {
+    //     name: "Chattagram",
+    //     location: "Jashore City, Bangladesh",
+    //     image: "nature2.jpg"
+    // },
     {
-        name: "Chattagram",
-        location: "Jashore City, Bangladesh",
-        image: "nature2.jpg"
-    },
-    {
-        name: "Cox's Bazar",
-        location: "Khulna, Bangladesh",
+        name: "Ratargul",
+        location: "Sylhet, Bangladesh",
         image: "nature3.jpg"
     },
    

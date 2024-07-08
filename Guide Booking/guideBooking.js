@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // Function to fetch top-rated guides
     function fetchTopRatedGuides() {
-        const apiUrl = 'http://localhost:3000/api/guides';
+        const apiUrl = 'api/guides';
 
         $.ajax({
             url: apiUrl,

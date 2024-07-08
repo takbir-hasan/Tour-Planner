@@ -1,5 +1,6 @@
 require("dotenv").config
 const express = require("express");
+const bcrypt = require('bcrypt')
 const cors = require("cors");
 const mongoose = require("mongoose");
 const multer = require('multer');
@@ -56,8 +57,8 @@ app.get("/registration",(req,res)=>{
 //signup
 app.post('/upload', async (req, res) => {
   try {
-    console.log('Form submission received');
-    console.log('Body:', req.body);
+    // console.log('Form submission received');
+    // console.log('Body:', req.body);
 
     const user = new User({
       fullname: req.body.fullName,
@@ -106,20 +107,67 @@ app.post('/login', async (req, res) => {
   try {
       const user = await User.findOne({ username });
 
-      if (!user || user.password !== password) {
-          return res.status(401).json({ message: 'Incorrect username or password.' });
-      }
 
-      res.json({ role: user.role });
+    if(user){
+      bcrypt.compare(password, user.password, (err, result) => {
+        if (err) {
+          console.error('Error comparing passwords:', err);
+        }
+         else if (result) {
+          console.log('Password matches!');
+          res.json({ role: user.role });
+          // Proceed with login
+        } else {
+          console.log('Password does not match.');
+          // Handle failed login
+          return res.status(401).json({ message: 'Incorrect username or password.' });
+        }
+      });
+    }
+
+     
   } catch (error) {
       res.status(500).json({ message: 'Server error. Please try again later.' });
   }
 });
 
+// add hotels
+const Hotel = require("./models/hotels.model");
 
+app.get('/api/hotels', async (req, res) => {
+  try {
+      const hotels = await Hotel.find();
+      res.json(hotels);
+  } catch (err) {
+      console.error('Error fetching hotels:', err);
+      res.status(500).json({ message: 'Server error' });
+  }
+});
 
+//add tranport
+const Transport = require("./models/transport.model");
 
+app.get('/api/transports', async (req, res) => {
+  try {
+      const tranports = await Transport.find();
+      res.json(tranports);
+  } catch (err) {
+      console.error('Error fetching hotels:', err);
+      res.status(500).json({ message: 'Server error' });
+  }
+});
 
+// add guide
+const Guide = require("./models/guide.model");
+app.get('/api/guides', async (req, res) => {
+  try {
+      const guides = await Guide.find();
+      res.json(guides);
+  } catch (err) {
+      console.error('Error fetching hotels:', err);
+      res.status(500).json({ message: 'Server error' });
+  }
+});
 
 
 

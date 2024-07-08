@@ -1,5 +1,5 @@
 $(document).ready(function () {
-      const apiUrl = 'http://localhost:3000/api/transports';
+      const apiUrl = '/api/transports';
     
       // Function to fetch top-rated transports
       function fetchTopRatedTransports() {
