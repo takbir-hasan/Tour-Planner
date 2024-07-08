@@ -9,6 +9,7 @@ $(document).ready(function() {
             $('#hotel-name').val(response.hotelName);
             $('#location').val(response.location);
             $('#price').val(response.price);
+            $('#image').attr('src', response.image);
         },
         error: function(error) {
             console.error('Error fetching service data:', error);
@@ -22,7 +23,8 @@ $(document).ready(function() {
         const updatedData = {
             hotelName: $('#hotel-name').val(),
             location: $('#location').val(),
-            price: $('#price').val()
+            price: $('#price').val(),
+            image:$('image').val()
         };
 
         $.ajax({
