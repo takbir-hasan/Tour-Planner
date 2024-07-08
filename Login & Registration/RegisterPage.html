@@ -10,46 +10,47 @@
 </head>
 <body>
   <header>
-    <a href="../HomePage/homepage.html" class="logo"><span>Tour</span> Planner</a>
+    <a href="/" class="logo"><span>Tour</span> Planner</a>
   </header>
   <div class="container">
     <div class="title">Registration</div>
     <div class="content">
-      <form id="registrationForm">
+      <form id="registrationForm" method="post" action="/upload">
         <div class="user-details">
           <div class="input-box">
             <span class="details">Full Name</span>
-            <input type="text" id="fullName" placeholder="Enter your name" required>
+            <input type="text" id="fullName" name="fullName" placeholder="Enter your name" required>
           </div>
           <div class="input-box">
             <span class="details">Username</span>
-            <input type="text" id="username" placeholder="Enter your username" required>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
           </div>
           <div class="input-box">
             <span class="details">Email</span>
-            <input type="text" id="email" placeholder="Enter your email" required>
+            <input type="text" id="email" name="email" placeholder="Enter your email" required>
             <span class="error-message" id="emailError"></span>
           </div>
           <div class="input-box">
             <span class="details">Phone Number</span>
-            <input type="text" id="phoneNumber" placeholder="Enter your number" required>
+            <input type="text" id="phoneNumber" name="phoneNumber" placeholder="Enter your number" required>
             <span class="error-message" id="phoneError"></span>
           </div>
           <div class="input-box">
             <span class="details">Password</span>
-            <input type="password" id="password" placeholder="Enter your password" required>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
           </div>
           <div class="input-box">
             <span class="details">Confirm Password</span>
-            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+            <span class="error-message" id="confirmPasswordError"></span>
           </div>
           <div class="input-box">
             <span class="details">Address</span>
-            <input type="text" id="address" placeholder="Enter your address" required>
+            <input type="text" id="address" name="address" placeholder="Enter your address" required>
           </div>
           <div class="input-box">
             <span class="details">Role</span>
-            <select id="role" required>
+            <select id="role" name="role" required>
                 <option value="" disabled selected>Select your role</option>
                 <option value="user">User</option>
                 <option value="transport-driver">Transport Driver</option>
@@ -58,7 +59,6 @@
             </select>
             <span class="error-message" id="roleError"></span>
           </div>
-        
         </div>
         <div class="gender-details" id="genderDetails">
           <input type="radio" name="gender" id="dot-1" value="Male" checked>
@@ -80,25 +80,128 @@
             </label>
           </div>
         </div>
-            
         <div class="col-md-3 text-center">
           <label id="profile-photo-label" class="profile-photo-label">
-              <!-- <img src="image0.jpeg" alt="Profile Photo" class="profile-photo img-fluid rounded-circle"> -->
-              <span class="profile-photo-edit-icon style= "><i style="color:#95b2c2; padding-right: 1rem;" class="fas fa-camera"></i></span><b>Photo [Optional]</b>
+              <span class="profile-photo-edit-icon"><i style="color:#95b2c2; padding-right: 1rem;" class="fas fa-camera"></i></span><b>Photo [Optional]</b>
           </label>
           <input type="file" id="profile-photo" class="d-none" aria-describedby="profile-photo-help">
         </div>
-      
         <div class="button">
           <input type="submit" value="SignUp">
         </div>
         <div class="login-link">
-          <p>Already Have an Account? <a href="LoginPage.html">Login</a></p>
+          <p>Already Have an Account? <a href="/login">Login</a></p>
         </div>
+        <input type="hidden" id="photoBase64" name="photo">
       </form>
     </div>
   </div>
+  <script>
+    document.getElementById('profile-photo').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      
+      reader.onloadend = function() {
+        document.getElementById('photoBase64').value = reader.result;
+      };
+      
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    });
 
-  <script src="RegistrationPage.js"></script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const fullName = document.getElementById('fullName').value;
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const phoneNumber = document.getElementById('phoneNumber').value;
+      const gender = document.querySelector('input[name="gender"]:checked').value;
+      const address = document.getElementById('address').value; 
+      const role = document.getElementById('role').value;
+      const photo = document.getElementById('photoBase64').value;
+
+      const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+      const phonePattern = /^\d{11}$/;
+      let valid = true;
+
+      document.getElementById('emailError').textContent = '';
+      document.getElementById('phoneError').textContent = '';
+      document.getElementById('confirmPasswordError').textContent = '';
+      const roleError = document.getElementById('roleError');
+      roleError.textContent = '';
+
+      if (!emailPattern.test(email)) {
+          document.getElementById('emailError').textContent = 'Please enter a valid email address.';
+          valid = false;
+      }
+
+      if (!phonePattern.test(phoneNumber)) {
+          document.getElementById('phoneError').textContent = 'Please enter a valid phone number (11 digits).';
+          valid = false;
+      }
+
+      if (!role) {
+          roleError.textContent = 'Please select your role.';
+          valid = false;
+      }
+
+      if (password !== confirmPassword) {
+          document.getElementById('confirmPasswordError').textContent = 'Password and Confirm Password do not match.';
+          valid = false;
+      }
+
+      if (valid) {
+        const formData = {
+          fullName: fullName,
+          username: username,
+          email: email,
+          phoneNumber: phoneNumber,
+          gender: gender,
+          address: address,
+          role: role,
+          photo: photo,
+          password: password,
+          confirmPassword: confirmPassword
+        };
+
+        fetch('/upload', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Role:', data.role);
+          let redirectUrl = '/';
+          switch(data.role) {
+            case 'user':
+              redirectUrl = '/user-success';
+              break;
+            case 'transport-driver':
+              redirectUrl = '/transport-driver-success';
+              break;
+            case 'guide':
+              redirectUrl = '/guide-success';
+              break;
+            case 'hotel-manager':
+              redirectUrl = '/hotel-manager-success';
+              break;
+            default:
+              redirectUrl = '/';
+          }
+          window.location.href = redirectUrl;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      }
+    });
+  </script>
 </body>
 </html>

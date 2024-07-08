@@ -1,48 +1,142 @@
-let searchBtn=document.querySelector('#search-btn');
-let searchBar=document.querySelector('.search-bar-container');
-let loginBtn = document.querySelector('#login-btn');
-let formBtn=document.querySelector('.login-btn');
-let loginForm=document.querySelector('.login-form-container');
-let formClose=document.querySelector('#form-close');
-let menu=document.querySelector('#menu-bar');
-let navbar=document.querySelector('.navbar');
-let videoBtn=document.querySelectorAll('.vid-btn');
-
-window.onscroll=() =>{
-    searchBtn.classList.remove('fa-times');
-    searchBar.classList.remove('active');
-    menu.classList.remove('fa-times');
-    navbar.classList.remove('active');
-    loginForm.classList.remove('active');
-}
-menu.addEventListener( 'click', ()=>{
-    menu.classList.toggle('fa-times');
-    navbar.classList.toggle('active');
-});
-searchBtn.addEventListener( 'click', ()=>{
-    searchBtn.classList.toggle('fa-times');
-   searchBar.classList.toggle('active');
-});
-loginBtn.addEventListener('click', () => {
-    loginForm.classList.add('active');
-});
-// formBtn.addEventListener( 'click', ()=>{
-//     loginForm.classList.add('active');
-// });
-formClose.addEventListener( 'click', ()=>{
-   // signupform.classList.remove('active');
-    loginForm.classList.remove('active');
-});
-
-
-videoBtn.forEach(btn=>{
-    btn.addEventListener('click',()=>{
-        document.querySelector('.controls .active').classList.remove('active');
-        btn.classList.add('active');
-        let src=btn.getAttribute('data-src');
-        document.querySelector("#video-slider").src=src;
+$(document).ready(function () {
+    const apiUrl = '/api/hotels';
+    // Function to fetch top-rated hotels
+    function fetchTopRatedHotels() {
+      $.ajax({
+        url: apiUrl,
+        method: 'GET',
+        success: function (response) {
+          // Sort hotels by rating and get the top 6
+          const topRatedHotels = response.sort((a, b) => b.rating - a.rating).slice(0, 2);
+          displaySuggestions(topRatedHotels);
+        },
+        error: function (error) {
+          console.error('Error fetching top-rated hotels:', error);
+        },
+      });
+    }
+  
+    // Function to fetch hotels based on search parameters
+    function fetchHotels(destination, checkinDate, checkoutDate) {
+      $.ajax({
+        url: apiUrl,
+        method: 'GET',
+        success: function (response) {
+  
+          // Filter hotels based on place and availability
+           const filteredHotels = response.filter(hotel => {
+            const isLocationMatch = hotel.location.toLowerCase().includes(destination.toLowerCase());
+            const isAvailable = new Date(hotel.availableFrom.split('-').join('/')) <= new Date(checkinDate) && new Date(hotel.availableTo.split('-').join('/')) >= new Date(checkoutDate);
+            
+            return isLocationMatch && isAvailable;
+          });
+  
+          console.log('Filtered Hotels:', filteredHotels);
+  
+          // Display filtered hotels
+          displayResults(filteredHotels);
+        },
+        error: function (error) {
+          console.error('Error fetching hotel data:', error);
+        },
+      });
+    }
+  
+    // Function to display hotels
+    function displayHotels(container, hotels) {
+      container.empty(); // Clear previous hotels
+  
+      if (hotels.length === 0) {
+        container.html("<p>No hotels available for the selected criteria.</p>");
+        return;
+      }
+  
+      hotels.forEach(hotel => {
+        const hotelCard = `
+          <div class="card col-md-4 ">
+            <img src="${hotel.image}" class="card-img-top" alt="${hotel.name}">
+            <div class="card-body">
+              <h5 class="card-title">${hotel.name}</h5>
+              <p class="card-text"><strong>Location:</strong> ${hotel.location}</p>
+              <p class="card-text"><strong>Price:</strong> $${hotel.price}/night</p>
+              <p class="card-text"><strong>Rating:</strong> ${hotel.rating}</p>
+              <a href="#" class="btn btn-primary">Book</a>
+              <a href="#" class="btn btn-warning">Show Reviews</a>
+            </div>
+          </div>
+        `;
+        container.append(hotelCard);
+      });
+    }
+  
+    // Function to display top-rated hotels
+    function displaySuggestions(suggestions) {
+      const suggestionsContainer = $('#suggestions');
+      displayHotels(suggestionsContainer, suggestions);
+      suggestionsContainer.show();
+    }
+  
+    // Function to display search results
+    function displayResults(results) {
+      const resultsContainer = $('#results');
+      $('#top-destinations-title').hide();
+      $('#suggestions').hide();
+      displayHotels(resultsContainer, results);
+      resultsContainer.show();
+    }
+  
+    // Function to fetch place suggestions
+    function fetchPlaceSuggestions(query) {
+      $.ajax({
+        url: apiUrl,
+        method: 'GET',
+        success: function (response) {
+          // Filter hotels based on place query
+          const placeSuggestions = response.filter(hotel =>
+            hotel.location.toLowerCase().includes(query.toLowerCase())
+          );
+  
+          // Display place suggestions
+          displayPlaceSuggestions(placeSuggestions.map(hotel => hotel.location));
+        },
+        error: function (error) {
+          console.error('Error fetching place suggestions:', error);
+        },
+      });
+    }
+  
+    // Function to display place suggestions
+    function displayPlaceSuggestions(suggestions) {
+      const datalist = $('#place-suggestions');
+      datalist.empty(); // Clear previous suggestions
+  
+      suggestions.forEach(suggestion => {
+        const option = `<option value="${suggestion}"></option>`;
+        datalist.append(option);
+      });
+    }
+  
+    // Event listener for destination input field
+    $('#destination').on('input', function () {
+      const query = $(this).val();
+      if (query.length > 2) { // Fetch suggestions after 3 characters
+        fetchPlaceSuggestions(query);
+      }
     });
-
-});
-
-
+  
+    // Event listener for search button
+    $('#search-btn').on('click', function () {
+      const destination = $('#destination').val();
+      const checkinDate = $('#checkin-date').val();
+      const checkoutDate = $('#checkout-date').val();
+      if (destination && checkinDate && checkoutDate) {
+        fetchHotels(destination, checkinDate, checkoutDate);
+      } else {
+        alert('Please fill in all fields.');
+      }
+    });
+  
+    // Initial fetch of top-rated hotels
+    fetchTopRatedHotels();
+  });
+  

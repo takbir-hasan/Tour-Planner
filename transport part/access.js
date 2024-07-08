@@ -1,5 +1,5 @@
 $(document).ready(function () {
-      const apiUrl = 'https://666949c82e964a6dfed47b5e.mockapi.io/tour-planner/transports';
+      const apiUrl = '/api/transports';
     
       // Function to fetch top-rated transports
       function fetchTopRatedTransports() {
@@ -60,6 +60,8 @@ $(document).ready(function () {
                 <p class="card-text"><strong>Price:</strong> $${transport.price}/trip</p>
                 <p class="card-text"><strong>Rating:</strong> ${transport.rating}</p>
                 <p class="card-text"><strong>Max Passengers:</strong> ${transport.maxPassengers}</p>
+                <a href="#" class="btn btn-primary">Book</a>
+                 <a href="#" class="btn btn-warning">Show Reviews</a>
               </div>
             </div>
           `;

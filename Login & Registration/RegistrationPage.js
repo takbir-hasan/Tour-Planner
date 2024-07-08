@@ -3,15 +3,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const registrationForm = document.getElementById('registrationForm');
     
     registrationForm.addEventListener('submit', function(event) {
-        event.preventDefault(); 
+         event.preventDefault(); 
         
         const fullName = document.getElementById('fullName').value;
         const username = document.getElementById('username').value;
         const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
         const phoneNumber = document.getElementById('phoneNumber').value;
         const gender = document.querySelector('input[name="gender"]:checked').value;
         const address = document.getElementById('address').value; 
         const role = document.getElementById('role').value;
+        const photo = document.getElementById('profile-photo').value;
 
 
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -39,6 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
             roleError.textContent = 'Please select your role.';
             valid = false;
         }
+        if (password != confirmPassword) {
+            document.getElementById('confirmPassword').textContent = 'Not matched with password';
+            valid = false;
+        }
 
 
 
@@ -50,9 +57,10 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('gender', gender);
         localStorage.setItem('address', address);
         localStorage.setItem('role', role);
+        localStorage.setItem('photo', photo);
         
         
-        window.location.href = 'UserProfile.html';
+     //  window.location.href = 'UserProfile.html';
         }
     });
 });

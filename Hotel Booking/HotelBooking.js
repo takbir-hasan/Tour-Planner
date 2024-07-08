@@ -1,6 +1,5 @@
 $(document).ready(function () {
-  const apiUrl = 'https://666949c82e964a6dfed47b5e.mockapi.io/tour-planner/hotels';
-
+  const apiUrl = '/api/hotels';
   // Function to fetch top-rated hotels
   function fetchTopRatedHotels() {
     $.ajax({
@@ -23,14 +22,16 @@ $(document).ready(function () {
       url: apiUrl,
       method: 'GET',
       success: function (response) {
+
         // Filter hotels based on place and availability
-        const filteredHotels = response.filter(hotel => {
-          return (
-            hotel.location.toLowerCase().includes(destination.toLowerCase()) &&
-            new Date(hotel.availableFrom) <= new Date(checkinDate) &&
-            new Date(hotel.availableTo) >= new Date(checkoutDate)
-          );
+         const filteredHotels = response.filter(hotel => {
+          const isLocationMatch = hotel.location.toLowerCase().includes(destination.toLowerCase());
+          const isAvailable = new Date(hotel.availableFrom.split('-').join('/')) <= new Date(checkinDate) && new Date(hotel.availableTo.split('-').join('/')) >= new Date(checkoutDate);
+          
+          return isLocationMatch && isAvailable;
         });
+
+        console.log('Filtered Hotels:', filteredHotels);
 
         // Display filtered hotels
         displayResults(filteredHotels);
@@ -59,6 +60,8 @@ $(document).ready(function () {
             <p class="card-text"><strong>Location:</strong> ${hotel.location}</p>
             <p class="card-text"><strong>Price:</strong> $${hotel.price}/night</p>
             <p class="card-text"><strong>Rating:</strong> ${hotel.rating}</p>
+            <a href="#" class="btn btn-primary">Book</a>
+              <a href="#" class="btn btn-warning">Show Reviews</a>
           </div>
         </div>
       `;
