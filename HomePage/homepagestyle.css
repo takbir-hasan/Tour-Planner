@@ -238,17 +238,6 @@
 }
 
 
-
-
-
-
-
-body{
-    height:300rem;
-}
-
-
-
 /*OurServices*/
 *{
     margin: 0;
@@ -660,6 +649,7 @@ body{
   }
   .hotel_grid{
     margin-top: 4rem;
+    margin-left: 7rem;
     display:grid ;
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
