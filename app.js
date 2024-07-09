@@ -67,6 +67,9 @@ app.use(express.static(path.join(__dirname, 'Profiles/HotelManager')));
 app.get('/editmanagerprofile', (req, res) => {
    res.sendFile(__dirname + "/./Profiles/HotelManager/EditHotelManagerProfile.html");
 })
+// app.get('/editguideprofile', (req, res) => {
+//    res.sendFile(__dirname + "/./Profiles/HotelManager/EditHotelManagerProfile.html");
+// })
 app.use(express.static(path.join(__dirname, 'Profiles/HotelManager')));
 app.get('/editmanagerservice', (req, res) => {
    res.sendFile(__dirname + "/./Profiles/HotelManager/EditHotelManagerService.html");
@@ -74,11 +77,11 @@ app.get('/editmanagerservice', (req, res) => {
 app.use(express.static(path.join(__dirname, 'Profiles/Guide/Edit Profile')));
 app.get('/editguideprofile', (req, res) => {
   res.sendFile(__dirname + "/./Profiles/Guide/Edit Profile/EditProfile.html");
-});
+})
 app.use(express.static(path.join(__dirname, 'Profiles/Guide/Edit Services')));
 app.get('/editguideservice', (req, res) => {
   res.sendFile(__dirname + "/./Profiles/Guide/Edit Services/EditServices.html");
-});
+})
 
 
  
