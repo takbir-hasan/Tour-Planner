@@ -176,6 +176,16 @@ app.get('/favicon.png', (req, res) => {
     res.sendFile(path.join(__dirname, '/./favicon.png'));
 });
 
+app.get('/api/users',async(req,res)=>{
+  const { username } = req.query;
+  try {
+    const users = await User.findOne({username:username});
+    res.json(users);
+    } catch (err) {
+      console.error('Error fetching users:', err);
+      res.status(500).json({ message: 'Server error' });
+      }
+});
 
 
 
