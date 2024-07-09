@@ -176,6 +176,7 @@ app.get('/favicon.png', (req, res) => {
     res.sendFile(path.join(__dirname, '/./favicon.png'));
 });
 
+//userprofile
 app.get('/api/users',async(req,res)=>{
   const { username } = req.query;
   try {
