@@ -1,463 +1,462 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
 }
 
 :root {
-  --orange: #ffa500;
-  --mycolor: #0D1456;
+    --orange: #ffa500;
+    --mycolor: #0D1456;
 }
 
 * {
-  font-family: 'Nunito', sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  /* text-transform: capitalize; */
-  outline: none;
-  border: none;
-  text-decoration: none;
-  transition: all .2s linear;
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* text-transform: capitalize; */
+    outline: none;
+    border: none;
+    text-decoration: none;
+    transition: all .2s linear;
 }
 
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: #0D1456;
-  color: var(--orange);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between; 
-  padding: 1rem 5%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #0D1456;
+    color: var(--orange);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 5%;
 }
 
 header .logo {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #FFFFFF;
-  margin:0;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin: 0;
 }
 
 header .logo span {
-  color: var(--orange);
+    color: var(--orange);
 }
 
 body {
-  height: 105vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background: #0D1456;
-  margin:0;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: #0D1456;
+    margin: 0;
+    margin-top: 300px;
 }
 
 .container {
-  width: 100%;
-  max-width: 700px;
-  background-color: #fff;
-  margin: 170px 100px 50px 50px;
-  padding: 25px 30px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-  margin-top: 200px;
-  margin-bottom: 50px;
-  
+    width: 100%;
+    max-width: 700px;
+    background-color: #fff;
+    margin: 170px 100px 50px 50px;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    margin-top: 200px;
+    margin-bottom: 50px;
 }
 
 .container .title {
-  font-size: 25px;
-  font-weight: 500;
-  text-align: center;
-  position: relative;
-  padding-bottom: 5px;
+    font-size: 25px;
+    font-weight: 500;
+    text-align: center;
+    position: relative;
+    padding-bottom: 5px;
 }
 
 .container .title::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 100%;
-  border-radius: 5px;
-  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 100%;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
 
 .user-details .input-box select {
-  height: 45px;
-  width: 100%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
-  background-color: #fff;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%239b59b6" d="M2 0L0 2h4z"/></svg>');
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 10px;
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%239b59b6" d="M2 0L0 2h4z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
 }
 
 .user-details .input-box select:focus,
 .user-details .input-box select:valid {
-  border-color: #9b59b6;
+    border-color: #9b59b6;
 }
 
 .user-details .input-box select option {
-  padding: 10px;
+    padding: 10px;
 }
 
 .content form .user-details {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 20px 0 12px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
 }
 
 form .user-details .input-box {
-  margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
+    margin-bottom: 15px;
+    width: calc(100% / 2 - 20px);
 }
 
 form .input-box span.details {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
 }
 
 .user-details .input-box input {
-  height: 45px;
-  width: 100%;
-  outline: none;
-  font-size: 16px;
-  border-radius: 5px;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
-  transition: all 0.3s ease;
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
 }
 
 .user-details .input-box input:focus,
 .user-details .input-box input:valid {
-  border-color: #9b59b6;
+    border-color: #9b59b6;
 }
 
 form .gender-details .gender-title {
-  font-size: 20px;
-  font-weight: 500;
+    font-size: 20px;
+    font-weight: 500;
 }
 
 form .category {
-  display: flex;
-  width: 80%;
-  margin: 14px 0;
-  justify-content: space-between;
+    display: flex;
+    width: 80%;
+    margin: 14px 0;
+    justify-content: space-between;
 }
 
 form .category label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
 form .category label .dot {
-  height: 18px;
-  width: 18px;
-  border-radius: 50%;
-  margin-right: 10px;
-  background: #d9d9d9;
-  border: 5px solid transparent;
-  transition: all 0.3s ease;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    margin-right: 10px;
+    background: #d9d9d9;
+    border: 5px solid transparent;
+    transition: all 0.3s ease;
 }
 
-#dot-1:checked ~ .category label .one,
-#dot-2:checked ~ .category label .two,
-#dot-3:checked ~ .category label .three {
-  background: #9b59b6;
-  border-color: #d9d9d9;
+#dot-1:checked~.category label .one,
+#dot-2:checked~.category label .two,
+#dot-3:checked~.category label .three {
+    background: #9b59b6;
+    border-color: #d9d9d9;
 }
 
 form input[type="radio"] {
-  display: none;
+    display: none;
 }
 
 form .button {
-  height: 45px;
-  margin: 35px 0;
+    height: 45px;
+    margin: 35px 0;
 }
 
 form .button input {
-  height: 100%;
-  width: 100%;
-  border-radius: 20px;
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: #0D1456;
+    height: 100%;
+    width: 100%;
+    border-radius: 20px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #0D1456;
 }
 
 form .button input:hover {
-  background: #e5b908;
+    background: #e5b908;
 }
 
 .login-link {
-  text-align: center;
-  margin-top: 20px;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .login-link a {
-  color: #007bff;
-  text-decoration: none;
+    color: #007bff;
+    text-decoration: none;
 }
 
 .login-link a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 @media(max-width: 768px) {
-  header {
-    padding: 1rem 5%;
-    flex-direction: column;
-    text-align: center;
-  }
+    header {
+        padding: 1rem 5%;
+        flex-direction: column;
+        text-align: center;
+    }
 }
+
 
 /* */
+
+
 /* Small Devices (landscape phones, 576px and up) */
+
 @media (max-width: 576px) {
-  header {
-    padding: 1rem 3%;
-  }
-  header .logo {
-    font-size: 1.8rem;
-  }
-  .container {
-    padding: 20px 20px;
-  }
-  .container .title {
-    font-size: 22px;
-  }
+    header {
+        padding: 1rem 3%;
+    }
+    header .logo {
+        font-size: 1.8rem;
+    }
+    .container {
+        padding: 20px 20px;
+    }
+    .container .title {
+        font-size: 22px;
+    }
 }
+
 @media (min-width: 576px) and (max-width: 767px) {
-  .container {
-    /* padding: 20px; */
-    padding: 20px 15px;
-  }
-  form .user-details .input-box {
-    width: 100%;
-  }
-  form .category {
-    width: 100%;
-  }
-  .content form .user-details {
-    max-height: 350px;
-    overflow-y: scroll;
-  }
-  header {
-    padding: 1rem 4%;
-  }
-  header .logo {
-    font-size: 2rem;
-  }
-  header .logo {
-    font-size: 2rem;
-  }
-  .container {
-    margin: 150px 20px 50px 20px;
-    padding: 20px;
-  }
-  .container .title {
-    font-size: 20px;
-  }
+    .container {
+        /* padding: 20px; */
+        padding: 20px 15px;
+    }
+    form .user-details .input-box {
+        width: 100%;
+    }
+    form .category {
+        width: 100%;
+    }
+    .content form .user-details {
+        max-height: 350px;
+        overflow-y: scroll;
+    }
+    header {
+        padding: 1rem 4%;
+    }
+    header .logo {
+        font-size: 2rem;
+    }
+    header .logo {
+        font-size: 2rem;
+    }
+    .container {
+        margin: 150px 20px 50px 20px;
+        padding: 20px;
+    }
+    .container .title {
+        font-size: 20px;
+    }
 }
+
 
 /* Medium Devices (tablets, 768px and up) */
+
 @media (min-width: 768px) and (max-width: 991px) {
-  .container {
-    padding: 25px 25px;
-  }
-  .container .title {
-    font-size: 24px;
-  }
-  form .user-details .input-box {
-    width: 100%;
-  }
-  form .category {
-    width: 100%;
-  }
-  .content form .user-details {
-    max-height: 400px;
-    overflow-y: scroll;
-  }
-  header {
-    padding: 1.5rem 6%;
-  }
-  header .logo {
-    font-size: 2.2rem;
-  }
+    .container {
+        padding: 25px 25px;
+    }
+    .container .title {
+        font-size: 24px;
+    }
+    form .user-details .input-box {
+        width: 100%;
+    }
+    form .category {
+        width: 100%;
+    }
+    .content form .user-details {
+        max-height: 400px;
+        overflow-y: scroll;
+    }
+    header {
+        padding: 1.5rem 6%;
+    }
+    header .logo {
+        font-size: 2.2rem;
+    }
 }
+
 @media (min-width: 1200px) {
-  header {
-    padding: 2rem 10%;
-  }
-  header .logo {
-    font-size: 2.5rem;
-  }
+    header {
+        padding: 2rem 10%;
+    }
+    header .logo {
+        font-size: 2.5rem;
+    }
 }
+
+
 /* Large Devices (desktops, 992px and up) */
+
 @media (min-width: 992px) and (max-width: 1199px) {
-  .container {
-    padding: 25px 30px;
-  }
-  .container .title {
-    font-size: 25px;
-  }
-  form .user-details .input-box {
-    width: 50%;
-  }
-  form .category {
-    width: 100%;
-  }
-  .content form .user-details {
-    max-height: 450px;
-    overflow-y: scroll;
-  }
-  
+    .container {
+        padding: 25px 30px;
+    }
+    .container .title {
+        font-size: 25px;
+    }
+    form .user-details .input-box {
+        width: 50%;
+    }
+    form .category {
+        width: 100%;
+    }
+    .content form .user-details {
+        max-height: 450px;
+        overflow-y: scroll;
+    }
 }
+
 
 /* Extra Large Devices (large desktops, 1200px and up) */
+
 @media (min-width: 1200px) {
-  .container {
-    padding: 30px 35px;
-  }
-  .container .title {
-    font-size: 25px;
-  }
-  form .user-details .input-box {
-    width: 50%;
-  }
-  form .category {
-    width: 100%;
-  }
-  .content form .user-details {
-    max-height: 500px;
-    overflow-y: scroll;
-  }
- 
+    .container {
+        padding: 30px 35px;
+    }
+    .container .title {
+        font-size: 25px;
+    }
+    form .user-details .input-box {
+        width: 50%;
+    }
+    form .category {
+        width: 100%;
+    }
+    .content form .user-details {
+        max-height: 500px;
+        overflow-y: scroll;
+    }
 }
+
 @media (min-width: 1740px) {
-  .container {
-    padding: 40px 60px;
-  }
-  form .user-details .input-box {
-    width: 45%;
-  }
-  form .category {
-    width: 100%;
-  }
-  .content form .user-details {
-    max-height: 600px;
-    overflow-y: scroll;
-  }
-  header {
-    padding: 2.5rem 12%;
-  }
-  header .logo {
-    font-size: 2.8rem;
-  }
+    .container {
+        padding: 40px 60px;
+    }
+    form .user-details .input-box {
+        width: 45%;
+    }
+    form .category {
+        width: 100%;
+    }
+    .content form .user-details {
+        max-height: 600px;
+        overflow-y: scroll;
+    }
+    header {
+        padding: 2.5rem 12%;
+    }
+    header .logo {
+        font-size: 2.8rem;
+    }
 }
+
+
 /* Additional media query for very small screens */
+
 @media (max-width: 459px) {
-  .container .content .category {
-    flex-direction: column;
-  }
- 
-  .content form .user-details {
-    margin: 15px 0 10px 0;
-  }
-
-  form .user-details .input-box {
-    width: 100%;
-  }
-
-  form .button {
-    margin: 25px 0;
-  }
-
-  form .input-box span.details {
-    font-size: 14px;
-  }
-
-  .user-details .input-box input {
-    height: 40px;
-    font-size: 14px;
-  }
-
-  form .button input {
-    font-size: 16px;
-  }
-
-  .login-link {
-    margin-top: 15px;
-  }
+    .container .content .category {
+        flex-direction: column;
+    }
+    .content form .user-details {
+        margin: 15px 0 10px 0;
+    }
+    form .user-details .input-box {
+        width: 100%;
+    }
+    form .button {
+        margin: 25px 0;
+    }
+    form .input-box span.details {
+        font-size: 14px;
+    }
+    .user-details .input-box input {
+        height: 40px;
+        font-size: 14px;
+    }
+    form .button input {
+        font-size: 16px;
+    }
+    .login-link {
+        margin-top: 15px;
+    }
 }
 
 @media(max-width: 576px) {
-  header {
-    padding: 1rem 3%;
-  }
-
-  header .logo {
-    font-size: 1.8rem;
-  }
-
-  .container {
-    margin: 120px 15px 50px 15px;
-    padding: 15px;
-  }
-
-  .container .title {
-    font-size: 18px;
-  }
-
-  .content form .user-details {
-    margin: 10px 0 8px 0;
-  }
-
-  form .button {
-    margin: 20px 0;
-  }
-
-  form .input-box span.details {
-    font-size: 12px;
-  }
-
-  .user-details .input-box input {
-    height: 35px;
-    font-size: 12px;
-  }
-
-  form .button input {
-    font-size: 14px;
-  }
-
-  .login-link {
-    margin-top: 10px;
-  }
+    header {
+        padding: 1rem 3%;
+    }
+    header .logo {
+        font-size: 1.8rem;
+    }
+    .container {
+        margin: 120px 15px 50px 15px;
+        padding: 15px;
+    }
+    .container .title {
+        font-size: 18px;
+    }
+    .content form .user-details {
+        margin: 10px 0 8px 0;
+    }
+    form .button {
+        margin: 20px 0;
+    }
+    form .input-box span.details {
+        font-size: 12px;
+    }
+    .user-details .input-box input {
+        height: 35px;
+        font-size: 12px;
+    }
+    form .button input {
+        font-size: 14px;
+    }
+    .login-link {
+        margin-top: 10px;
+    }
 }
