@@ -168,6 +168,15 @@
           confirmPassword: confirmPassword
         };
 
+        localStorage.setItem('fullName', fullName);
+        localStorage.setItem('username', username);
+        localStorage.setItem('email', email);
+        localStorage.setItem('phoneNumber', phoneNumber);
+        localStorage.setItem('gender', gender);
+        localStorage.setItem('address', address);
+        localStorage.setItem('role', role);
+        localStorage.setItem('photo', photo);
+
         fetch('/upload', {
           method: 'POST',
           headers: {
