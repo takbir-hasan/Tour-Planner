@@ -14,6 +14,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="ProfileEdit.css">
     <link rel="icon" href="/favicon.png" type="image/png">
+
+    <script>
+      function clearAllData() {
+    localStorage.clear();
+   // alert('All data cleared from sessionStorage');
+  }
+  </script>
+
 </head>
 <body>
 
@@ -23,7 +31,7 @@
         <div class="header-outer pb-5 mb-5" style="background-color:#0D1456 ;" >
             <!-- First Navbar -->
             <nav class="navbar navbar-expand-lg" >
-                <a class="navbar-brand logo " href=".../HomePage/homepage.html">
+                <a class="navbar-brand logo " href="/">
                     <span class="tour me-2">Tour</span><span class="planner">Planner</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,11 +40,9 @@
                 <div class="collapse navbar-collapse justify-content-end text-center" id="navbarSupportedContent">
                     <ul class="navbar-nav me-3">
                         <li class="nav-item">
-                            <a class="nav-link ms-auto" href=".../Login & Registration/LoginPage.html">Login</a>
+                          <a class="nav-link logout" onclick="clearAllData()" href="/login">Logout</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link ms-auto" href=".../Login & Registration/RegisterPage.html">Register</a>
-                        </li>
+                        
                     </ul>
                 </div>
             </nav>
@@ -46,7 +52,7 @@
                 <div id="navbarNav2">
                     <ul class="navbar-nav d-flex flex-row">
                         <li class="nav-item active me-3">
-                            <a class="nav-link" href=".../Hotel Booking/HotelBooking.html">
+                            <a class="nav-link" href="/hotelbooking">
                                 <span class="nav-options">
                                     <i class="fa-solid fa-hotel"></i>
                                     Hotels
@@ -54,7 +60,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href=".../transport part/index.html">
+                            <a class="nav-link" href="/transportbooking">
                                 <span class="nav-options">
                                     <i class="fa-solid fa-car"></i>
                                     Transports
@@ -62,7 +68,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href=".../Guide Booking/guidBooking.html">
+                            <a class="nav-link" href="/guidebooking">
                                 <span class="nav-options">
                                     <i class="fa-solid fa-person-shelter"></i>
                                     Guides
@@ -107,7 +113,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
-         <a href="../driver profile/DriverProfile.html"> <button class="btn btn-danger mt-3">Cancel</button></a>
+         <a href="#" onclick="history.back(); return false;"> <button class="btn btn-danger mt-3">Cancel</button></a>
     </div>
 
 
