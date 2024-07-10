@@ -52,6 +52,37 @@ app.get("/login",(req,res)=>{
 app.get("/registration",(req,res)=>{
       res.sendFile(__dirname + "/./Login & Registration/RegisterPage.html");
 })
+app.get("/edituserprofile",(req,res)=>{
+      res.sendFile(__dirname + "/./Login & Registration/EditProfile.html");
+})
+app.use(express.static(path.join(__dirname, 'Profiles/TransportProfile/profile edit')));
+app.get('/editdriverprofile', (req, res) => {
+   res.sendFile(__dirname + "/./Profiles/TransportProfile/profile edit/ProfileEdit.html");
+})
+app.use(express.static(path.join(__dirname, 'Profiles/TransportProfile/service edit')));
+app.get('/editdriverservice', (req, res) => {
+   res.sendFile(__dirname + "/./Profiles/TransportProfile/service edit/ServiceEdit.html");
+})
+app.use(express.static(path.join(__dirname, 'Profiles/HotelManager')));
+app.get('/editmanagerprofile', (req, res) => {
+   res.sendFile(__dirname + "/./Profiles/HotelManager/EditHotelManagerProfile.html");
+})
+// app.get('/editguideprofile', (req, res) => {
+//    res.sendFile(__dirname + "/./Profiles/HotelManager/EditHotelManagerProfile.html");
+// })
+app.use(express.static(path.join(__dirname, 'Profiles/HotelManager')));
+app.get('/editmanagerservice', (req, res) => {
+   res.sendFile(__dirname + "/./Profiles/HotelManager/EditHotelManagerService.html");
+})
+app.use(express.static(path.join(__dirname, 'Profiles/Guide/Edit Profile')));
+app.get('/editguideprofile', (req, res) => {
+  res.sendFile(__dirname + "/./Profiles/Guide/Edit Profile/EditProfile.html");
+})
+app.use(express.static(path.join(__dirname, 'Profiles/Guide/Edit Services')));
+app.get('/editguideservice', (req, res) => {
+  res.sendFile(__dirname + "/./Profiles/Guide/Edit Services/EditServices.html");
+})
+
 
  
 //signup
@@ -168,7 +199,16 @@ app.get('/api/guides', async (req, res) => {
       res.status(500).json({ message: 'Server error' });
   }
 });
+//User Profile
 
+//favicon
+app.use(express.static(path.join(__dirname, '/')));
+
+app.get('/favicon.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/./favicon.png'));
+});
+
+//userprofile
 app.get('/api/users',async(req,res)=>{
   const { username } = req.query;
   try {

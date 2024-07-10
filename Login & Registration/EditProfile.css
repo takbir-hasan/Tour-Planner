@@ -60,7 +60,7 @@ body{
   padding: 25px 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-  margin-top: 100px;
+  margin-top: 200px;
 }
 
 .container .title{
@@ -202,6 +202,12 @@ form .button input:hover{
 .edit-profile-btn:active {
   background-color: #0056b3; 
   transform: translateY(1px); 
+}
+
+.chiki :hover{
+  text-shadow: #0D1456;
+  text-decoration:underline;
+  
 }
 
 /* Media Queries */
