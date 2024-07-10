@@ -7,7 +7,8 @@ const guideSchema = new mongoose.Schema({
     rating: { type: Number, required: true },
     image: { type: String, required: true },
     availableDates: { type: [Date], required: true },
-    pricePerDay: { type: Number, required: true }
+    pricePerDay: { type: Number, required: true },
+    username: {type: String, require:true}
 });
 
 
