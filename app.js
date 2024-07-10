@@ -219,7 +219,28 @@ app.get('/api/users',async(req,res)=>{
       res.status(500).json({ message: 'Server error' });
       }
 });
+//update profile info
+app.put('/api/users/:username', async (req, res) => {
+  const { username } = req.params;
+  const { fullname, email, phoneNumber, address, photo } = req.body;
 
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { username: username },
+      { fullname, email, phoneNumber, address, photo },
+      { new: true } 
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json(updatedUser); 
+  } catch (err) {
+    console.error('Error updating user profile:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 
 
