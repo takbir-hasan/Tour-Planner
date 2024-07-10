@@ -26,7 +26,8 @@ const transportSchema = new Schema({
   location: {
     type: String,
     required: true
-  }
+  },
+  username: {type: String, require:true}
 }, {
   timestamps: true // Adds createdAt and updatedAt timestamps
 });

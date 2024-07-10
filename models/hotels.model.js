@@ -10,7 +10,8 @@ const hotelSchema = new mongoose.Schema({
     description: { type: String, required: true },
     availableFrom: { type: String, required: true },
     availableTo: { type: String, required: true },
-    id: { type: String, required: true, unique: true }
+    id: { type: String, required: true, unique: true },
+    username: {type: String, require:true}
 });
 
 module.exports = mongoose.model('Hotel', hotelSchema);
