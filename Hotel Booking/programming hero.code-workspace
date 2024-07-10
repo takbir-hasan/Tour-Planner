@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "D:/programming hero"
+		},
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "webdevelopment project(last)"
+	}
+}
