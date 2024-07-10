@@ -13,6 +13,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="ServiceEdit.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <script>
+      function clearAllData() {
+    localStorage.clear();
+   // alert('All data cleared from sessionStorage');
+  }
+  </script>
+
 </head>
 <body>
 
@@ -21,12 +29,12 @@
         <div class="header-outer pb-5 mb-5" style="background-color:#0D1456 ;" >
             <!-- First Navbar -->
             <nav class="navbar navbar-expand-lg justify-content-lg-between" >
-                <a class="navbar-brand logo " href="#">
+                <a class="navbar-brand logo " href="/">
                     <span class="tour">Tour</span><span class="planner"> Planner</span>
                 </a>
                
                 <div class="justify-content-end navbar-nav me-3 nav-item" id="navbarSupportedContent">
-                    <a class="nav-link logout" href="">Logout</a>
+                    <a class="nav-link logout" onclick="clearAllData()" href="/login">Logout</a>
                 </div>
             </nav>
     
@@ -35,7 +43,7 @@
                 <div id="navbarNav2">
                     <ul class="navbar-nav d-flex flex-row">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/hotelbooking">
                                 <span class="nav-options">
                                     <i class="fa-solid fa-hotel"></i>
                                     Hotels
@@ -43,7 +51,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/transportbooking">
                                 <span class="nav-options">
                                     <i class="fa-solid fa-car"></i>
                                     Transports
@@ -51,7 +59,7 @@
                             </a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="/guidebooking">
                                 <span class="nav-options">
                                     <i class="fa-solid fa-person-shelter"></i>
                                     Guides
@@ -94,7 +102,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
-        <a href="../driver profile/DriverProfile.html"> <button class="btn btn-danger mt-3">Cancel</button></a>
+        <a href="#" onclick="history.back(); return false;"> <button class="btn btn-danger mt-3">Cancel</button></a>
     </div>
 
 

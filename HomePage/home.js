@@ -135,7 +135,10 @@ $(document).ready(function () {
         alert('Please fill in all fields.');
       }
     });
-  
+
+
+    
+
     // Initial fetch of top-rated hotels
     fetchTopRatedHotels();
   });

@@ -10,6 +10,13 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="UserProfile.css">
+    <link rel="icon" href="/favicon.png" type="image/png">
+    <script>
+      function clearAllData() {
+    localStorage.clear();
+   // alert('All data cleared from sessionStorage');
+  }
+  </script>
 </head>
 <body>
 
@@ -23,7 +30,7 @@
                 </a>
                
                 <div class="justify-content-end navbar-nav me-3 nav-item" id="navbarSupportedContent">
-                    <a class="nav-link logout" href="/login">Logout</a>
+                    <a class="nav-link logout" onclick="clearAllData()" href="/login">Logout</a>
                 </div>
             </nav>
     
@@ -80,7 +87,7 @@
                 <p id="gender"><i class="fas fa-venus-mars"></i> Male</p> <!-- You can replace "Male" with the user's actual gender -->
               </div>
               <div class="col-md-3 text-center">
-                <a href="EditProfile.html" class="btn btn-primary edit-profile-btn"><i class="fas fa-edit"></i> Edit Profile</a>
+                <a href="/edituserprofile" class="btn btn-primary edit-profile-btn"><i class="fas fa-edit"></i> Edit Profile</a>
               </div>              
         </div>
         <div class="profile-content mt-4">
