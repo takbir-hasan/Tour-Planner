@@ -1,105 +1,64 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Profile photo upload functionality
-    const profilePhotoLabel = document.getElementById('profile-photo-label');
-    const profilePhotoInput = document.getElementById('profile-photo');
-    const profilePhoto = document.querySelector('.profile-photo');
-  
-    profilePhotoLabel.addEventListener('click', function () {
-        profilePhotoInput.click();
-    });
-  
-    profilePhotoInput.addEventListener('change', function (event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                profilePhoto.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-  
-    // Form validation and update profile
-    const editProfileForm = document.getElementById('editProfileForm');
-    const fullNameInput = document.getElementById('fullName');
-    const emailInput = document.getElementById('email');
-    const phoneInput = document.getElementById('phoneNumber');
-    const addressInput = document.getElementById('address');
-    const genderDetails = document.getElementById('genderDetails');
-    const emailError = document.getElementById('emailError');
-    const phoneError = document.getElementById('phoneError');
-  
-    
-    editProfileForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        let valid = true;
-  
-        // Validate email
-        if (!validateEmail(emailInput.value)) {
-            emailError.textContent = 'Please enter a valid email.';
-            valid = false;
-        } else {
-            emailError.textContent = '';
-        }
-  
-        // Validate phone number
-        if (!validatePhoneNumber(phoneInput.value)) {
-            phoneError.textContent = 'Please enter a valid phone number.';
-            valid = false;
-        } else {
-            phoneError.textContent = '';
-        }
-  
-        if (valid) {
-            // Save the updated information to localStorage
-            localStorage.setItem('fullName', fullNameInput.value);
-            localStorage.setItem('email', emailInput.value);
-            localStorage.setItem('phoneNumber', phoneInput.value);
-            localStorage.setItem('address', addressInput.value);
-            localStorage.setItem('gender', genderDetails.value);
 
-            // Update profile display
-            updateProfileDisplay();
-
-            window.location.href = 'UserProfile.html';
-
-        }
-    });
+document.getElementById('profile-photo').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  const reader = new FileReader();
   
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-    
+  reader.onloadend = function() {
+    const base64String = reader.result;
+    const finalBase64 = base64String.startsWith('data:image/') ? base64String : 'data:image/jpeg;base64,' + base64String;
+    document.getElementById('photoBase64').value = finalBase64;
+
+    // Debugging: Log the finalBase64 to verify it's correct
+    console.log('Base64 String:', finalBase64);
+  };
   
-    function validatePhoneNumber(phone) {
-        const re = /^\d{11}$/;
-        return re.test(phone);
-    }
-
-    function updateProfileDisplay() {
-        const fullName = localStorage.getItem('fullName');
-        const email = localStorage.getItem('email');
-        const phoneNumber = localStorage.getItem('phoneNumber');
-        const address = localStorage.getItem('address');
-        const gender = localStorage.getItem('gender');
-
-        document.getElementById('name').textContent = fullName;
-        document.getElementById('email').textContent = email;
-        document.getElementById('phone').textContent = phoneNumber;
-        document.getElementById('address').textContent = address;
-        document.getElementById('gender').textContent = gender;
-    }
-
-    // Update profile display on page load
-    updateProfileDisplay();
+  if (file) {
+    reader.readAsDataURL(file);
+  }
 });
+// Function to update user profile
+const updateProfile = async (username, fullname, email, phoneNumber, address, photoUrl) => {
+    try {
+      const response = await fetch(`/api/users/${username}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullname,
+          email,
+          phoneNumber,
+          address,
+          photo: photoUrl,
+        }),
+      });
+  
+      if (!response.ok) {
+        const errorMessage = await response.json();
+        throw new Error(errorMessage.message || 'Failed to update profile');
+      }
+  
+      const updatedUser = await response.json();
+      console.log('Updated user:', updatedUser);
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
+  };
 
-document.addEventListener('DOMContentLoaded', function () {
-    const updateProfileBtn = document.getElementById('updateProfileBtn');
 
-    updateProfileBtn.addEventListener('click', function () {
-        // Redirect to UserProfile.html
-        window.location.href = 'UserProfile.html';
-    });
-});
+  // Event listener for form submission
+  document.getElementById('editProfileForm').addEventListener('submit', async (event) => {
+    event.preventDefault(); 
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('email').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    const address = document.getElementById('address').value;
+    //const photoUrl = document.getElementById('profile-photo').value;
+    const photoUrl = document.getElementById('photoBase64').value;  
+    console.log('Photo URL:', photoUrl);
+
+    const username = localStorage.getItem('username');
+  
+    await updateProfile(username, fullName, email, phoneNumber, address, photoUrl);
+    alert('Profile Updated Succesfully! go to your profile and refresh.');
+  });
