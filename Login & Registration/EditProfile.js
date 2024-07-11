@@ -61,4 +61,5 @@ const updateProfile = async (username, fullname, email, phoneNumber, address, ph
   
     await updateProfile(username, fullName, email, phoneNumber, address, photoUrl);
     alert('Profile Updated Succesfully! go to your profile and refresh.');
+    window.location.href = '/UserProfile.html';
   });
