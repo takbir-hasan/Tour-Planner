@@ -1,13 +1,20 @@
 $(document).ready(function () {
-    // Function to fetch top-rated guides
-    function fetchTopRatedGuides() {
-        const apiUrl = 'api/guides';
+    const apiUrl = '/api/guides';
 
+    // Function to format date to "yyyy-mm-dd"
+    function formatDateToYMD(dateStr) {
+        const date = new Date(dateStr);
+        const year = date.getFullYear();
+        const month = ('0' + (date.getMonth() + 1)).slice(-2);
+        const day = ('0' + date.getDate()).slice(-2);
+        return `${year}-${month}-${day}`;
+    }
+
+    function fetchTopRatedGuides() {
         $.ajax({
             url: apiUrl,
             method: 'GET',
             success: function (response) {
-                // Sort guides by rating and get the top 6
                 const topRatedGuides = response.sort((a, b) => b.rating - a.rating).slice(0, 6);
                 displaySuggestions(topRatedGuides);
             },
@@ -17,29 +24,22 @@ $(document).ready(function () {
         });
     }
 
-    // Function to fetch guides based on search parameters
     function fetchGuides(destination, date) {
-        const apiUrl = 'http://localhost:3000/api/guides';
-    
+        console.log("searched Date : " + date);
         $.ajax({
             url: apiUrl,
             method: 'GET',
             success: function (response) {
-                // Filter guides based on location and available dates
+                const formattedDate = formatDateToYMD(date);
                 const filteredGuides = response.filter(guide => {
-                    const guideDates = guide.availableDates.map(date => new Date(date).toISOString().split('T')[0]);
-                    const searchDate = new Date(date).toISOString().split('T')[0];
-                    return (
-                        guide.location.toLowerCase() === destination.toLowerCase() &&
-                        guideDates.includes(searchDate)
-                    );
+                    const isLocationMatch = guide.location.toLowerCase().includes(destination.toLowerCase());
+                    const guideDate = formatDateToYMD(guide.availableDates);
+                    
+                    const isAvailable = guideDate === formattedDate;
+                    console.log('Guide:', guide.name, 'Location match:', isLocationMatch, 'date: ', guideDate, 'Date match:', isAvailable); // Debugging output
+                    return isLocationMatch && isAvailable;
                 });
-    
-                // Sort filtered guides by rating
-                const sortedGuides = filteredGuides.sort((a, b) => b.rating - a.rating);
-    
-                // Display filtered and sorted guides
-                displayResults(sortedGuides);
+                displayResults(filteredGuides, date);
             },
             error: function (error) {
                 console.error('Error fetching guide data:', error);
@@ -47,10 +47,9 @@ $(document).ready(function () {
         });
     }
 
-    // Function to display guides
-    function displayGuides(container, guides) {
-        container.empty(); // Clear previous guides
-        
+    function displayGuides(container, guides, date = null) {
+        container.empty();
+
         if (guides.length === 0) {
             container.html("<p>No guides available for the selected criteria.</p>");
             return;
@@ -63,74 +62,123 @@ $(document).ready(function () {
                     <div class="card-body">
                         <h5 class="card-title">${guide.name}</h5>
                         <p class="card-text"><strong>Location:</strong> ${guide.location}</p>
+                        <p class="card-text"><strong>Available Date:</strong> ${guide.availableDates} </p>
+                        <p class="card-text"><strong>Price:</strong> $${guide.pricePerDay}/day</p>
                         <p class="card-text"><strong>Rating:</strong> ${guide.rating}</p>
-                        <p class="card-text"><strong>Price:</strong> ${guide.pricePerDay} BDT</p>
-                        <a href="#" class="btn btn-primary">Book</a>
-                     <a href="#" class="btn btn-warning">Show Reviews</a>
+                        <a href="#" class="btn btn-primary book-Btn"
+                            data-guide-id="${guide.id}"
+                            data-guide-name="${guide.name}"
+                            data-guide-location="${guide.location}"
+                            data-date="${date || guide.availableDates}"
+                            data-rating="${guide.rating}"
+                            data-guide-price="${guide.pricePerDay}">
+                            Book
+                        </a>
+                        <a href="#" class="btn btn-warning">Show Reviews</a>
                     </div>
                 </div>
             `;
             container.append(guideCard);
         });
+
+        container.on('click', '.book-Btn', function (event) {
+            event.preventDefault();
+
+            if (!localStorage.getItem('username')) {
+                alert("To proceed with your booking, kindly log in.");
+                return;
+            }
+
+            const guideId = $(this).data('guide-id');
+            const guideName = $(this).data('guide-name');
+            const place = $(this).data('guide-location');
+            const price = $(this).data('guide-price');
+            const date = $(this).data('date');
+            const rating = $(this).data('rating');
+            const username = localStorage.getItem('username');
+
+            // Debugging output
+            console.log('Guide ID:', guideId);
+            console.log('Guide Name:', guideName);
+            console.log('Place:', place);
+            console.log('Price:', price);
+            console.log('Date:', date);
+            console.log('Rating:', rating);
+
+            // Construct booking data object
+            const bookingData = {
+                user: username,
+                guideName: guideName,
+                place: place,
+                date: date,
+                price: price,
+                rating: rating
+            };
+
+            // Example: Make AJAX request to book guide
+            $.ajax({
+                url: '/api/guideBooking/book',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(bookingData),
+                success: function (response) {
+                    alert(`Booking successful!\nGuide: ${response.booking.guideName}\nDate: ${new Date(response.booking.date).toLocaleDateString()}`);
+                    const button = $(event.target);
+                    button.text('Booked').addClass('disabled').attr('disabled', 'disabled');
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error booking guide:', error);
+                    alert('Failed to book guide. Please try again later.');
+                }
+            });
+        });
     }
 
-    // Function to display top-rated guides as suggestions
     function displaySuggestions(suggestions) {
         const suggestionsContainer = $('#suggestions');
         displayGuides(suggestionsContainer, suggestions);
         suggestionsContainer.show();
     }
 
-    // Function to display search results
-    function displayResults(results) {
+    function displayResults(results, date) {
         const resultsContainer = $('#results');
-        $('#top-destinations-title').hide();
+        $('#top-guides-title').hide();
         $('#suggestions').hide();
-        displayGuides(resultsContainer, results);
+        displayGuides(resultsContainer, results, date);
         resultsContainer.show();
     }
 
-    // Function to fetch place suggestions
-  function fetchPlaceSuggestions(query) {
-    $.ajax({
-      url: 'http://localhost:3000/api/guides',
-      method: 'GET',
-      success: function (response) {
-        // Filter guides based on place query
-        const placeSuggestions = response.filter(guide =>
-          guide.location.toLowerCase().includes(query.toLowerCase())
-        );
-
-        // Display place suggestions
-        displayPlaceSuggestions(placeSuggestions.map(guide => guide.location));
-      },
-      error: function (error) {
-        console.error('Error fetching place suggestions:', error);
-      },
-    });
-  }
-
-  // Function to display place suggestions
-  function displayPlaceSuggestions(suggestions) {
-    const datalist = $('#place-suggestions');
-    datalist.empty(); // Clear previous suggestions
-
-    suggestions.forEach(suggestion => {
-      const option = `<option value="${suggestion}"></option>`;
-      datalist.append(option);
-    });
-  }
-
-  // Event listener for destination input field
-  $('#destination').on('input', function () {
-    const query = $(this).val();
-    if (query.length > 2) { // Fetch suggestions after 3 characters
-      fetchPlaceSuggestions(query);
+    function fetchPlaceSuggestions(query) {
+        $.ajax({
+            url: apiUrl,
+            method: 'GET',
+            success: function (response) {
+                const placeSuggestions = response.filter(guide => guide.location.toLowerCase().includes(query.toLowerCase()));
+                displayPlaceSuggestions(placeSuggestions.map(guide => guide.location));
+            },
+            error: function (error) {
+                console.error('Error fetching place suggestions:', error);
+            },
+        });
     }
-  });
 
+    function displayPlaceSuggestions(suggestions) {
+        const datalist = $('#place-suggestions');
+        datalist.empty();
 
-    // Event listener for search button
+        suggestions.forEach(suggestion => {
+            const option = `<option value="${suggestion}"></option>`;
+            datalist.append(option);
+        });
+    }
+
+    $('#destination').on('input', function () {
+        const query = $(this).val();
+        if (query.length > 2) {
+            fetchPlaceSuggestions(query);
+        }
+    });
+
     $('#search-btn').on('click', function () {
         const destination = $('#destination').val();
         const date = $('#date').val();
@@ -141,6 +189,5 @@ $(document).ready(function () {
         }
     });
 
-    // Initial fetch of top-rated guides
     fetchTopRatedGuides();
 });

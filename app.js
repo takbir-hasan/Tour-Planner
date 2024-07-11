@@ -226,6 +226,10 @@ app.get('/api/users',async(req,res)=>{
 const hotelBookingRoutes = require('./routes/HotelBooking');
 app.use('/api/hotelBooking', hotelBookingRoutes);
 
+//Routes of Guide Booking
+const guideBookingRoutes = require('./routes/GuideBooking');
+app.use('/api/guideBooking', guideBookingRoutes);
+
 
 //start the server
 const PORT = process.env.PORT || 3000;
