@@ -1,10 +1,11 @@
 // $(document).ready(function () {
 //       const apiUrl = 'https://example.com/api'; // Replace with your actual API endpoint
   
+//       const username = localStorage.getItem('username');
 //       // Function to fetch profile data
 //       function fetchProfileData() {
 //           $.ajax({
-//               url: `${apiUrl}/profile`,
+//             url: `/hmp?username=${username}`,
 //               method: 'GET',
 //               success: function (response) {
 //                   displayProfile(response);
@@ -31,13 +32,13 @@
   
 //       // Function to display profile data
 //       function displayProfile(data) {
-//           $('#name').text(data.name);
+//         //   $('#name').text(data.name);
 //           $('#hotel').html(`<i class="fas fa-hotel"></i> ${data.hotel}`);
-//           $('#email').html(`<i class="fas fa-envelope"></i> ${data.email}`);
-//           $('#phone').html(`<i class="fas fa-phone"></i> ${data.phone}`);
-//           $('#address').html(`<i class="fas fa-map-marker-alt"></i> ${data.address}`);
+//         //   $('#email').html(`<i class="fas fa-envelope"></i> ${data.email}`);
+//         //   $('#phone').html(`<i class="fas fa-phone"></i> ${data.phone}`);
+//         //   $('#address').html(`<i class="fas fa-map-marker-alt"></i> ${data.address}`);
 //           $('#rating').html(`<i class="fas fa-star"></i> Rating: ${data.rating}`);
-//           $('.profile-photo').attr('src', data.photo);
+//         //   $('.profile-photo').attr('src', data.photo);
 //       }
   
 //       // Function to display booking data
@@ -68,6 +69,8 @@
 //       fetchBookingData();
 //   });
   
+
+  
 document.addEventListener('DOMContentLoaded', function () {
     const apiUrl = '/api/users';
 
@@ -91,11 +94,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to display profile data
     function displayProfile(data) {
         document.getElementById('name').textContent = data.fullname;
-        document.getElementById('email').textContent = data.email;
+       // document.getElementById('email').textContent = data.email;
         document.getElementById('email').innerHTML = `<i class="fas fa-envelope"></i> ${data.email}`;
         document.getElementById('phone').textContent = data.phoneNumber;
         document.getElementById('phone').innerHTML = `<i class="fas fa-phone"></i> ${data.phoneNumber}`;
-        document.getElementById('address').textContent = data.address;
+       // document.getElementById('address').textContent = data.address;
         document.getElementById('address').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${data.address}`;
         const profilePhoto = document.querySelector('.profile-photo');
         profilePhoto.setAttribute('src', data.photo);
@@ -115,4 +118,43 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         console.error('Username not found in localStorage.');
     }
+    
+// function to show data of rating
+     function fetchData() {
+        const username = localStorage.getItem('username');
+
+        if (username) {
+            fetch(`/hmp?username=${username}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                Profile(data);
+            })
+            .catch(error => {
+                console.error('Error fetching profile data:', error);
+            });
+        } else {
+            console.error('Username not found in localStorage');
+        }
+    }
+
+    function Profile(data) {
+        const hotelElement = document.getElementById('hotel');
+        const ratingElement = document.getElementById('rating');
+
+        hotelElement.innerHTML = `<i class="fas fa-hotel"></i> ${data.name}`;
+        ratingElement.innerHTML = `<i class="fas fa-star"></i> Rating: ${data.rating}`;
+    }
+
+    fetchData();
+
 });

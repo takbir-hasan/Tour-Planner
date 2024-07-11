@@ -3,11 +3,12 @@ const Schema = mongoose.Schema;
 
 // Define the transport schema
 const transportSchema = new Schema({
+  username: {type: String, require:true},
   name: {
     type: String,
     required: true
   },
-  type: {
+  location: {
     type: String,
     required: true
   },

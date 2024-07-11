@@ -220,7 +220,222 @@ app.get('/api/users',async(req,res)=>{
       res.status(500).json({ message: 'Server error' });
       }
 });
+//update profile info
+app.put('/api/users/:username', async (req, res) => {
+  const { username } = req.params;
+  const { fullname, email, phoneNumber, address, photo } = req.body;
 
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { username: username },
+      { fullname, email, phoneNumber, address, photo },
+      { new: true } 
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json(updatedUser); 
+  } catch (err) {
+    console.error('Error updating user profile:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+
+
+//hotel service edit
+app.post('/api/editHotelService', async (req, res) => {
+  const { username, name, location, price, image, availableFrom, availableTo } = req.body;
+
+  try {
+    const hotel = await Hotel.findOne({ username });
+
+    if (hotel) {
+      const rating = hotel.rating;
+
+      // Delete all existing records for the given username
+      await Hotel.deleteMany({ username });
+
+      // Create a new hotel record
+      const newHotel = new Hotel({
+        username,
+        name,
+        location,
+        price,
+        rating,
+        image,
+        availableFrom,
+        availableTo
+      });
+
+      await newHotel.save();
+    } else {
+      // Create a new hotel record
+      const newHotel = new Hotel({
+        username,
+        name,
+        location,
+        price,
+        rating: 0,
+        image,
+        availableFrom,
+        availableTo
+      });
+
+      await newHotel.save();
+    }
+
+    res.json({ success: true, message: 'Hotel created successfully' });
+
+  } catch (error) {
+    console.error('Error:', error);
+    res.json({ success: false, message: 'An error occurred' });
+  }
+});
+
+app.get('/hmp',async(req,res)=>{
+  const username = req.query.username;
+  try {
+    const user = await Hotel.findOne({ username });
+        if (user) {
+            res.json(user);
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (err) {
+      console.error('Error fetching users:', err);
+      res.status(500).json({ message: 'Server error' });
+      }
+});
+//transport service
+app.post('/api/editdriverService', async (req, res) => {
+  const { username, name, location, price, image, maxPassengers, available } = req.body;
+
+  try {
+    const driver = await Transport.findOne({ username });
+
+    if (driver) {
+      const rating = driver.rating;
+
+      // Delete all existing records for the given username
+      await Transport.deleteMany({ username });
+
+      // Create a new hotel record
+      const newDriver = new Transport({
+        username,
+        name,
+        location,
+        price,
+        rating,
+        image,
+        maxPassengers,
+        available
+      });
+
+      await newDriver.save();
+    } else {
+      // Create a new hotel record
+      const newDriver = new Transport({
+        username,
+        name,
+        location,
+        price,
+        rating: 0,
+        image,
+        maxPassengers,
+        available
+      });
+
+      await newDriver.save();
+    }
+
+    res.json({ success: true, message: 'Hotel created successfully' });
+
+  } catch (error) {
+    console.error('Error:', error);
+    res.json({ success: false, message: 'An error occurred' });
+  }
+});
+
+app.get('/alb',async(req,res)=>{
+  const username = req.query.username;
+  try {
+    const user = await Transport.findOne({ username });
+        if (user) {
+            res.json(user);
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (err) {
+      console.error('Error fetching users:', err);
+      res.status(500).json({ message: 'Server error' });
+      }
+});
+// guide service edit
+app.post('/api/editguideService', async (req, res) => {
+  const { username, name, location, price, image, available } = req.body;
+
+  try {
+    const guide = await Guide.findOne({ username });
+
+    if (guide) {
+      const rating = guide.rating;
+
+      // Delete all existing records for the given username
+      await Guide.deleteMany({ username });
+
+      // Create a new hotel record
+      const newGuide = new Guide({
+        username,
+        name,
+        location,
+        price,
+        rating,
+        image,
+        available
+      });
+
+      await newGuide.save();
+    } else {
+      // Create a new hotel record
+      const newGuide = new Guide({
+        username,
+        name,
+        location,
+        price,
+        rating: 0,
+        image,
+        available
+      });
+
+      await newGuide.save();
+    }
+
+    res.json({ success: true, message: 'Hotel created successfully' });
+
+  } catch (error) {
+    console.error('Error:', error);
+    res.json({ success: false, message: 'An error occurred' });
+  }
+});
+
+app.get('/atb',async(req,res)=>{
+  const username = req.query.username;
+  try {
+    const user = await Guide.findOne({ username });
+        if (user) {
+            res.json(user);
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (err) {
+      console.error('Error fetching users:', err);
+      res.status(500).json({ message: 'Server error' });
+      }
+});
 
 // Routes of Hotel Booking
 const hotelBookingRoutes = require('./routes/HotelBooking');
