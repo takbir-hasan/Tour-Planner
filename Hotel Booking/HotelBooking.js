@@ -57,6 +57,7 @@ $(document).ready(function () {
               data-hotel-location="${hotel.location}"
               data-checkin-date="${checkinDate || hotel.availableFrom}"
               data-checkout-date="${checkoutDate || hotel.availableTo}"
+              data-rating = "${hotel.rating}"
               data-hotel-price="${hotel.price}">
               Book
             </a>
@@ -83,6 +84,7 @@ $(document).ready(function () {
       const price = $(this).data('hotel-price');
       const checkInDate = $(this).data('checkin-date');
       const checkOutDate = $(this).data('checkout-date');
+      const rating = $(this).data('rating');
       const username = localStorage.getItem('username')
 
        // Debugging output
@@ -92,6 +94,7 @@ $(document).ready(function () {
        console.log('Price:', price);
        console.log('Available From:', checkInDate);
        console.log('Available To:', checkOutDate);
+       console.log('Available rating: ', rating);
   
 
     // Construct booking data object
@@ -101,7 +104,8 @@ $(document).ready(function () {
         place: place,
         checkInDate: checkInDate,
         checkOutDate: checkOutDate,
-        price: price
+        price: price,
+        rating:rating
       };
       
   

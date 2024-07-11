@@ -1,4 +1,3 @@
-// models/hotelBookingHistory.js
 const mongoose = require('mongoose');
 
 const hotelBookingHistorySchema = new mongoose.Schema({
@@ -23,8 +22,20 @@ const hotelBookingHistorySchema = new mongoose.Schema({
     required: true
   },
   price: {
-    type: Number,
+    type: String,
     required: true
+  },
+  rating: {
+    type: String,
+    required: true
+  },
+  review: {
+    type: String,
+    default: null
+  },
+  status: {
+    type: String,
+    default: 'Booked'
   }
 });
 
