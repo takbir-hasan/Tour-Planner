@@ -10,6 +10,7 @@ const app = express();
 const dbURL = process.env.MongoDB;
 const bodyParser = require("body-parser");
 const User = require("./models/user.model");
+
 // const Booking = require("./models/booking.model");
 
 // Connect to MongoDB
@@ -221,7 +222,9 @@ app.get('/api/users',async(req,res)=>{
 });
 
 
-
+// Routes of Hotel Booking
+const hotelBookingRoutes = require('./routes/HotelBooking');
+app.use('/api/hotelBooking', hotelBookingRoutes);
 
 
 //start the server

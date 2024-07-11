@@ -1,12 +1,11 @@
 $(document).ready(function () {
   const apiUrl = '/api/hotels';
-  // Function to fetch top-rated hotels
+
   function fetchTopRatedHotels() {
     $.ajax({
       url: apiUrl,
       method: 'GET',
       success: function (response) {
-        // Sort hotels by rating and get the top 6
         const topRatedHotels = response.sort((a, b) => b.rating - a.rating).slice(0, 6);
         displaySuggestions(topRatedHotels);
       },
@@ -16,25 +15,17 @@ $(document).ready(function () {
     });
   }
 
-  // Function to fetch hotels based on search parameters
   function fetchHotels(destination, checkinDate, checkoutDate) {
     $.ajax({
       url: apiUrl,
       method: 'GET',
       success: function (response) {
-
-        // Filter hotels based on place and availability
-         const filteredHotels = response.filter(hotel => {
+        const filteredHotels = response.filter(hotel => {
           const isLocationMatch = hotel.location.toLowerCase().includes(destination.toLowerCase());
-          const isAvailable = new Date(hotel.availableFrom.split('-').join('/')) <= new Date(checkinDate) && new Date(hotel.availableTo.split('-').join('/')) >= new Date(checkoutDate);
-          
+          const isAvailable = new Date(hotel.availableFrom) <= new Date(checkinDate) && new Date(hotel.availableTo) >= new Date(checkoutDate);
           return isLocationMatch && isAvailable;
         });
-
-        console.log('Filtered Hotels:', filteredHotels);
-
-        // Display filtered hotels
-        displayResults(filteredHotels);
+        displayResults(filteredHotels, checkinDate, checkoutDate);
       },
       error: function (error) {
         console.error('Error fetching hotel data:', error);
@@ -42,9 +33,9 @@ $(document).ready(function () {
     });
   }
 
-  // Function to display hotels
-  function displayHotels(container, hotels) {
-    container.empty(); // Clear previous hotels
+  function displayHotels(container, hotels, checkinDate = null, checkoutDate = null) {
+    container.empty();
+
 
     if (hotels.length === 0) {
       container.html("<p>No hotels available for the selected criteria.</p>");
@@ -60,43 +51,102 @@ $(document).ready(function () {
             <p class="card-text"><strong>Location:</strong> ${hotel.location}</p>
             <p class="card-text"><strong>Price:</strong> $${hotel.price}/night</p>
             <p class="card-text"><strong>Rating:</strong> ${hotel.rating}</p>
-            <a href="#" class="btn btn-primary">Book</a>
-              <a href="#" class="btn btn-warning">Show Reviews</a>
+            <a href="#" class="btn btn-primary book-Btn"
+              data-hotel-id="${hotel.id}"
+              data-hotel-name="${hotel.name}"
+              data-hotel-location="${hotel.location}"
+              data-checkin-date="${checkinDate || hotel.availableFrom}"
+              data-checkout-date="${checkoutDate || hotel.availableTo}"
+              data-hotel-price="${hotel.price}">
+              Book
+            </a>
+                    
+            <a href="#" class="btn btn-warning">Show Reviews</a>
           </div>
         </div>
       `;
       container.append(hotelCard);
     });
+    const username = "";
+    //username = localStorage.getItem('username');
+  
+    container.on('click', '.book-Btn', function(event) {
+
+      if(!localStorage.getItem('username')) {
+        alert("To proceed with your booking, kindly log in.");
+        return;
+      }
+      event.preventDefault();
+      const hotelId = $(this).data('hotel-id');
+      const hotelName = $(this).data('hotel-name');
+      const place = $(this).data('hotel-location');
+      const price = $(this).data('hotel-price');
+      const checkInDate = $(this).data('checkin-date');
+      const checkOutDate = $(this).data('checkout-date');
+      const username = localStorage.getItem('username')
+
+       // Debugging output
+       console.log('Hotel ID:', hotelId);
+       console.log('Hotel Name:', hotelName);
+       console.log('Place:', place);
+       console.log('Price:', price);
+       console.log('Available From:', checkInDate);
+       console.log('Available To:', checkOutDate);
+  
+
+    // Construct booking data object
+      const bookingData = {
+        user: username,
+        hotelName: hotelName,
+        place: place,
+        checkInDate: checkInDate,
+        checkOutDate: checkOutDate,
+        price: price
+      };
+      
+  
+      // Example: Make AJAX request to book hotel
+      $.ajax({
+        url: '/api/hotelBooking/book',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(bookingData),
+        success: function(response) {
+          alert(`Booking successful!\nHotel: ${response.booking.hotelName}\nCheck-in: ${new Date(response.booking.checkInDate).toLocaleDateString()}\nCheck-out: ${new Date(response.booking.checkOutDate).toLocaleDateString()}`);
+          const button = $(event.target);
+          button.text('Booked').addClass('disabled').attr('disabled', 'disabled');
+        },
+        error: function(xhr, status, error) {
+          console.error('Error booking hotel:', error);
+          alert('Failed to book hotel. Please try again later.');
+        }
+      });
+      
+  
+    });
+    
   }
 
-  // Function to display top-rated hotels
   function displaySuggestions(suggestions) {
     const suggestionsContainer = $('#suggestions');
     displayHotels(suggestionsContainer, suggestions);
     suggestionsContainer.show();
   }
 
-  // Function to display search results
-  function displayResults(results) {
+  function displayResults(results, checkinDate, checkoutDate) {
     const resultsContainer = $('#results');
     $('#top-destinations-title').hide();
     $('#suggestions').hide();
-    displayHotels(resultsContainer, results);
+    displayHotels(resultsContainer, results, checkinDate, checkoutDate);
     resultsContainer.show();
   }
 
-  // Function to fetch place suggestions
   function fetchPlaceSuggestions(query) {
     $.ajax({
       url: apiUrl,
       method: 'GET',
       success: function (response) {
-        // Filter hotels based on place query
-        const placeSuggestions = response.filter(hotel =>
-          hotel.location.toLowerCase().includes(query.toLowerCase())
-        );
-
-        // Display place suggestions
+        const placeSuggestions = response.filter(hotel => hotel.location.toLowerCase().includes(query.toLowerCase()));
         displayPlaceSuggestions(placeSuggestions.map(hotel => hotel.location));
       },
       error: function (error) {
@@ -105,10 +155,9 @@ $(document).ready(function () {
     });
   }
 
-  // Function to display place suggestions
   function displayPlaceSuggestions(suggestions) {
     const datalist = $('#place-suggestions');
-    datalist.empty(); // Clear previous suggestions
+    datalist.empty();
 
     suggestions.forEach(suggestion => {
       const option = `<option value="${suggestion}"></option>`;
@@ -116,15 +165,13 @@ $(document).ready(function () {
     });
   }
 
-  // Event listener for destination input field
   $('#destination').on('input', function () {
     const query = $(this).val();
-    if (query.length > 2) { // Fetch suggestions after 3 characters
+    if (query.length > 2) {
       fetchPlaceSuggestions(query);
     }
   });
 
-  // Event listener for search button
   $('#search-btn').on('click', function () {
     const destination = $('#destination').val();
     const checkinDate = $('#checkin-date').val();
@@ -136,6 +183,5 @@ $(document).ready(function () {
     }
   });
 
-  // Initial fetch of top-rated hotels
   fetchTopRatedHotels();
 });
