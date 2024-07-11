@@ -12,24 +12,27 @@ const transportSchema = new Schema({
     required: true
   },
   capacity: {
-    type: Number,
+    type: String,
     required: true
   },
   price: {
-    type: Number,
+    type: String,
     required: true
   },
   availableDates: {
-    type: [Date],
+    type: String,
     required: true
   },
   location: {
+    type: String,
+    required: true
+  },
+  image: {
     type: String,
     required: true
   }
 }, {
   timestamps: true // Adds createdAt and updatedAt timestamps
 });
-
 
 module.exports = mongoose.model('Transport', transportSchema);

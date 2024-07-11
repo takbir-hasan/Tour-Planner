@@ -49,6 +49,8 @@ $(document).ready(function () {
           <div class="card-body">
             <h5 class="card-title">${hotel.name}</h5>
             <p class="card-text"><strong>Location:</strong> ${hotel.location}</p>
+            <p class="card-text"><strong>Available From: </strong> ${hotel.availableFrom} </p>
+            <p class="card-text"><strong>Available To: </strong> ${hotel.availableTo} </p>
             <p class="card-text"><strong>Price:</strong> $${hotel.price}/night</p>
             <p class="card-text"><strong>Rating:</strong> ${hotel.rating}</p>
             <a href="#" class="btn btn-primary book-Btn"

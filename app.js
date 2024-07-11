@@ -230,6 +230,9 @@ app.use('/api/hotelBooking', hotelBookingRoutes);
 const guideBookingRoutes = require('./routes/GuideBooking');
 app.use('/api/guideBooking', guideBookingRoutes);
 
+//Routes of transport
+const transportBookingRoute = require('./routes/TransportBooking'); // Adjust the path as per your directory structure
+app.use('/api/transportBooking', transportBookingRoute);
 
 //start the server
 const PORT = process.env.PORT || 3000;
