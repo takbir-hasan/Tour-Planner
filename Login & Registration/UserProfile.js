@@ -184,7 +184,7 @@ async function fetchGuideBookingHistory(username) {
       listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
   
       const bookingText = document.createElement('span');
-      bookingText.textContent = `Booking ${index + 1}: Date: ${booking.date}, Guide Name: ${booking.guideName}, Place: ${booking.place}`;
+      bookingText.textContent = `Booking ${index + 1}: Date: ${booking.date}, Guide Name: ${booking.transportName}, Place: ${booking.place}`;
   
       const buttonGroup = document.createElement('div');
       buttonGroup.className = 'btn-group';
