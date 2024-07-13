@@ -48,3 +48,182 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Username not found in localStorage.');
     }
 });
+// Function to fetch booking history
+async function fetchBookingHistory(username) {
+    try {
+      const response = await fetch(`/api/bookings/${username}`);
+      if (response.ok) {
+        const bookings = await response.json();
+        displayBookingHistory(bookings);
+      } else {
+        console.error('Failed to fetch booking history');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  // Function to fetch guide booking history
+async function fetchGuideBookingHistory(username) {
+    try {
+      const response = await fetch(`/api/Guidebookings/${username}`);
+      if (response.ok) {
+        const bookings = await response.json();
+        displayGuideBookingHistory(bookings);
+      } else {
+        console.error('Failed to fetch guide booking history');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  // Function to fetch Transport booking history
+  async function fetchTransportBookingHistory(username) {
+    try {
+      const response = await fetch(`/api/Transportbookings/${username}`);
+      if (response.ok) {
+        const bookings = await response.json();
+        displayTransportBookingHistory(bookings);
+      } else {
+        console.error('Failed to fetch guide booking history');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  
+  
+  // Function to display Hotel booking history
+  function displayBookingHistory(bookings) {
+    const bookingHistory = document.getElementById('booking-history');
+    bookingHistory.innerHTML = ''; // Clear any existing content
+  
+    bookings.forEach((booking, index) => {
+      const listItem = document.createElement('li');
+      listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+  
+      const bookingText = document.createElement('span');
+      bookingText.textContent = `Booking ${index + 1}: Date: ${booking.checkInDate}, Hotel Name: ${booking.hotelName}, Place: ${booking.place}`;
+  
+      const buttonGroup = document.createElement('div');
+      buttonGroup.className = 'btn-group';
+  
+      if (booking.status === 'Completed') {
+        const statusSpan = document.createElement('span');
+        statusSpan.className = 'text';
+        statusSpan.textContent = 'Completed';
+  
+        const reviewButton = document.createElement('button');
+        reviewButton.className = 'btn btn-success btn-sm review-btn';
+        reviewButton.innerHTML = '<i class="fas fa-star"></i> Write a Review';
+        // reviewButton.onclick = () => writeReview(booking);
+  
+        buttonGroup.appendChild(statusSpan);
+        buttonGroup.appendChild(reviewButton);
+      } else {
+        const cancelButton = document.createElement('button');
+        cancelButton.className = 'btn btn-danger btn-sm cancel-btn';
+        cancelButton.innerHTML = '<i class="fas fa-times"></i> Cancel';
+        // cancelButton.onclick = () => cancelBooking(booking);
+  
+        buttonGroup.appendChild(cancelButton);
+      }
+  
+      listItem.appendChild(bookingText);
+      listItem.appendChild(buttonGroup);
+      bookingHistory.appendChild(listItem);
+    });
+  }
+  //Display Guide Booking History
+  function displayGuideBookingHistory(bookings) {
+    const bookingHistory = document.getElementById('guide-booking-history');
+    bookingHistory.innerHTML = ''; // Clear any existing content
+  
+    bookings.forEach((booking, index) => {
+      const listItem = document.createElement('li');
+      listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+  
+      const bookingText = document.createElement('span');
+      bookingText.textContent = `Booking ${index + 1}: Date: ${booking.date}, Guide Name: ${booking.guideName}, Place: ${booking.place}`;
+  
+      const buttonGroup = document.createElement('div');
+      buttonGroup.className = 'btn-group';
+  
+      if (booking.status === 'Completed') {
+        const statusSpan = document.createElement('span');
+        statusSpan.className = 'text';
+        statusSpan.textContent = 'Completed';
+  
+        const reviewButton = document.createElement('button');
+        reviewButton.className = 'btn btn-success btn-sm review-btn';
+        reviewButton.innerHTML = '<i class="fas fa-star"></i> Write a Review';
+        // reviewButton.onclick = () => writeReview(booking);
+  
+        buttonGroup.appendChild(statusSpan);
+        buttonGroup.appendChild(reviewButton);
+      } else {
+        const cancelButton = document.createElement('button');
+        cancelButton.className = 'btn btn-danger btn-sm cancel-btn';
+        cancelButton.innerHTML = '<i class="fas fa-times"></i> Cancel';
+        // cancelButton.onclick = () => cancelBooking(booking);
+  
+        buttonGroup.appendChild(cancelButton);
+      }
+  
+      listItem.appendChild(bookingText);
+      listItem.appendChild(buttonGroup);
+      bookingHistory.appendChild(listItem);
+    });
+  }
+  //Display Guide Booking History
+  function displayTransportBookingHistory(bookings) {
+    const bookingHistory = document.getElementById('transport-booking-history');
+    bookingHistory.innerHTML = ''; // Clear any existing content
+  
+    bookings.forEach((booking, index) => {
+      const listItem = document.createElement('li');
+      listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+  
+      const bookingText = document.createElement('span');
+      bookingText.textContent = `Booking ${index + 1}: Date: ${booking.date}, Guide Name: ${booking.guideName}, Place: ${booking.place}`;
+  
+      const buttonGroup = document.createElement('div');
+      buttonGroup.className = 'btn-group';
+  
+      if (booking.status === 'Completed') {
+        const statusSpan = document.createElement('span');
+        statusSpan.className = 'text';
+        statusSpan.textContent = 'Completed';
+  
+        const reviewButton = document.createElement('button');
+        reviewButton.className = 'btn btn-success btn-sm review-btn';
+        reviewButton.innerHTML = '<i class="fas fa-star"></i> Write a Review';
+        // reviewButton.onclick = () => writeReview(booking);
+  
+        buttonGroup.appendChild(statusSpan);
+        buttonGroup.appendChild(reviewButton);
+      } else {
+        const cancelButton = document.createElement('button');
+        cancelButton.className = 'btn btn-danger btn-sm cancel-btn';
+        cancelButton.innerHTML = '<i class="fas fa-times"></i> Cancel';
+        // cancelButton.onclick = () => cancelBooking(booking);
+  
+        buttonGroup.appendChild(cancelButton);
+      }
+  
+      listItem.appendChild(bookingText);
+      listItem.appendChild(buttonGroup);
+      bookingHistory.appendChild(listItem);
+    });
+  }
+  
+  const username = localStorage.getItem('username'); 
+  if (username) {
+    fetchBookingHistory(username);
+    fetchGuideBookingHistory(username);
+    fetchTransportBookingHistory(username);
+
+  } else {
+    console.error('Username not found in localStorage');
+  }
+  
+  

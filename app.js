@@ -441,13 +441,73 @@ app.get('/atb',async(req,res)=>{
 const hotelBookingRoutes = require('./routes/HotelBooking');
 app.use('/api/hotelBooking', hotelBookingRoutes);
 
+//Hotel Booking History
+app.get('/api/bookings', async (req, res) => {
+  try {
+    const bookings = await HotelBookingHistory.find();
+    res.status(200).json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+app.get('/api/bookings/:username', async (req, res) => {
+  const username = req.params.username;
+  try {
+    const bookings = await HotelBookingHistory.find({ user: username });
+    res.status(200).json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 //Routes of Guide Booking
 const guideBookingRoutes = require('./routes/GuideBooking');
 app.use('/api/guideBooking', guideBookingRoutes);
 
+//Guide Booking Histroy
+app.get('/api/Guidebookings', async (req, res) => {
+  try {
+    const bookings = await guideBookingHistory.find();
+    res.status(200).json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+app.get('/api/Guidebookings/:username', async (req, res) => {
+  const username = req.params.username;
+  try {
+    const bookings = await guideBookingHistory.find({ user: username });
+    res.status(200).json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 //Routes of transport
 const transportBookingRoute = require('./routes/TransportBooking'); // Adjust the path as per your directory structure
+const HotelBookingHistory = require("./models/hotelBookingHistory");
+const guideBookingHistory = require("./models/guideBookingHistory");
+const transportBookingHistory = require("./models/transportBookingHistory");
 app.use('/api/transportBooking', transportBookingRoute);
+
+//Transport Booking History
+app.get('/api/Transportbookings', async (req, res) => {
+  try {
+    const bookings = await transportBookingHistory.find();
+    res.status(200).json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+app.get('/api/Transportbookings/:username', async (req, res) => {
+  const username = req.params.username;
+  try {
+    const bookings = await transportBookingHistory.find({ user: username });
+    res.status(200).json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
 //start the server
 const PORT = process.env.PORT || 3000;
