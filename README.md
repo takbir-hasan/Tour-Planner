@@ -20,13 +20,13 @@ Users can explore our <a href="https://www.yourwebsite.com" target="_blank">webs
    ```bash
    git clone [https://github.com/SadikMR/Tour-Planner.git]
 
-Technologies Used
+## Technologies Used
 List the frameworks, libraries, programming languages, databases, and any other tools you've used in your project:
 
-Frontend: [e.g., React, Vue, Angular]
-Backend: [e.g., Node.js, Django, Flask]
-Database: [e.g., MongoDB, PostgreSQL, MySQL]
-Other: [e.g., Bootstrap, Tailwind CSS, Webpack]
+Frontend: HTML, CSS, JavaScript
+Backend: Node.js, Express.js, JavaScript
+Database: MongoDB
+Other: BootStrap, npm, Bcrypt
 
 
 ## Features
@@ -37,4 +37,3 @@ Other: [e.g., Bootstrap, Tailwind CSS, Webpack]
 - **Booking System**: Users can book hotels, transport, and guides based on ratings and reviews.
 - **Ratings and Reviews**: Users can leave ratings and reviews for hotels, transport services, and guides after availing the services.
 
-****Website****: https://tour-planner-9799.onrender.com
