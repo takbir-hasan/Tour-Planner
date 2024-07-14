@@ -202,7 +202,7 @@ function displayBookingHistory(bookings) {
             listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
 
             const bookingText = document.createElement('span');
-            bookingText.textContent = `Booking ${index + 1}: Date: ${booking.checkOutDate}, Customer Name: ${booking.userInfo.fullname}, Phone Number: ${booking.userInfo.phoneNumber}`;
+            bookingText.textContent = `Booking ${index + 1}: Date: ${booking.date}, Customer Name: ${booking.userInfo.fullname}, Phone Number: ${booking.userInfo.phoneNumber}`;
 
             const buttonGroup = document.createElement('div');
             buttonGroup.className = 'btn-group';

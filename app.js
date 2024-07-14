@@ -558,7 +558,7 @@ app.get('/api/GuideManagerInfo/:username', async (req, res) => {
         {
           $project: {
             guideName: 1,
-            checkOutDate: 1,
+            date: 1,
             'userInfo.fullname': 1,
             'userInfo.phoneNumber': 1
           }
@@ -632,7 +632,7 @@ app.get('/api/TransportManagerInfo/:username', async (req, res) => {
         {
           $project: {
             transportName: 1,
-            checkOutDate: 1,
+            date: 1,
             'userInfo.fullname': 1,
             'userInfo.phoneNumber': 1
           }
