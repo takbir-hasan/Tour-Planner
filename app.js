@@ -205,8 +205,8 @@ app.get('/api/guides', async (req, res) => {
 //favicon
 app.use(express.static(path.join(__dirname, '/')));
 
-app.get('/favicon.png', (req, res) => {
-    res.sendFile(path.join(__dirname, '/./favicon.png'));
+app.get('/public/favicon.png', (req, res) => {
+    res.sendFile(path.join(__dirname, '/./public/favicon.png'));
 });
 
 //userprofile
