@@ -35,7 +35,7 @@ $(document).ready(function () {
           const formattedDate = formatDateToYMD(date);
           const filteredTransports = response.filter(transport => {
               const isLocationMatch = transport.location.toLowerCase().includes(destination.toLowerCase());
-              const transportDate = formatDateToYMD(transport.availableDates);
+              const transportDate = formatDateToYMD(transport.available);
               
               const isAvailable = transportDate === formattedDate;
               console.log('transport:', transport.name, 'Location match:', isLocationMatch, 'date: ', transportDate, 'Date match:', isAvailable); // Debugging output

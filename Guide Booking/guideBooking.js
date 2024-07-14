@@ -33,7 +33,7 @@ $(document).ready(function () {
                 const formattedDate = formatDateToYMD(date);
                 const filteredGuides = response.filter(guide => {
                     const isLocationMatch = guide.location.toLowerCase().includes(destination.toLowerCase());
-                    const guideDate = formatDateToYMD(guide.availableDates);
+                    const guideDate = formatDateToYMD(guide.available);
                     
                     const isAvailable = guideDate === formattedDate;
                     console.log('Guide:', guide.name, 'Location match:', isLocationMatch, 'date: ', guideDate, 'Date match:', isAvailable); // Debugging output
@@ -142,7 +142,7 @@ $(document).ready(function () {
 
     function displayResults(results, date) {
         const resultsContainer = $('#results');
-        $('#top-guides-title').hide();
+        $('#top-destinations-title').hide();
         $('#suggestions').hide();
         displayGuides(resultsContainer, results, date);
         resultsContainer.show();
