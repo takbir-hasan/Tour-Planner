@@ -459,6 +459,54 @@ app.get('/api/bookings/:username', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+//HotelManagerBookingInfo
+app.get('/api/HotelManagerInfo/:username', async (req, res) => {
+  const username = req.params.username;
+  try {
+    const hotels = await Hotel.find({ username });
+
+    if (hotels.length > 0) {
+      const hotelNames = hotels.map(hotel => hotel.name);
+
+      const bookingHistory = await HotelBookingHistory.aggregate([
+        {
+          $match: { hotelName: { $in: hotelNames } }
+        },
+        {
+          $lookup: {
+            from: 'users', 
+            localField: 'user',
+            foreignField: 'username',
+            as: 'userInfo'
+          }
+        },
+        {
+          $unwind: '$userInfo'
+        },
+        {
+          $project: {
+            hotelName: 1,
+            checkOutDate: 1,
+            'userInfo.fullname': 1,
+            'userInfo.phoneNumber': 1
+          }
+        }
+      ]);
+
+      if (bookingHistory.length > 0) {
+        res.json(bookingHistory);
+      } else {
+        res.status(404).json({ message: 'Booking history not found for hotels associated with this user' });
+      }
+    } else {
+      res.status(404).json({ message: 'Hotels not found for this user' });
+    }
+  } catch (err) {
+    console.error('Error fetching hotel booking history:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 //Routes of Guide Booking
 const guideBookingRoutes = require('./routes/GuideBooking');
@@ -482,6 +530,55 @@ app.get('/api/Guidebookings/:username', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+//Guide Manager Info
+app.get('/api/GuideManagerInfo/:username', async (req, res) => {
+  const username = req.params.username;
+  try {
+    const guides = await Guide.find({ username });
+
+    if (guides.length > 0) {
+      const guideNames = guides.map(guide => guide.name);
+
+      const bookingHistory = await guideBookingHistory.aggregate([
+        {
+          $match: { guideName: { $in: guideNames } }
+        },
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'user',
+            foreignField: 'username',
+            as: 'userInfo'
+          }
+        },
+        {
+          $unwind: '$userInfo'
+        },
+        {
+          $project: {
+            guideName: 1,
+            checkOutDate: 1,
+            'userInfo.fullname': 1,
+            'userInfo.phoneNumber': 1
+          }
+        }
+      ]);
+
+      if (bookingHistory.length > 0) {
+        res.json(bookingHistory);
+      } else {
+        res.status(404).json({ message: 'Booking history not found for guide associated with this user' });
+      }
+    } else {
+      res.status(404).json({ message: 'Guides not found for this user' });
+    }
+  } catch (err) {
+    console.error('Error fetching guides booking history:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 //Routes of transport
 const transportBookingRoute = require('./routes/TransportBooking'); // Adjust the path as per your directory structure
@@ -508,6 +605,54 @@ app.get('/api/Transportbookings/:username', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+//TransportManagerInfo
+app.get('/api/TransportManagerInfo/:username', async (req, res) => {
+  const username = req.params.username;
+  try {
+    const transports = await Transport.find({ username });
+
+    if (transports.length > 0) {
+      const transportNames = transports.map(transport => transport.name);
+
+      const bookingHistory = await transportBookingHistory.aggregate([
+        {
+          $match: { transportName: { $in: transportNames } }
+        },
+        {
+          $lookup: {
+            from: 'users', 
+            localField: 'user',
+            foreignField: 'username',
+            as: 'userInfo'
+          }
+        },
+        {
+          $unwind: '$userInfo'
+        },
+        {
+          $project: {
+            transportName: 1,
+            checkOutDate: 1,
+            'userInfo.fullname': 1,
+            'userInfo.phoneNumber': 1
+          }
+        }
+      ]);
+
+      if (bookingHistory.length > 0) {
+        res.json(bookingHistory);
+      } else {
+        res.status(404).json({ message: 'Booking history not found for transports associated with this user' });
+      }
+    } else {
+      res.status(404).json({ message: 'transports not found for this user' });
+    }
+  } catch (err) {
+    console.error('Error fetching transports booking history:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 //start the server
 const PORT = process.env.PORT || 3000;
