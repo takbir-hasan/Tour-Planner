@@ -23,10 +23,10 @@ Users can explore our <a href="https://www.yourwebsite.com" target="_blank">webs
 ## Technologies Used
 List the frameworks, libraries, programming languages, databases, and any other tools you've used in your project:
 
-Frontend: HTML, CSS, JavaScript
-Backend: Node.js, Express.js, JavaScript
-Database: MongoDB
-Other: BootStrap, npm, Bcrypt
+Frontend: HTML, CSS, JavaScript  
+Backend: Node.js, Express.js, JavaScript  
+Database: MongoDB  
+Other: BootStrap, npm, Bcrypt  
 
 
 ## Features
