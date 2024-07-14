@@ -49,7 +49,7 @@ Other: BootStrap, npm, Bcrypt
 - **Ratings and Reviews**: Users can leave ratings and reviews for hotels, transport services, and guides after availing the services.
 
 ## Screenshots  
-![Home Page](/screenshots/Home.png) 
-![Hotel Booking](/screenshot/Hotel.png) 
-![Transport Booking](screenshot/Transport.png) 
-![Guide Booking](/screenshot/Guide.png) 
+![Home Page](/screenshots/Home.png)  
+![Hotel Booking](/screenshot/Hotel.png)  
+![Transport Booking](screenshot/Transport.png)  
+![Guide Booking](/screenshot/Guide.png)  
