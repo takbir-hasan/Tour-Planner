@@ -19,7 +19,7 @@ After clicking on the link it will
 2. **Clone the Repository:**
 
    ```bash
-   git clone [https://github.com/SadikMR/Tour-Planner.git]
+   git clone [https://github.com/SadikMR/Tour-Planner.git](https://github.com/SadikMR/Tour-Planner.git)
 
 Technologies Used
 List the frameworks, libraries, programming languages, databases, and any other tools you've used in your project:
