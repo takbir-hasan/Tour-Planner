@@ -4,15 +4,20 @@ const places = [
         location: "Cox's Bazar, Bangladesh",
         image: "nature1.jpg"
     },
-    // {
-    //     name: "Chattagram",
-    //     location: "Jashore City, Bangladesh",
-    //     image: "nature2.jpg"
-    // },
+    {
+        name: "Boga Lake",
+        location: "Bandarban, Bangladesh",
+        image: "bogalake.jpeg"
+    },
     {
         name: "Ratargul",
         location: "Sylhet, Bangladesh",
         image: "nature3.jpg"
+    },
+    {
+        name: "Karamjal",
+        location: "Sundarban, Bangladesh",
+        image: "image.png"
     },
    
     
