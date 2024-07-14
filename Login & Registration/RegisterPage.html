@@ -39,6 +39,7 @@
           <div class="input-box">
             <span class="details">Password</span>
             <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            <span class="error-message" id="passwordError"></span>
           </div>
           <div class="input-box">
             <span class="details">Confirm Password</span>
@@ -154,6 +155,12 @@
           document.getElementById('confirmPasswordError').textContent = 'Password and Confirm Password do not match.';
           valid = false;
       }
+
+      if (password.length < 6) {
+      document.getElementById('confirmPasswordError').textContent = 'Password should be at least 6 characters long.';
+      document.getElementById('passwordError').textContent = 'Password should be at least 6 characters long.';
+      valid = false;
+  }
 
       if (valid) {
         const formData = {
