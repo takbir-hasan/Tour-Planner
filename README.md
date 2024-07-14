@@ -86,7 +86,7 @@ Let's connect!
 
 - **Md. Sadik Mahmud Raihan** (<a href="mailto:sadikmahmudraihan@gmail.com">sadikmahmudraihan@gmail.com</a>)  
 
-- **Md. Saniul Basir Saz** (<a href="mailto:saniulsaj@gmail.com">saniulsaj@gmail.com</a>)   
+- **Md. Saniul Basir Saz** (<a href="mailto:saniul.cse.just@gmail.com">saniul.cse.just@gmail.com</a>)   
 
 - **Md. Shahin Hossain** (<a href="mailto:ss0379182@gmail.com">ss0379182@gmail.com</a>)  
 
