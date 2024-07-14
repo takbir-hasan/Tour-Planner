@@ -15,7 +15,6 @@ The UI is easy to understand. Users can easily use the website without any confu
 - [Features](#features)
 - [Screenshots](#screenshots)
 - [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 ## Installation
@@ -85,7 +84,7 @@ Let's connect!
 
 - **Sajid Hasan Takbir** (<a href="mailto:takbirhasan274@gmail.com">takbirhasan274@gmail.com</a>)  
 
-- **Md. Sadik Mahmud Raihan** <a href="mailto:sadikmahmudraihan@gmail.com">sadikmahmudraihan@gmail.com</a>)  
+- **Md. Sadik Mahmud Raihan** (<a href="mailto:sadikmahmudraihan@gmail.com">sadikmahmudraihan@gmail.com</a>)  
 
 - **Md. Saniul Basir Saz** (<a href="mailto:saniulsaj@gmail.com">saniulsaj@gmail.com</a>)   
 
