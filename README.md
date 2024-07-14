@@ -3,8 +3,9 @@
 ## Overview
 Tour Planner is a comprehensive platform that allows users to seamlessly plan their trips by booking hotels, transport, and guides based on ratings and reviews. The platform supports multiple user roles including users, hotel managers, transport drivers, and guides, each with their own account management capabilities.
 
-Usage
-Provide clear instructions on how users can interact with your website. Include examples, screenshots, or GIFs to make it easy to understand. If applicable, mention any API endpoints and how to use them.
+## Usage
+Users can explore our website by the link: https://tour-planner-9799.onrender.com
+After clicking on the link it will
 
 ## Installation
 
@@ -18,7 +19,7 @@ Provide clear instructions on how users can interact with your website. Include 
 2. **Clone the Repository:**
 
    ```bash
-   git clone [https://github.com/your-username/your-repository.git](https://github.com/your-username/your-repository.git)
+   git clone [https://github.com/SadikMR/Tour-Planner.git]
 
 Technologies Used
 List the frameworks, libraries, programming languages, databases, and any other tools you've used in your project:
