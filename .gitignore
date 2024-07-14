@@ -1,3 +1,12 @@
+# Node Modules
 node_modules
 # package-lock.json
 # package.json
+
+# Environment files
+.env
+
+# Local files
+.cph
+.vscode
+.DS_Store
