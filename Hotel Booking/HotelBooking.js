@@ -90,15 +90,16 @@ $(document).ready(function () {
       const username = localStorage.getItem('username')
 
        // Debugging output
-       console.log('Hotel ID:', hotelId);
+      /*  console.log('Hotel ID:', hotelId);
        console.log('Hotel Name:', hotelName);
        console.log('Place:', place);
        console.log('Price:', price);
        console.log('Available From:', checkInDate);
        console.log('Available To:', checkOutDate);
        console.log('Available rating: ', rating);
+        */
+       
   
-
     // Construct booking data object
       const bookingData = {
         user: username,
@@ -109,6 +110,8 @@ $(document).ready(function () {
         price: price,
         rating:rating
       };
+      bookData = JSON.stringify(bookingData);
+      console.log(bookData);
       
   
       // Example: Make AJAX request to book hotel

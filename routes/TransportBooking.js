@@ -6,12 +6,13 @@ const TransportBookingHistory = require('../models/transportBookingHistory');
 router.post('/book', async (req, res) => {
   //alert("came to route");
   try {
-    const { user, transportName, place, date, passengers, price, rating } = req.body;
+    const { user, transportName, place, date, passengers, price, rating = 0 } = req.body;
 
     console.log('Booking Data Received:', req.body);
 
     // Validate data
-    if (!user || !transportName || !place || !date || !passengers || !price || !rating) {
+    if (!user || !transportName || !place || !date || !passengers || !price ) {
+      console.log("problem is here");
       return res.status(400).json({ error: 'All fields are required' });
     }
 

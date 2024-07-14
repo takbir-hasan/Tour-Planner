@@ -4,12 +4,12 @@ const GuideBookingHistory = require('../models/guideBookingHistory');
 
 router.post('/book', async (req, res) => {
   try {
-    const { user, guideName, place, date, price, rating } = req.body;
+    const { user, guideName, place, date, price, rating = 0 } = req.body;
 
     console.log('Booking Data Received:', req.body);
 
     // Validate data
-    if (!user || !guideName || !place || !date || !price || !rating) {
+    if (!user || !guideName || !place || !date || !price ) {
       return res.status(400).json({ error: 'All fields are required' });
     }
 

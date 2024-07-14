@@ -4,12 +4,18 @@ const HotelBookingHistory = require('../models/hotelBookingHistory');
 
 router.post('/book', async (req, res) => {
   try {
-    const { user, hotelName, place, checkInDate, checkOutDate, price, rating } = req.body;
+    const { user, hotelName, place, checkInDate, checkOutDate, price, rating = 0 } = req.body;
 
     console.log('Booking Data Received:', req.body);
 
     // Validate data
-    if (!user || !hotelName || !place || !checkInDate || !checkOutDate || !price || !rating) {
+    /* if(!user) console.log("user problem");
+    if(!hotelName) console.log("hotel problem");
+    if(!place) console.log("place problem");
+    if(!date) console.log("date problem");
+    if(!price) console.log("price problem"); */
+    if (!user || !hotelName || !place || !checkInDate|| !checkOutDate|| !price ) {
+      console.log("problem is here");
       return res.status(400).json({ error: 'All fields are required' });
     }
 

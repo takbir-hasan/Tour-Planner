@@ -69,9 +69,9 @@ $(document).ready(function () {
                             data-guide-id="${guide.id}"
                             data-guide-name="${guide.name}"
                             data-guide-location="${guide.location}"
-                            data-date="${date || guide.availableDates}"
+                            data-date="${date || guide.available}"
                             data-rating="${guide.rating}"
-                            data-guide-price="${guide.pricePerDay}">
+                            data-guide-price="${guide.price}">
                             Book
                         </a>
                         <a href="#" class="btn btn-warning">Show Reviews</a>

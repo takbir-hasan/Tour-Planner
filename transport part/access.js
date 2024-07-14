@@ -73,10 +73,10 @@ $(document).ready(function () {
                data-transport-id="${transport.id}"
                data-transport-name="${transport.name}"
                data-transport-location="${transport.location}"
-               data-transport-date="${date || transport.availableDates}"
+               data-transport-date="${date || transport.available}"
                data-transport-rating="${transport.rating}"
                data-transport-price="${transport.price}"
-               data-transport-passengers="${passengers || transport.passengers}">
+               data-transport-passengers="${passengers || transport.maxPassengers}">
               Book
             </a>
             <a href="#" class="btn btn-warning">Show Reviews</a>

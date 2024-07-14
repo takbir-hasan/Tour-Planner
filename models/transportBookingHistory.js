@@ -17,7 +17,7 @@ const transportBookingHistorySchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  passengers: {
+  passengers:{
     type: String,
     required: true
   },
@@ -26,7 +26,7 @@ const transportBookingHistorySchema = new mongoose.Schema({
     required: true
   },
   rating: {
-    type: String,
+    type: Number,
     required: true
   },
   review: {
