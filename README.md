@@ -4,7 +4,7 @@
 Tour Planner is a comprehensive platform that allows users to seamlessly plan their trips by booking hotels, transport, and guides based on ratings and reviews. The platform supports multiple user roles including users, hotel managers, transport drivers, and guides, each with their own account management capabilities.
 
 ## Usage
-To explore our website go to this <a href="https://www.yourwebsite.com" target="_blank">link</a>. The interface is easy to understand. Users can easily use the website without any confusion.
+To explore our website go to this <a href="https://tour-planner-9799.onrender.com" target="_blank">link</a>. The interface is easy to understand. Users can easily use the website without any confusion.
 
 ## Table of Contents
 
@@ -49,8 +49,12 @@ Other: BootStrap, npm, Bcrypt
 - **Ratings and Reviews**: Users can leave ratings and reviews for hotels, transport services, and guides after availing the services.
 
 ## Screenshots  
+**Home:**  
 ![Home Page](/screenshots/Home.png)  
+**Hotel Booking:**
 ![Hotel Booking](/screenshots/Hotel.png)  
+**Transport Booking:**  
 ![Transport Booking](screenshots/Transport.png)  
+**Guide Booking:**  
 ![Guide Booking](/screenshots/Guide.png)  
 
