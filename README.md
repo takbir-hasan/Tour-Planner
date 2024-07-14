@@ -4,7 +4,8 @@
 Tour Planner is a comprehensive platform that allows users to seamlessly plan their trips by booking hotels, transport, and guides based on ratings and reviews. The platform supports multiple user roles including users, hotel managers, transport drivers, and guides, each with their own account management capabilities.
 
 ## Usage
-To explore our website go to this <a href="https://tour-planner-9799.onrender.com" target="_blank">link</a>. The interface is easy to understand. Users can easily use the website without any confusion.
+The UI is easy to understand. Users can easily use the website without any confusion.  
+**Website:** https://tour-planner-9799.onrender.com
 
 ## Table of Contents
 
@@ -14,7 +15,6 @@ To explore our website go to this <a href="https://tour-planner-9799.onrender.co
 - [Features](#features)
 - [Screenshots](#screenshots)
 - [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 ## Installation
@@ -50,11 +50,47 @@ Other: BootStrap, npm, Bcrypt
 
 ## Screenshots  
 **Home:**  
+
 ![Home Page](/screenshots/Home.png)  
-**Hotel Booking:**
+
+**Hotel Booking:**  
+
 ![Hotel Booking](/screenshots/Hotel.png)  
+
 **Transport Booking:**  
+
 ![Transport Booking](screenshots/Transport.png)  
+
 **Guide Booking:**  
+
 ![Guide Booking](/screenshots/Guide.png)  
+
+## Contributing
+
+We welcome contributions from everyone! Whether you're fixing a bug, adding a new feature, or improving the documentation, your help is greatly appreciated.  
+  
+To contribute, follow these steps:  
+
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature-name`
+3. Make your changes and commit them: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin feature-name`
+5. Submit a pull request.
+
+
+## Contact
+
+Let's connect!
+
+- **Sajid Hasan Takbir** (<a href="mailto:takbirhasan274@gmail.com">takbirhasan274@gmail.com</a>)  
+
+- **Md. Sadik Mahmud Raihan** (<a href="mailto:sadikmahmudraihan@gmail.com">sadikmahmudraihan@gmail.com</a>)  
+
+- **Md. Saniul Basir Saz** (<a href="mailto:saniulsaj@gmail.com">saniulsaj@gmail.com</a>)   
+
+- **Md. Shahin Hossain** (<a href="mailto:ss0379182@gmail.com">ss0379182@gmail.com</a>)  
+
+
+
+
 
