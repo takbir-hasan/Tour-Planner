@@ -83,19 +83,15 @@ To contribute, follow these steps:
 
 Let's connect!
 
-- **Name:** Sajid Hasan Takbir  
-- **Email:** <a href="mailto:takbirhasan274@gmail.com">takbirhasan274@gmail.com</a>
+- **Sajid Hasan Takbir** (<a href="mailto:takbirhasan274@gmail.com">takbirhasan274@gmail.com</a>)  
 
-- **Name:** Md. Sadik Mahmud Raihan  
-- **Email:** <a href="mailto:sadikmahmudraihan@gmail.com">sadikmahmudraihan@gmail.com</a>
+- **Md. Sadik Mahmud Raihan** <a href="mailto:sadikmahmudraihan@gmail.com">sadikmahmudraihan@gmail.com</a>)  
 
-- **Name:** Md. Saniul Basir Saz  
-- **Email:** <a href="mailto:saniulsaj@gmail.com">saniulsaj@gmail.com</a>  
+- **Md. Saniul Basir Saz** (<a href="mailto:saniulsaj@gmail.com">saniulsaj@gmail.com</a>)   
 
-- **Name:** Md. Shahin Hossain  
-- **Email:** <a href="mailto:ss0379182@gmail.com">ss0379182@gmail.com</a>
+- **Md. Shahin Hossain** (<a href="mailto:ss0379182@gmail.com">ss0379182@gmail.com</a>)  
 
-  
+
 
 
 
