@@ -62,8 +62,8 @@ $(document).ready(function () {
                     <div class="card-body">
                         <h5 class="card-title">${guide.name}</h5>
                         <p class="card-text"><strong>Location:</strong> ${guide.location}</p>
-                        <p class="card-text"><strong>Available Date:</strong> ${guide.availableDates} </p>
-                        <p class="card-text"><strong>Price:</strong> $${guide.pricePerDay}/day</p>
+                        <p class="card-text"><strong>Available Date:</strong> ${guide.available} </p>
+                        <p class="card-text"><strong>Price:</strong> $${guide.price}/day</p>
                         <p class="card-text"><strong>Rating:</strong> ${guide.rating}</p>
                         <a href="#" class="btn btn-primary book-Btn"
                             data-guide-id="${guide.id}"

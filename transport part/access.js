@@ -65,10 +65,10 @@ $(document).ready(function () {
           <div class="card-body">
             <h5 class="card-title">${transport.name}</h5>
             <p class="card-text"><strong>Location:</strong> ${transport.location}</p>
-            <p class="card-text"><strong>Available Date:</strong> ${transport.availableDates} </p>
+            <p class="card-text"><strong>Available Date:</strong> ${transport.available} </p>
             <p class="card-text"><strong>Price:</strong> $${transport.price}/trip</p>
             <p class="card-text"><strong>Rating:</strong> ${transport.rating}</p>
-            <p class="card-text"><strong>Max Passengers:</strong> ${transport.passengers}</p>
+            <p class="card-text"><strong>Max Passengers:</strong> ${transport.maxPassengers}</p>
             <a href="#" class="btn btn-primary book-Btn"
                data-transport-id="${transport.id}"
                data-transport-name="${transport.name}"
