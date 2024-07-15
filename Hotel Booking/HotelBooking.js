@@ -54,7 +54,7 @@ $(document).ready(function () {
             <p class="card-text"><strong>Price:</strong> $${hotel.price}/night</p>
             <p class="card-text"><strong>Rating:</strong> ${hotel.rating}</p>
             <a href="#" class="btn btn-primary book-Btn"
-              data-hotel-id="${hotel.id}"
+              data-hotel-id="${hotel._id}"
               data-hotel-name="${hotel.name}"
               data-hotel-location="${hotel.location}"
               data-checkin-date="${checkinDate || hotel.availableFrom}"
@@ -124,9 +124,25 @@ $(document).ready(function () {
         contentType: 'application/json',
         data: JSON.stringify(bookingData),
         success: function(response) {
-          alert(`Booking successful!\nHotel: ${response.booking.hotelName}\nCheck-in: ${new Date(response.booking.checkInDate).toLocaleDateString()}\nCheck-out: ${new Date(response.booking.checkOutDate).toLocaleDateString()}`);
-          const button = $(event.target);
-          button.text('Booked').addClass('disabled').attr('disabled', 'disabled');
+            alert(`Booking successful!\nHotel: ${response.booking.hotelName}\nCheck-in: ${new Date(response.booking.checkInDate).toLocaleDateString()}\nCheck-out: ${new Date(response.booking.checkOutDate).toLocaleDateString()}`);
+            const button = $(event.target);
+            button.text('Booked').addClass('disabled').attr('disabled', 'disabled');
+      
+            //Deleting hotel
+            $.ajax({
+                url: `/api/hotelBooking/delete/${hotelId}`,
+                method: 'DELETE',
+                success: function (deleteResponse) {
+                    console.log('hotel booking deleted from database:', deleteResponse);
+                    const button = $(event.target);
+                    button.closest('.card').remove(); // Remove the card from UI
+                    button.text('Booked').addClass('disabled').attr('disabled', 'disabled');
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error deleting hotel booking:', error);
+                    alert('Failed to delete hotel booking. Please try again later.');
+                }
+            });
         },
         error: function(xhr, status, error) {
           console.error('Error booking hotel:', error);

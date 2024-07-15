@@ -66,7 +66,7 @@ $(document).ready(function () {
                         <p class="card-text"><strong>Price:</strong> $${guide.price}/day</p>
                         <p class="card-text"><strong>Rating:</strong> ${guide.rating}</p>
                         <a href="#" class="btn btn-primary book-Btn"
-                            data-guide-id="${guide.id}"
+                            data-guide-id="${guide._id}"
                             data-guide-name="${guide.name}"
                             data-guide-location="${guide.location}"
                             data-date="${date || guide.available}"
@@ -130,6 +130,21 @@ $(document).ready(function () {
                     alert(`Booking successful!\nGuide: ${response.booking.guideName}\nDate: ${new Date(response.booking.date).toLocaleDateString()}`);
                     const button = $(event.target);
                     button.text('Booked').addClass('disabled').attr('disabled', 'disabled');
+                     // Delete the booked guide from database
+                    $.ajax({
+                        url: `/api/guideBooking/delete/${guideId}`,
+                        method: 'DELETE',
+                        success: function (deleteResponse) {
+                            console.log('Guide booking deleted from database:', deleteResponse);
+                            const button = $(event.target);
+                            button.closest('.card').remove(); // Remove the card from UI
+                            button.text('Booked').addClass('disabled').attr('disabled', 'disabled');
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error deleting guide booking:', error);
+                            alert('Failed to delete guide booking. Please try again later.');
+                        }
+                    });
                 },
                 error: function (xhr, status, error) {
                     console.error('Error booking guide:', error);

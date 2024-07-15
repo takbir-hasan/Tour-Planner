@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const TransportBookingHistory = require('../models/transportBookingHistory');
+const Transport = require("../models/transport.model");
 
 // POST route to book transport
 router.post('/book', async (req, res) => {
@@ -40,5 +41,24 @@ router.post('/book', async (req, res) => {
     res.status(500).json({ error: 'Failed to book transport' });
   }
 });
+
+
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedTransport = await Transport.findByIdAndDelete(id);
+
+    if (!deletedTransport) {
+      return res.status(404).json({ error: 'Transport not found' });
+    }
+    console.log("Transport Deleted");
+
+    res.json({ message: 'Transport deleted successfully', transport: deletedTransport });
+  } catch (error) {
+    console.error('Error deleting transport:', error);
+    res.status(500).json({ error: 'Failed to delete transport' });
+  }
+});
+
 
 module.exports = router;

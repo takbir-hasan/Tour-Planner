@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const HotelBookingHistory = require('../models/hotelBookingHistory');
+const Hotel = require('../models/hotels.model');
 
 router.post('/book', async (req, res) => {
   try {
@@ -43,5 +44,22 @@ router.post('/book', async (req, res) => {
     res.status(500).json({ error: 'Failed to book hotel' });
   }
 });
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedHotel = await Hotel.findByIdAndDelete(id);
+
+    if (!deletedHotel) {
+      return res.status(404).json({ error: 'Hotel not found' });
+    }
+    console.log("Hotel Deleted");
+
+    res.json({ message: 'Hotel deleted successfully', hotel: deletedHotel });
+  } catch (error) {
+    console.error('Error deletHotel:', error);
+    res.status(500).json({ error: 'Failed to delete hotel' });
+  }
+});
+
 
 module.exports = router;

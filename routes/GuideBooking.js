@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const GuideBookingHistory = require('../models/guideBookingHistory');
+const Guide = require('../models/guide.model');
 
 router.post('/book', async (req, res) => {
   try {
@@ -36,5 +37,23 @@ router.post('/book', async (req, res) => {
     res.status(500).json({ error: 'Failed to book guide' });
   }
 });
+
+router.delete('/delete/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedGuide = await Guide.findByIdAndDelete(id);
+
+    if (!deletedGuide) {
+      return res.status(404).json({ error: 'Guide not found' });
+    }
+    console.log("Guide Deleted");
+
+    res.json({ message: 'Guide deleted successfully', guide: deletedGuide });
+  } catch (error) {
+    console.error('Error deleting guide:', error);
+    res.status(500).json({ error: 'Failed to delete guide' });
+  }
+});
+
 
 module.exports = router;

@@ -70,7 +70,7 @@ $(document).ready(function () {
             <p class="card-text"><strong>Rating:</strong> ${transport.rating}</p>
             <p class="card-text"><strong>Max Passengers:</strong> ${transport.maxPassengers}</p>
             <a href="#" class="btn btn-primary book-Btn"
-               data-transport-id="${transport.id}"
+               data-transport-id="${transport._id}"
                data-transport-name="${transport.name}"
                data-transport-location="${transport.location}"
                data-transport-date="${date || transport.available}"
@@ -130,14 +130,33 @@ $(document).ready(function () {
 
       // Example: Make AJAX request to book transport
       $.ajax({
+
         url: '/api/transportBooking/book', // Endpoint URL on your server
         method: 'POST', // HTTP method
         contentType: 'application/json', // Content type of the request body
         data: JSON.stringify(bookingData), // Data to send, converted to JSON string
+
         success: function (response) { // Success callback function
           alert(`Booking successful!\nTransport: ${response.booking.transportName}\nDate: ${new Date(response.booking.date).toLocaleDateString()}`);
           const button = $(event.target);
           button.text('Booked').addClass('disabled').attr('disabled', 'disabled');
+
+          //deleting transport
+          $.ajax({
+              url: `/api/transportBooking/delete/${transportId}`,
+              method: 'DELETE',
+              success: function (deleteResponse) {
+                  console.log('transport booking deleted from database:', deleteResponse);
+                  const button = $(event.target);
+                  button.closest('.card').remove(); // Remove the card from UI
+                  button.text('Booked').addClass('disabled').attr('disabled', 'disabled');
+              },
+              error: function (xhr, status, error) {
+                  console.error('Error deleting transport booking:', error);
+                  alert('Failed to delete transport booking. Please try again later.');
+              }
+          });
+
         },
         error: function (xhr, status, error) { // Error callback function
           console.error('Error booking transport:', error);
