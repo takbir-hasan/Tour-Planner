@@ -40,6 +40,26 @@ const userSchema = mongoose.Schema({
       photo:{
             type:String,
             require:false
+      },
+      totRating:{
+            type: Number,
+            require:false,
+            default: 0
+      },
+      countRating:{
+            type: Number,
+            require:false,
+            default: 0
+      },
+      averageRating:{
+            type: Number,
+            require:false,
+            default: 0
+      },
+      review:{
+            type: [String],
+            require: false,
+            default: []
       }
 
 })
