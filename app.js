@@ -459,6 +459,45 @@ app.get('/api/bookings/:username', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+//Cancel Booking Hotel from user
+app.delete('/api/bookings/:username/:bookingId', async (req, res) => {
+  try {
+    const { username, bookingId } = req.params;
+
+    const booking = await HotelBookingHistory.findOne({ user: username, _id: bookingId });
+    if (!booking) {
+      return res.status(404).json({ error: 'Booking not found' });
+    }
+
+    const hotelData = {
+      username: booking.serviceProvider,
+      name: booking.hotelName,
+      location: booking.place,
+      image: booking.image, 
+      price: booking.price,
+      rating: booking.rating,
+      description: booking.review,
+      availableFrom: booking.checkInDate,
+      availableTo: booking.checkOutDate,
+      bookingId: booking._id
+    };
+
+    const newHotel = new Hotel(hotelData);
+    await newHotel.save();
+
+    const deletionResult = await HotelBookingHistory.deleteOne({ user: username, _id: bookingId });
+
+    if (deletionResult.deletedCount === 1) {
+      res.json({ message: 'Booking cancelled and added to hotel list successfully' });
+    } else {
+      console.error('Booking deletion failed');
+      res.status(500).json({ error: 'Failed to cancel booking' });
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: 'Server Error' });
+  }
+});
 //Hotel Manager Info
 app.get('/api/HotelManagerInfo/:username', async (req, res) => {
   const username = req.params.username;
@@ -521,7 +560,44 @@ app.get('/api/Guidebookings/:username', async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+//Cancel Guide booking from user
+app.delete('/api/Guidebookings/:username/:bookingId', async (req, res) => {
+  try {
+    const { username, bookingId } = req.params;
 
+    const booking = await guideBookingHistory.findOne({ user: username, _id: bookingId });
+    if (!booking) {
+      return res.status(404).json({ error: 'Booking not found' });
+    }
+
+    const GuideData = {
+      username: booking.serviceProvider,
+      name: booking.guideName,
+      location: booking.place,
+      image: booking.image, 
+      price: booking.price,
+      rating: booking.rating,
+      description: booking.review,
+      bookingId: booking._id,
+      available: booking.date
+    };
+
+    const newGuide = new Guide(GuideData);
+    await newGuide.save();
+
+    const deletionResult = await guideBookingHistory.deleteOne({ user: username, _id: bookingId });
+
+    if (deletionResult.deletedCount === 1) {
+      res.json({ message: 'Booking cancelled and added to guide list successfully' });
+    } else {
+      console.error('Booking deletion failed');
+      res.status(500).json({ error: 'Failed to cancel booking' });
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: 'Server Error' });
+  }
+});
 //Guide Manager Info
 app.get('/api/GuideManagerInfo/:username', async (req, res) => {
   const username = req.params.username;
@@ -586,6 +662,45 @@ app.get('/api/Transportbookings/:username', async (req, res) => {
     res.status(200).json(bookings);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+});
+//Cancel Transport booking from user
+app.delete('/api/Transportbookings/:username/:bookingId', async (req, res) => {
+  try {
+    const { username, bookingId } = req.params;
+
+    const booking = await transportBookingHistory.findOne({ user: username, _id: bookingId });
+    if (!booking) {
+      return res.status(404).json({ error: 'Booking not found' });
+    }
+
+    const TransportData = {
+      username: booking.serviceProvider,
+      name: booking.transportName,
+      location: booking.place,
+      image: booking.image, 
+      price: booking.price,
+      rating: booking.rating,
+      description: booking.review,
+      bookingId: booking._id,
+      available: booking.date,
+      maxPassengers: booking.passengers
+    };
+
+    const newTransport = new Transport(TransportData);
+    await newTransport.save();
+
+    const deletionResult = await transportBookingHistory.deleteOne({ user: username, _id: bookingId });
+
+    if (deletionResult.deletedCount === 1) {
+      res.json({ message: 'Booking cancelled and added to transport list successfully' });
+    } else {
+      console.error('Booking deletion failed');
+      res.status(500).json({ error: 'Failed to cancel booking' });
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: 'Server Error' });
   }
 });
 //TransportManagerInfo

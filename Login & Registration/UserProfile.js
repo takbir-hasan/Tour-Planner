@@ -123,7 +123,7 @@ async function fetchGuideBookingHistory(username) {
         const cancelButton = document.createElement('button');
         cancelButton.className = 'btn btn-danger btn-sm cancel-btn';
         cancelButton.innerHTML = '<i class="fas fa-times"></i> Cancel';
-        // cancelButton.onclick = () => cancelBooking(booking);
+        cancelButton.onclick = () => cancelBooking(username,booking._id);
   
         buttonGroup.appendChild(cancelButton);
       }
@@ -132,6 +132,22 @@ async function fetchGuideBookingHistory(username) {
       listItem.appendChild(buttonGroup);
       bookingHistory.appendChild(listItem);
     });
+  }
+  // Function to handle Hotel booking cancellation
+  async function cancelBooking(username, bookingId) {
+    try {
+      const response = await fetch(`/api/bookings/${username}/${bookingId}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        console.log('Booking cancelled successfully');
+        fetchBookingHistory(username); 
+      } else {
+        console.error('Failed to cancel booking');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   }
   //Display Guide Booking History
   function displayGuideBookingHistory(bookings) {
@@ -164,7 +180,7 @@ async function fetchGuideBookingHistory(username) {
         const cancelButton = document.createElement('button');
         cancelButton.className = 'btn btn-danger btn-sm cancel-btn';
         cancelButton.innerHTML = '<i class="fas fa-times"></i> Cancel';
-        // cancelButton.onclick = () => cancelBooking(booking);
+        cancelButton.onclick = () => cancelGuideBooking(username,booking._id);
   
         buttonGroup.appendChild(cancelButton);
       }
@@ -173,6 +189,22 @@ async function fetchGuideBookingHistory(username) {
       listItem.appendChild(buttonGroup);
       bookingHistory.appendChild(listItem);
     });
+  }
+  //Guide cancel button handle 
+  async function cancelGuideBooking(username, bookingId) {
+    try {
+      const response = await fetch(`/api/Guidebookings/${username}/${bookingId}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        console.log('Booking cancelled successfully');
+        fetchGuideBookingHistory(username); 
+      } else {
+        console.error('Failed to cancel booking');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   }
   //Display Guide Booking History
   function displayTransportBookingHistory(bookings) {
@@ -205,7 +237,7 @@ async function fetchGuideBookingHistory(username) {
         const cancelButton = document.createElement('button');
         cancelButton.className = 'btn btn-danger btn-sm cancel-btn';
         cancelButton.innerHTML = '<i class="fas fa-times"></i> Cancel';
-        // cancelButton.onclick = () => cancelBooking(booking);
+        cancelButton.onclick = () => cancelTransportBooking(username,booking._id);
   
         buttonGroup.appendChild(cancelButton);
       }
@@ -215,7 +247,22 @@ async function fetchGuideBookingHistory(username) {
       bookingHistory.appendChild(listItem);
     });
   }
-  
+   //Transport cancel button handle 
+   async function cancelTransportBooking(username, bookingId) {
+    try {
+      const response = await fetch(`/api/Transportbookings/${username}/${bookingId}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        console.log('Booking cancelled successfully');
+        fetchTransportBookingHistory(username); 
+      } else {
+        console.error('Failed to cancel booking');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
   const username = localStorage.getItem('username'); 
   if (username) {
     fetchBookingHistory(username);
