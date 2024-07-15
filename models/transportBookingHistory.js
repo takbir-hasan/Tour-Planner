@@ -40,7 +40,12 @@ const transportBookingHistorySchema = new mongoose.Schema({
   image: {
     type: String,
     default: null
-  }
+  },
+  serviceProvider: { 
+    type: String, 
+    required: true 
+  },
+
 });
 
 const transportBookingHistory = mongoose.model('transportBookingHistory', transportBookingHistorySchema);

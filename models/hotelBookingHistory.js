@@ -40,7 +40,11 @@ const hotelBookingHistorySchema = new mongoose.Schema({
   image: {
     type: String,
     default: null
-  }
+  },
+  serviceProvider: { 
+    type: String, 
+    required: true 
+  },
 });
 
 const HotelBookingHistory = mongoose.model('HotelBookingHistory', hotelBookingHistorySchema);

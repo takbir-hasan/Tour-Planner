@@ -5,7 +5,7 @@ const Hotel = require('../models/hotels.model');
 
 router.post('/book', async (req, res) => {
   try {
-    const { user, hotelName, place, checkInDate, checkOutDate, price, rating = 0, image } = req.body;
+    const { user, hotelName, place, checkInDate, checkOutDate, price, rating = 0, image, serviceProvider } = req.body;
 
     console.log('Booking Data Received:', req.body);
 
@@ -15,7 +15,7 @@ router.post('/book', async (req, res) => {
     if(!place) console.log("place problem");
     if(!date) console.log("date problem");
     if(!price) console.log("price problem"); */
-    if (!user || !hotelName || !place || !checkInDate|| !checkOutDate|| !price ) {
+    if (!user || !hotelName || !place || !checkInDate|| !checkOutDate|| !price || !serviceProvider ) {
       console.log("problem is here");
       return res.status(400).json({ error: 'All fields are required' });
     }
@@ -31,7 +31,8 @@ router.post('/book', async (req, res) => {
       rating,
       review: null, // Initialize review as null or handle it as needed
       status: 'Booked', // Assuming 'Booked' as the default status
-      image
+      image,
+      serviceProvider
     });
 
     // Save booking

@@ -72,7 +72,8 @@ $(document).ready(function () {
                             data-date="${date || guide.available}"
                             data-rating="${guide.rating}"
                             data-guide-price="${guide.price}"
-                            data-guide-image="${guide.image}">
+                            data-guide-image="${guide.image}"
+                            data-servant = "${guide.username}">
                             Book
                         </a>
                         <a href="#" class="btn btn-warning">Show Reviews</a>
@@ -98,6 +99,7 @@ $(document).ready(function () {
             const rating = $(this).data('rating');
             const username = localStorage.getItem('username');
             const guideImage = $(this).data('guide-image');
+            const ServiceProvider = $(this).data('servant');
 
             // Debugging output
             console.log('Guide ID:', guideId);
@@ -106,6 +108,8 @@ $(document).ready(function () {
             console.log('Price:', price);
             console.log('Date:', date);
             console.log('Rating:', rating);
+            console.log('Service Provide: ' , ServiceProvider);
+
             //console.log('Guide Image:', guideImage);
 
             // Construct booking data object
@@ -116,7 +120,8 @@ $(document).ready(function () {
                 date: date,
                 price: price,
                 rating: rating,
-                image: guideImage
+                image: guideImage,
+                serviceProvider: ServiceProvider
             };
             console.log(bookingData);
 

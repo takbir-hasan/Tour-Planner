@@ -36,7 +36,10 @@ const guideBookingHistorySchema = new mongoose.Schema({
   image: {
     type: String,
     default: null
-  }
+  },
+  serviceProvider: { 
+    type: String, 
+    required: true },
 });
 
 const guideBookingHistory = mongoose.model('guideBookingHistory', guideBookingHistorySchema);

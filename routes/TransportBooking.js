@@ -7,12 +7,12 @@ const Transport = require("../models/transport.model");
 router.post('/book', async (req, res) => {
   //alert("came to route");
   try {
-    const { user, transportName, place, date, passengers, price, rating = 0, image } = req.body;
+    const { user, transportName, place, date, passengers, price, rating = 0, image, serviceProvider } = req.body;
 
     console.log('Booking Data Received:', req.body);
 
     // Validate data
-    if (!user || !transportName || !place || !date || !passengers || !price ) {
+    if (!user || !transportName || !place || !date || !passengers || !price || !serviceProvider ) {
       console.log("problem is here");
       return res.status(400).json({ error: 'All fields are required' });
     }
@@ -28,7 +28,8 @@ router.post('/book', async (req, res) => {
       rating,
       review: null, // Initialize review as null or handle it as needed
       status: 'Booked', // Default status when a booking is made
-      image
+      image, 
+      serviceProvider
     });
 
     // Save booking

@@ -77,7 +77,8 @@ $(document).ready(function () {
                data-transport-rating="${transport.rating}"
                data-transport-price="${transport.price}"
                data-transport-passengers="${passengers || transport.maxPassengers}"
-               data-transport-image="${transport.image}">>\
+               data-servant = "${transport.username}"
+               data-transport-image="${transport.image}">
               Book
             </a>
             <a href="#" class="btn btn-warning">Show Reviews</a>
@@ -104,6 +105,7 @@ $(document).ready(function () {
       const passengers = $(this).data('transport-passengers');
       const username = localStorage.getItem('username');
       const transportImage = $(this).data('transport-image');
+      const serviceProvider = $(this).data('servant');
 
       // Debugging output
       console.log('Transport ID:', transportId);
@@ -113,6 +115,7 @@ $(document).ready(function () {
       console.log('Date:', date);
       console.log('Rating:', rating);
       console.log('Passengers:', passengers);
+      console.log('servant:', serviceProvider);
 
       // Construct booking data object
       const bookingData = {
@@ -123,7 +126,8 @@ $(document).ready(function () {
         passengers: passengers,
         price: price,
         rating: rating,
-        image: transportImage
+        image: transportImage,
+        serviceProvider: serviceProvider
       };
       console.log('Stringified Booking Data:', JSON.stringify(bookingData));
      // alert(bookingData.user +" "+ bookingData.transportName +" "+ bookingData.place +" "+ bookingData.date +" "+ bookingData.passengers +" "+ bookingData.price +" "+ bookingData.rating);

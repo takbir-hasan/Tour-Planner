@@ -5,7 +5,7 @@ const Guide = require('../models/guide.model');
 
 router.post('/book', async (req, res) => {
   try {
-    const { user, guideName, place, date, price, rating = 0, image } = req.body;
+    const { user, guideName, place, date, price, rating = 0, image, serviceProvider } = req.body;
 
     console.log('Booking Data Received:', req.body);
 
@@ -24,7 +24,8 @@ router.post('/book', async (req, res) => {
       rating,
       review: null, // Initialize review as null or handle it as needed
       status: 'Booked', // Default status when a booking is made
-      image
+      image,
+      serviceProvider
     });
 
     // Save booking
