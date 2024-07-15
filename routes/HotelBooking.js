@@ -4,7 +4,7 @@ const HotelBookingHistory = require('../models/hotelBookingHistory');
 
 router.post('/book', async (req, res) => {
   try {
-    const { user, hotelName, place, checkInDate, checkOutDate, price, rating = 0 } = req.body;
+    const { user, hotelName, place, checkInDate, checkOutDate, price, rating = 0, image } = req.body;
 
     console.log('Booking Data Received:', req.body);
 
@@ -29,7 +29,8 @@ router.post('/book', async (req, res) => {
       price,
       rating,
       review: null, // Initialize review as null or handle it as needed
-      status: 'Booked' // Assuming 'Booked' as the default status
+      status: 'Booked', // Assuming 'Booked' as the default status
+      image
     });
 
     // Save booking

@@ -36,6 +36,10 @@ const hotelBookingHistorySchema = new mongoose.Schema({
   status: {
     type: String,
     default: 'Booked'
+  },
+  image: {
+    type: String,
+    default: null
   }
 });
 

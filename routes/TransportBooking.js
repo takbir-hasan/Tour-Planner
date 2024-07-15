@@ -6,7 +6,7 @@ const TransportBookingHistory = require('../models/transportBookingHistory');
 router.post('/book', async (req, res) => {
   //alert("came to route");
   try {
-    const { user, transportName, place, date, passengers, price, rating = 0 } = req.body;
+    const { user, transportName, place, date, passengers, price, rating = 0, image } = req.body;
 
     console.log('Booking Data Received:', req.body);
 
@@ -26,7 +26,8 @@ router.post('/book', async (req, res) => {
       price,
       rating,
       review: null, // Initialize review as null or handle it as needed
-      status: 'Booked' // Default status when a booking is made
+      status: 'Booked', // Default status when a booking is made
+      image
     });
 
     // Save booking

@@ -60,7 +60,8 @@ $(document).ready(function () {
               data-checkin-date="${checkinDate || hotel.availableFrom}"
               data-checkout-date="${checkoutDate || hotel.availableTo}"
               data-rating = "${hotel.rating}"
-              data-hotel-price="${hotel.price}">
+              data-hotel-price="${hotel.price}"
+              data-hotel-image="${hotel.image}">
               Book
             </a>
                     
@@ -87,7 +88,8 @@ $(document).ready(function () {
       const checkInDate = $(this).data('checkin-date');
       const checkOutDate = $(this).data('checkout-date');
       const rating = $(this).data('rating');
-      const username = localStorage.getItem('username')
+      const username = localStorage.getItem('username');
+      const hotelImage = $(this).data('hotel-image');
 
        // Debugging output
       /*  console.log('Hotel ID:', hotelId);
@@ -108,7 +110,8 @@ $(document).ready(function () {
         checkInDate: checkInDate,
         checkOutDate: checkOutDate,
         price: price,
-        rating:rating
+        rating:rating,
+        image: hotelImage
       };
       bookData = JSON.stringify(bookingData);
       console.log(bookData);

@@ -32,6 +32,10 @@ const guideBookingHistorySchema = new mongoose.Schema({
   status: {
     type: String,
     default: 'Booked'  // Default status when a booking is made
+  },
+  image: {
+    type: String,
+    default: null
   }
 });
 

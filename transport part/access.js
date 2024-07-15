@@ -76,7 +76,8 @@ $(document).ready(function () {
                data-transport-date="${date || transport.available}"
                data-transport-rating="${transport.rating}"
                data-transport-price="${transport.price}"
-               data-transport-passengers="${passengers || transport.maxPassengers}">
+               data-transport-passengers="${passengers || transport.maxPassengers}"
+               data-transport-image="${transport.image}">>\
               Book
             </a>
             <a href="#" class="btn btn-warning">Show Reviews</a>
@@ -102,6 +103,7 @@ $(document).ready(function () {
       const rating = $(this).data('transport-rating');
       const passengers = $(this).data('transport-passengers');
       const username = localStorage.getItem('username');
+      const transportImage = $(this).data('transport-image');
 
       // Debugging output
       console.log('Transport ID:', transportId);
@@ -120,7 +122,8 @@ $(document).ready(function () {
         date: date,
         passengers: passengers,
         price: price,
-        rating: rating
+        rating: rating,
+        image: transportImage
       };
       console.log('Stringified Booking Data:', JSON.stringify(bookingData));
      // alert(bookingData.user +" "+ bookingData.transportName +" "+ bookingData.place +" "+ bookingData.date +" "+ bookingData.passengers +" "+ bookingData.price +" "+ bookingData.rating);

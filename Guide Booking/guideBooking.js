@@ -71,7 +71,8 @@ $(document).ready(function () {
                             data-guide-location="${guide.location}"
                             data-date="${date || guide.available}"
                             data-rating="${guide.rating}"
-                            data-guide-price="${guide.price}">
+                            data-guide-price="${guide.price}"
+                            data-guide-image="${guide.image}">
                             Book
                         </a>
                         <a href="#" class="btn btn-warning">Show Reviews</a>
@@ -96,6 +97,7 @@ $(document).ready(function () {
             const date = $(this).data('date');
             const rating = $(this).data('rating');
             const username = localStorage.getItem('username');
+            const guideImage = $(this).data('guide-image');
 
             // Debugging output
             console.log('Guide ID:', guideId);
@@ -104,6 +106,7 @@ $(document).ready(function () {
             console.log('Price:', price);
             console.log('Date:', date);
             console.log('Rating:', rating);
+            //console.log('Guide Image:', guideImage);
 
             // Construct booking data object
             const bookingData = {
@@ -112,8 +115,10 @@ $(document).ready(function () {
                 place: place,
                 date: date,
                 price: price,
-                rating: rating
+                rating: rating,
+                image: guideImage
             };
+            console.log(bookingData);
 
             // Example: Make AJAX request to book guide
             $.ajax({
