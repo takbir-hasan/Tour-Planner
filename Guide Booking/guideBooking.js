@@ -90,6 +90,7 @@ $(document).ready(function () {
                 alert("To proceed with your booking, kindly log in.");
                 return;
             }
+            
 
             const guideId = $(this).data('guide-id');
             const guideName = $(this).data('guide-name');
@@ -100,6 +101,11 @@ $(document).ready(function () {
             const username = localStorage.getItem('username');
             const guideImage = $(this).data('guide-image');
             const ServiceProvider = $(this).data('servant');
+
+            if(username == ServiceProvider) {
+                alert("Failed! You Can't Book Yourself");
+                return;
+            }
 
             // Debugging output
             console.log('Guide ID:', guideId);

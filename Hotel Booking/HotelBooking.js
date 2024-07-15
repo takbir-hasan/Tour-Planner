@@ -93,6 +93,11 @@ $(document).ready(function () {
       const hotelImage = $(this).data('hotel-image');
       const serviceProvider = $(this).data('servant');
 
+      if(username == serviceProvider) {
+        alert("Failed! You Can't Book Yourself");
+        return;
+      }
+
        // Debugging output
       /*  console.log('Hotel ID:', hotelId);
        console.log('Hotel Name:', hotelName);

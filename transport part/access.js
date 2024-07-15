@@ -107,8 +107,13 @@ $(document).ready(function () {
       const transportImage = $(this).data('transport-image');
       const serviceProvider = $(this).data('servant');
 
+      if(username == serviceProvider) {
+        alert("Failed! You Can't Book Yourself");
+        return;
+      }
+
       // Debugging output
-      console.log('Transport ID:', transportId);
+     /*  console.log('Transport ID:', transportId);
       console.log('Transport Name:', transportName);
       console.log('Place:', place);
       console.log('Price:', price);
@@ -116,7 +121,7 @@ $(document).ready(function () {
       console.log('Rating:', rating);
       console.log('Passengers:', passengers);
       console.log('servant:', serviceProvider);
-
+    */
       // Construct booking data object
       const bookingData = {
         user: username,
