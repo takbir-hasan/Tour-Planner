@@ -178,7 +178,7 @@ function updateBookingStatus(bookings) {
     const currentDate = new Date();
 
     bookings.forEach(booking => {
-        const checkOutDate = new Date(booking.checkOutDate);
+        const checkOutDate = new Date(booking.date);
         if (checkOutDate < currentDate) {
             booking.status = "Completed";
         } else {
