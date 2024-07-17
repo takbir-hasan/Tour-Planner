@@ -119,43 +119,6 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Username not found in localStorage.');
     }
     
-// function to show data of rating
-     function fetchData() {
-        const username = localStorage.getItem('username');
-
-        if (username) {
-            fetch(`/hmp?username=${username}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                Profile(data);
-            })
-            .catch(error => {
-                console.error('Error fetching profile data:', error);
-            });
-        } else {
-            console.error('Username not found in localStorage');
-        }
-    }
-
-    function Profile(data) {
-        const hotelElement = document.getElementById('hotel');
-        const ratingElement = document.getElementById('rating');
-
-        hotelElement.innerHTML = `<i class="fas fa-hotel"></i> ${data.name}`;
-        ratingElement.innerHTML = `<i class="fas fa-star"></i> Rating: ${data.rating}`;
-    }
-
-    fetchData();
 
 });
 
@@ -204,7 +167,7 @@ function displayBookingHistory(bookings) {
             listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
 
             const bookingText = document.createElement('span');
-            bookingText.textContent = `Booking ${index + 1}: Date: ${booking.checkOutDate}, Customer Name: ${booking.userInfo.fullname}, Phone Number: ${booking.userInfo.phoneNumber}`;
+            bookingText.textContent = `Booking ${index + 1}: Check-out Date: ${booking.checkOutDate}, Customer Name: ${booking.userInfo.fullname}, Phone Number: ${booking.userInfo.phoneNumber}`;
 
             const buttonGroup = document.createElement('div');
             buttonGroup.className = 'btn-group';

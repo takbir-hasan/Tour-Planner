@@ -68,9 +68,6 @@ app.use(express.static(path.join(__dirname, 'Profiles/HotelManager')));
 app.get('/editmanagerprofile', (req, res) => {
    res.sendFile(__dirname + "/./Profiles/HotelManager/EditHotelManagerProfile.html");
 })
-// app.get('/editguideprofile', (req, res) => {
-//    res.sendFile(__dirname + "/./Profiles/HotelManager/EditHotelManagerProfile.html");
-// })
 app.use(express.static(path.join(__dirname, 'Profiles/HotelManager')));
 app.get('/editmanagerservice', (req, res) => {
    res.sendFile(__dirname + "/./Profiles/HotelManager/EditHotelManagerService.html");
@@ -130,6 +127,20 @@ app.use(express.static(path.join(__dirname, 'Profiles/HotelManager')));
 app.get('/hotel-manager-success', (req, res) => {
   res.sendFile(__dirname + "/./Profiles/HotelManager/HotelManagerProfile.html");
 });
+// Serve static files from the 'Review' directory
+app.use(express.static(path.join(__dirname, 'Review')));
+
+// Example route to serve 'page.html'
+app.get('/api/review', (req, res) => {
+  res.sendFile(path.join(__dirname, 'Review', 'page.html'));
+});
+
+// Example route to serve 'page.js'
+app.get('/api/page.js', (req, res) => {
+  res.set('Content-Type', 'application/javascript');
+  res.sendFile(path.join(__dirname, 'Review', 'page.js'));
+});
+
 
 
 // login
@@ -274,12 +285,15 @@ app.post('/api/editHotelService', async (req, res) => {
       await newHotel.save();
     } else {
       // Create a new hotel record
+      const user = await User.findOne({username});
+      const rating = user.averageRating;
+
       const newHotel = new Hotel({
         username,
         name,
         location,
         price,
-        rating: 0,
+        rating,
         image,
         availableFrom,
         availableTo
@@ -296,20 +310,7 @@ app.post('/api/editHotelService', async (req, res) => {
   }
 });
 
-app.get('/hmp',async(req,res)=>{
-  const username = req.query.username;
-  try {
-    const user = await Hotel.findOne({ username });
-        if (user) {
-            res.json(user);
-        } else {
-            res.status(404).json({ message: 'User not found' });
-        }
-    } catch (err) {
-      console.error('Error fetching users:', err);
-      res.status(500).json({ message: 'Server error' });
-      }
-});
+
 //transport service
 app.post('/api/editdriverService', async (req, res) => {
   const { username, name, location, price, image, maxPassengers, available } = req.body;
@@ -338,12 +339,15 @@ app.post('/api/editdriverService', async (req, res) => {
       await newDriver.save();
     } else {
       // Create a new hotel record
+      const user = await User.findOne({username});
+      const rating = user.averageRating;
+
       const newDriver = new Transport({
         username,
         name,
         location,
         price,
-        rating: 0,
+        rating,
         image,
         maxPassengers,
         available
@@ -360,20 +364,7 @@ app.post('/api/editdriverService', async (req, res) => {
   }
 });
 
-app.get('/alb',async(req,res)=>{
-  const username = req.query.username;
-  try {
-    const user = await Transport.findOne({ username });
-        if (user) {
-            res.json(user);
-        } else {
-            res.status(404).json({ message: 'User not found' });
-        }
-    } catch (err) {
-      console.error('Error fetching users:', err);
-      res.status(500).json({ message: 'Server error' });
-      }
-});
+
 // guide service edit
 app.post('/api/editguideService', async (req, res) => {
   const { username, name, location, price, image, available } = req.body;
@@ -401,12 +392,15 @@ app.post('/api/editguideService', async (req, res) => {
       await newGuide.save();
     } else {
       // Create a new hotel record
+      const user = await User.findOne({username});
+      const rating = user.averageRating;
+
       const newGuide = new Guide({
         username,
         name,
         location,
         price,
-        rating: 0,
+        rating,
         image,
         available
       });
@@ -422,20 +416,6 @@ app.post('/api/editguideService', async (req, res) => {
   }
 });
 
-app.get('/atb',async(req,res)=>{
-  const username = req.query.username;
-  try {
-    const user = await Guide.findOne({ username });
-        if (user) {
-            res.json(user);
-        } else {
-            res.status(404).json({ message: 'User not found' });
-        }
-    } catch (err) {
-      console.error('Error fetching users:', err);
-      res.status(500).json({ message: 'Server error' });
-      }
-});
 
 // Routes of Hotel Booking
 const hotelBookingRoutes = require('./routes/HotelBooking');
@@ -598,7 +578,7 @@ app.delete('/api/Guidebookings/:username/:bookingId', async (req, res) => {
     res.status(500).json({ error: 'Server Error' });
   }
 });
-//Guide Manager Info
+//Guide  Info
 app.get('/api/GuideManagerInfo/:username', async (req, res) => {
   const username = req.params.username;
   try {
@@ -743,6 +723,90 @@ app.get('/api/TransportManagerInfo/:username', async (req, res) => {
   }
 });
 
+// review update
+app.post('/review', async (req, res) => {
+  const { username, rating, review } = req.body;
+  try {
+    console.log('Searching for user:', username);
+    const user = await User.findOne({username}).select('-password');
+    if (!user)
+      return res.status(404).json({ error: 'User not found' });
+    console.log(' Got the user:', username);
+
+  if(rating){
+    const numericRating = parseFloat(rating); // Ensure rating is parsed as a number
+    if (!isNaN(numericRating)) { // Check if rating is valid number
+      user.totRating = user.totRating + numericRating;
+      user.countRating = user.countRating + 1;
+      user.averageRating = user.totRating / user.countRating;
+    } else {
+      return res.status(400).json({ error: 'Invalid rating format' });
+    }
+
+  }
+    if(review)
+    user.review.push(review);
+  
+    await user.save({ validateBeforeSave: false });
+  
+    res.status(200).json({ message: 'Review updated successfully', user });
+  } catch (error) {
+      console.error('Error updating data:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+ 
+});
+
+// booking flag
+app.post('/api/flag', async (req, res) => {
+  const { id, service } = req.body;
+  try {
+   if(service === 'hotel'){
+        const hotel = await HotelBookingHistory.findById(id);
+        if(hotel){
+          hotel.flag = 1;
+          await hotel.save();
+          console.log("Its working!!!!!!!!!");
+        }
+        else{
+          return res.status(404).json({ error: 'Hotel not found' });
+        }
+   }
+   else if(service === 'guide'){
+    const guide = await guideBookingHistory.findById(id);
+    if(guide){
+      guide.flag = 1;
+      await guide.save();
+      console.log("Its working!!!!!!!!!");
+    }
+    else{
+      return res.status(404).json({ error: 'Guide not found' });
+    }
+   }
+   else if(service === 'driver'){
+    const tranport = await transportBookingHistory.findById(id);
+    if(tranport){
+      tranport.flag = 1;
+      await tranport.save();
+      console.log("Its working!!!!!!!!!");
+    }
+    else{
+      return res.status(404).json({ error: 'Driver not found' });
+    }
+   }
+   else{
+    return res.status(404).json({ error: 'Servie not found' });
+   }
+  
+    res.status(200).json({ message: 'Flag updated successfully'});
+  } catch (error) {
+      console.error('Error updating data:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+ 
+});
+
+   
 
 //start the server
 const PORT = process.env.PORT || 3000;

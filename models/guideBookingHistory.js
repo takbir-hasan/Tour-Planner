@@ -40,6 +40,11 @@ const guideBookingHistorySchema = new mongoose.Schema({
   serviceProvider: { 
     type: String, 
     required: true },
+  flag: { 
+    type: Number, 
+    required: false,
+    default:0 
+     },
 });
 
 const guideBookingHistory = mongoose.model('guideBookingHistory', guideBookingHistorySchema);

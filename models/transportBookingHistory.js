@@ -45,6 +45,11 @@ const transportBookingHistorySchema = new mongoose.Schema({
     type: String, 
     required: true 
   },
+  flag: { 
+    type: Number, 
+    required: false,
+    default: 0 
+     },
 
 });
 

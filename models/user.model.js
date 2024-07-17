@@ -66,10 +66,11 @@ const userSchema = mongoose.Schema({
 
 userSchema.pre('save',async function(next){
       try {
-            const salt = await bcrypt.genSalt(10)
-            this.password = await bcrypt.hash(this.password,salt)
-            this.confirmPassword = await bcrypt.hash(this.confirmPassword,salt)
-            
+            if(this.isModified('password') || this.isModified('confirmPassword')){
+                  const salt = await bcrypt.genSalt(10)
+                  this.password = await bcrypt.hash(this.password,salt)
+                  this.confirmPassword = await bcrypt.hash(this.confirmPassword,salt)
+            }            
       } catch (error) {
             next(error);
       }

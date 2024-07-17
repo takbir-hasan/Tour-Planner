@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Review</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+    * {
+        font-family: 'Nunito', sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        outline: none;
+        border: none;
+        text-decoration: none;
+        transition: all .2s linear;
+    }
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #0D1456;
+        color: var(--orange);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2rem 9%;
+    }
+
+    header .logo {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #FFFFFF;
+        margin: 0;
+    }
+    
+    header .logo span {
+        color: #ffa500;
+    }
+    
+    
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #0D1456;
+        padding: 20px;
+        margin: 0;
+        align-content: center;
+        height: auto; 
+        margin-top: 135px;
+    }
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .rating {
+        unicode-bidi: bidi-override;
+        direction: rtl;
+        text-align: center;
+        position: relative;
+        font-size: 48px;
+        margin-bottom: 20px;
+    }
+    .rating > label {
+        display: inline-block;
+        position: relative;
+        width: 1.1em;
+        color: #ccc;
+        cursor: pointer;
+    }
+    .rating > label:hover:before,
+    .rating > label:hover ~ label:before,
+    .rating > input:checked ~ label:before {
+        content: "\2605";
+        position: absolute;
+        color: gold;
+    }
+    .rating > label:before {
+        content: "\2606";
+        position: absolute;
+    }
+    .rating > input {
+        display: none;
+    }
+    .review-text {
+        width: 100%;
+        height: 100px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        resize: vertical;
+    }
+    .submit-btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        margin-right: 10px;
+    }
+    .cancel-btn{
+      background-color: #FF0000;
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        margin-right: 10px;
+    }
+    .submit-btn:hover {
+        background-color: #45a049;
+    }
+    .cancel-btn:hover{
+      background-color: #FF0000;
+    }
+
+    .cancel-btn {
+        background-color: #FF0000; /* Red background color */
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 10px;
+        }
+        .rating {
+            font-size: 36px;
+        }
+        .review-text {
+            font-size: 14px;
+            height: 80px;
+        }
+        .submit-btn, .cancel-btn {
+            font-size: 14px;
+            padding: 10px 20px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .rating {
+            font-size: 28px;
+        }
+        .review-text {
+            font-size: 12px;
+            height: 60px;
+        }
+        .submit-btn, .cancel-btn {
+            font-size: 12px;
+            padding: 8px 16px;
+        }
+    }
+</style>
+<link rel="icon" href="/public/favicon.png" type="image/png">
+</head>
+<body>
+<header>
+    <a href="/" class="logo"><span>Tour</span> Planner</a>
+</header>
+
+<div class="container">
+    <h1 style="text-align: center;">Ratings and Reviews</h1>
+    <form id="reviewForm" action="/review" method="POST">
+        <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+            <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+            <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+            <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+            <input type="radio" id="star1" name="rating" value="1" checked><label for="star1"></label>
+        </div>
+        <br><br>
+        <label for="review">Write your review:</label><br>
+        <textarea id="review" name="review" class="review-text" placeholder="Your review here..." required></textarea><br><br>
+        <input type="submit" value="Submit" class="submit-btn">
+        <input type="button" value="Cancel" class="cancel-btn" onclick="window.history.back();">
+    </form>
+</div>
+
+ <script src="page.js"></script>
+</body>
+</html>

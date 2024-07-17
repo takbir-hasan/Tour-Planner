@@ -45,6 +45,11 @@ const hotelBookingHistorySchema = new mongoose.Schema({
     type: String, 
     required: true 
   },
+  flag: { 
+    type: Number, 
+    required: false,
+    default: 0 
+     },
 });
 
 const HotelBookingHistory = mongoose.model('HotelBookingHistory', hotelBookingHistorySchema);

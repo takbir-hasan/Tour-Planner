@@ -48,12 +48,13 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Username not found in localStorage.');
     }
 });
-// Function to fetch booking history
+// Function to fetch hotel booking history
 async function fetchBookingHistory(username) {
     try {
       const response = await fetch(`/api/bookings/${username}`);
       if (response.ok) {
         const bookings = await response.json();
+        updateHotelBookingStatus(bookings);
         displayBookingHistory(bookings);
       } else {
         console.error('Failed to fetch booking history');
@@ -68,6 +69,7 @@ async function fetchGuideBookingHistory(username) {
       const response = await fetch(`/api/Guidebookings/${username}`);
       if (response.ok) {
         const bookings = await response.json();
+        updateBookingStatus(bookings);
         displayGuideBookingHistory(bookings);
       } else {
         console.error('Failed to fetch guide booking history');
@@ -82,6 +84,7 @@ async function fetchGuideBookingHistory(username) {
       const response = await fetch(`/api/Transportbookings/${username}`);
       if (response.ok) {
         const bookings = await response.json();
+        updateBookingStatus(bookings);
         displayTransportBookingHistory(bookings);
       } else {
         console.error('Failed to fetch guide booking history');
@@ -91,6 +94,35 @@ async function fetchGuideBookingHistory(username) {
     }
   }
   
+   // Function to update booking status based on check-out date
+   function updateBookingStatus(bookings) {
+     const currentDate = new Date();
+   
+  
+    bookings.forEach(booking => {
+         const checkOutDate = new Date(booking.date);
+     
+        if (checkOutDate < currentDate) {
+            booking.status = "Completed";
+        } else {
+            booking.status = "Pending";
+        }
+    });
+  }
+  //for hotel
+   function updateHotelBookingStatus(bookings) {
+    const currentDate = new Date();
+  
+    bookings.forEach(booking => {
+        const checkOutDate = new Date(booking.checkOutDate);
+
+        if (checkOutDate < currentDate) {
+            booking.status = "Completed";
+        } else {
+            booking.status = "Pending";
+        }
+    });
+  }
   
   // Function to display Hotel booking history
   function displayBookingHistory(bookings) {
@@ -102,23 +134,42 @@ async function fetchGuideBookingHistory(username) {
       listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
   
       const bookingText = document.createElement('span');
-      bookingText.textContent = `Booking ${index + 1}: Date: ${booking.checkInDate}, Hotel Name: ${booking.hotelName}, Place: ${booking.place}`;
+      bookingText.textContent = `Booking ${index + 1}:  Check-in Date: ${booking.checkInDate}, Check-out Date: ${booking.checkOutDate}, Hotel Name: ${booking.hotelName}, Place: ${booking.place}`;
   
       const buttonGroup = document.createElement('div');
       buttonGroup.className = 'btn-group';
   
       if (booking.status === 'Completed') {
-        const statusSpan = document.createElement('span');
-        statusSpan.className = 'text';
-        statusSpan.textContent = 'Completed';
+        if(booking.flag){
+          const statusSpan = document.createElement('span');
+          statusSpan.className = 'text';
+          statusSpan.textContent = 'Completed';
+    
+          const reviewButton = document.createElement('button');
+          reviewButton.className = 'btn btn-secondary btn-sm review-btn disabled';
+          reviewButton.innerHTML = '<i class="fas fa-star"></i> Reviewed';
+    
+          buttonGroup.appendChild(statusSpan);
+          buttonGroup.appendChild(reviewButton);
+         }
+         else{
+          const statusSpan = document.createElement('span');
+          statusSpan.className = 'text';
+          statusSpan.textContent = 'Completed';
+
+          const serviceProvider = booking.serviceProvider;
+          const id = booking._id;
+          const service = "hotel";
+
+          const reviewButton = document.createElement('button');
+          reviewButton.className = 'btn btn-success btn-sm review-btn';
+          reviewButton.innerHTML = '<i class="fas fa-star"></i> Write a Review';
+          reviewButton.onclick = () => writeReview(serviceProvider,id,service);
   
-        const reviewButton = document.createElement('button');
-        reviewButton.className = 'btn btn-success btn-sm review-btn';
-        reviewButton.innerHTML = '<i class="fas fa-star"></i> Write a Review';
-        // reviewButton.onclick = () => writeReview(booking);
-  
-        buttonGroup.appendChild(statusSpan);
-        buttonGroup.appendChild(reviewButton);
+          
+          buttonGroup.appendChild(statusSpan);
+          buttonGroup.appendChild(reviewButton);
+         }
       } else {
         const cancelButton = document.createElement('button');
         cancelButton.className = 'btn btn-danger btn-sm cancel-btn';
@@ -149,6 +200,7 @@ async function fetchGuideBookingHistory(username) {
       console.error('Error:', error);
     }
   }
+ 
   //Display Guide Booking History
   function displayGuideBookingHistory(bookings) {
     const bookingHistory = document.getElementById('guide-booking-history');
@@ -165,17 +217,35 @@ async function fetchGuideBookingHistory(username) {
       buttonGroup.className = 'btn-group';
   
       if (booking.status === 'Completed') {
+       if(booking.flag){
         const statusSpan = document.createElement('span');
         statusSpan.className = 'text';
         statusSpan.textContent = 'Completed';
   
         const reviewButton = document.createElement('button');
-        reviewButton.className = 'btn btn-success btn-sm review-btn';
-        reviewButton.innerHTML = '<i class="fas fa-star"></i> Write a Review';
-        // reviewButton.onclick = () => writeReview(booking);
+        reviewButton.className = 'btn btn-secondary btn-sm review-btn disabled';
+        reviewButton.innerHTML = '<i class="fas fa-star"></i> Reviewed';
   
         buttonGroup.appendChild(statusSpan);
         buttonGroup.appendChild(reviewButton);
+       }
+       else{
+        const statusSpan = document.createElement('span');
+        statusSpan.className = 'text';
+        statusSpan.textContent = 'Completed';
+
+        const serviceProvider = booking.serviceProvider;
+        const id = booking._id;
+        const service = "guide";
+
+        const reviewButton = document.createElement('button');
+        reviewButton.className = 'btn btn-success btn-sm review-btn';
+        reviewButton.innerHTML = '<i class="fas fa-star"></i> Write a Review';
+        reviewButton.onclick = () => writeReview(serviceProvider,id,service);
+  
+        buttonGroup.appendChild(statusSpan);
+        buttonGroup.appendChild(reviewButton);
+       }
       } else {
         const cancelButton = document.createElement('button');
         cancelButton.className = 'btn btn-danger btn-sm cancel-btn';
@@ -206,7 +276,15 @@ async function fetchGuideBookingHistory(username) {
       console.error('Error:', error);
     }
   }
-  //Display Guide Booking History
+  // get review
+   function writeReview(serviceProvider,id,service) {
+    localStorage.setItem('serviceProvider',serviceProvider);
+    localStorage.setItem('id',id);
+    localStorage.setItem('service',service);
+    window.location.href = '/api/review';
+  }
+  
+  //Display transport Booking History
   function displayTransportBookingHistory(bookings) {
     const bookingHistory = document.getElementById('transport-booking-history');
     bookingHistory.innerHTML = ''; // Clear any existing content
@@ -222,17 +300,36 @@ async function fetchGuideBookingHistory(username) {
       buttonGroup.className = 'btn-group';
   
       if (booking.status === 'Completed') {
-        const statusSpan = document.createElement('span');
-        statusSpan.className = 'text';
-        statusSpan.textContent = 'Completed';
-  
-        const reviewButton = document.createElement('button');
-        reviewButton.className = 'btn btn-success btn-sm review-btn';
-        reviewButton.innerHTML = '<i class="fas fa-star"></i> Write a Review';
-        // reviewButton.onclick = () => writeReview(booking);
-  
-        buttonGroup.appendChild(statusSpan);
-        buttonGroup.appendChild(reviewButton);
+        if(booking.flag){
+          const statusSpan = document.createElement('span');
+          statusSpan.className = 'text';
+          statusSpan.textContent = 'Completed';
+    
+          const reviewButton = document.createElement('button');
+          reviewButton.className = 'btn btn-secondary btn-sm review-btn disabled';
+          reviewButton.innerHTML = '<i class="fas fa-star"></i> Reviewed';
+    
+          buttonGroup.appendChild(statusSpan);
+          buttonGroup.appendChild(reviewButton);
+         }
+         else{
+          const statusSpan = document.createElement('span');
+          statusSpan.className = 'text';
+          statusSpan.textContent = 'Completed';
+    
+          const serviceProvider = booking.serviceProvider;
+          const id = booking._id;
+          const service = "driver";
+
+          const reviewButton = document.createElement('button');
+          reviewButton.className = 'btn btn-success btn-sm review-btn';
+          reviewButton.innerHTML = '<i class="fas fa-star"></i> Write a Review';
+          reviewButton.onclick = () => writeReview(serviceProvider,id,service);
+
+    
+          buttonGroup.appendChild(statusSpan);
+          buttonGroup.appendChild(reviewButton);
+         }
       } else {
         const cancelButton = document.createElement('button');
         cancelButton.className = 'btn btn-danger btn-sm cancel-btn';
