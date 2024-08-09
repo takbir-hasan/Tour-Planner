@@ -759,12 +759,14 @@ app.post('/review', async (req, res) => {
 
 // booking flag
 app.post('/api/flag', async (req, res) => {
-  const { id, service } = req.body;
+  const { id, service, rating, review } = req.body;
   try {
    if(service === 'hotel'){
         const hotel = await HotelBookingHistory.findById(id);
         if(hotel){
           hotel.flag = 1;
+          hotel.rating = rating;
+          hotel.review = review;
           await hotel.save();
           console.log("Its working!!!!!!!!!");
         }
@@ -776,6 +778,8 @@ app.post('/api/flag', async (req, res) => {
     const guide = await guideBookingHistory.findById(id);
     if(guide){
       guide.flag = 1;
+      guide.rating = rating;
+      guide.review = review;
       await guide.save();
       console.log("Its working!!!!!!!!!");
     }
@@ -784,10 +788,12 @@ app.post('/api/flag', async (req, res) => {
     }
    }
    else if(service === 'driver'){
-    const tranport = await transportBookingHistory.findById(id);
-    if(tranport){
-      tranport.flag = 1;
-      await tranport.save();
+    const transport = await transportBookingHistory.findById(id);
+    if(transport){
+      transport.flag = 1;
+      transport.rating = rating;
+      transport.review = review;
+      await transport.save();
       console.log("Its working!!!!!!!!!");
     }
     else{
@@ -795,7 +801,7 @@ app.post('/api/flag', async (req, res) => {
     }
    }
    else{
-    return res.status(404).json({ error: 'Servie not found' });
+    return res.status(404).json({ error: 'Service not found' });
    }
   
     res.status(200).json({ message: 'Flag updated successfully'});

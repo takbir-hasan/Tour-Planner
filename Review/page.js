@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log('Rating successfull');
              const id = localStorage.getItem('id');
              const service = localStorage.getItem('service');
-            updateflag(id,service); 
+            updateflag(id,service,rating,review); 
           } else {
             console.error('Failed');
           }
@@ -55,11 +55,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       }
 
-      async function updateflag(id, service) {
+      async function updateflag(id, service,rating,review) {
         try {
           const formData = {
             id,
-            service    
+            service,
+            rating, 
+            review   
         };
           const response = await fetch(`/api/flag`, {
             method: 'Post',
