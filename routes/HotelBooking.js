@@ -3,6 +3,7 @@ const router = express.Router();
 const HotelBookingHistory = require('../models/hotelBookingHistory');
 const Hotel = require('../models/hotels.model');
 
+
 router.post('/book', async (req, res) => {
   try {
     const { user, hotelName, place, checkInDate, checkOutDate, price, rating = 0, image, serviceProvider } = req.body;
@@ -61,6 +62,19 @@ router.delete('/delete/:id', async (req, res) => {
     res.status(500).json({ error: 'Failed to delete hotel' });
   }
 });
+
+// Route to get all hotel booking histories
+router.get('/history', async (req, res) => {
+  console.log("History requested");
+  try {
+    const HotelHistories = await HotelBookingHistory.find();
+    res.json(HotelHistories);
+  } catch (err) {
+    console.error('Error fetching hotel histories:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 
 module.exports = router;

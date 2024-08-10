@@ -61,5 +61,17 @@ router.delete('/delete/:id', async (req, res) => {
   }
 });
 
+// Route to get all hotel booking histories
+router.get('/history', async (req, res) => {
+  console.log("History requested");
+  try {
+    const TransportHistories = await TransportBookingHistory.find();
+    res.json(TransportHistories);
+  } catch (err) {
+    console.error('Error fetching Transport histories:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 
 module.exports = router;

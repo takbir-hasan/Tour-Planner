@@ -281,5 +281,13 @@ footer a:hover {
 
 /* Add this CSS to your existing stylesheet */
 
+/* Ensure modal has proper positioning */
+body.modal-open {
+    overflow: hidden;
+}
+
+
+
+
 
 

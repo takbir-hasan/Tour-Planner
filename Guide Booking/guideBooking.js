@@ -76,7 +76,7 @@ $(document).ready(function () {
                             data-servant = "${guide.username}">
                             Book
                         </a>
-                        <a href="#" class="btn btn-warning">Show Reviews</a>
+                        <a href="#" class="btn btn-warning review-btn" data-servant = "${guide.username}">Show Reviews</a>
                     </div>
                 </div>
             `;
@@ -219,6 +219,68 @@ $(document).ready(function () {
             alert('Please fill in all fields.');
         }
     });
+
+  // Event handler for the review button click
+$(document).on('click', '.review-btn', function() {
+    // Get the service provider from the button's data attribute
+    const serviceProvider = $(this).data('servant');
+    console.log('Service Provider:', serviceProvider);
+  
+    // Make an AJAX call to fetch all hotel booking histories
+    $.ajax({
+        url: '/api/guideBooking/history', // Ensure this matches the route
+        method: 'GET',
+        success: function(response) {
+            // Filter the histories based on the serviceProvider
+            const filteredHistories = response.filter(history => history.serviceProvider === serviceProvider && history.review !== null);
+  
+            // Display the filtered reviews
+            displayReviews(filteredHistories);
+        },
+        error: function(error) {
+            console.error('Error fetching histories:', error);
+            $('#reviewModalBody').html('<p>Error fetching reviews. Please try again later.</p>');
+            $('#reviewModal').modal('show');
+        }
+    });
+  });
+  
+  // Event handler for the close button click (if needed, for additional handling)
+  $(document).on('click', '.close, .btn-secondary', function() {
+    // Optional: Add any specific logic you need when closing the modal
+    $('#reviewModal').modal('hide');
+  });
+  
+  // Function to display reviews
+  function displayReviews(histories) {
+    console.log(histories.length);
+    let reviewsHtml = '';
+  
+    if (histories.length > 0) {
+        histories.forEach(history => {
+            reviewsHtml += `
+              <div class="review-item" style="padding: 10px; border-bottom: 1px solid #ddd;">
+                <h4 style = "color: #3383FF"><strong>${history.user}</strong></h3>
+                <br>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Rating: </strong>${history.rating}</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Review: </strong>${history.review || 'No review available'}</p>
+                <hr>
+             </div>
+            `;
+        });
+    } else {
+        reviewsHtml = '<p>No reviews found for this service provider.</p>';
+    }
+  
+    // Inject the reviews into the modal body
+    $('#reviewModalBody').html(reviewsHtml);
+  
+    // Show the modal
+    $('#reviewModal').modal('show');
+  }
+
+
+
 
     fetchTopRatedGuides();
 });
