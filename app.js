@@ -1,4 +1,4 @@
-require("dotenv").config
+require("dotenv").config();
 const express = require("express");
 const bcrypt = require('bcrypt')
 const cors = require("cors");
@@ -11,10 +11,8 @@ const dbURL = process.env.MongoDB;
 const bodyParser = require("body-parser");
 const User = require("./models/user.model");
 
-// const Booking = require("./models/booking.model");
-
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://admin01:admin01@database.ibr7v7c.mongodb.net/?retryWrites=true&w=majority&appName=Database', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbURL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB');
   })
