@@ -63,7 +63,9 @@ function updatePopularPlaces() {
                     <p>${place.location}</p>
                 </div>
                 <p class="place_txt">${place.info}</p>
-                <button class="show_btn">Show Details</button>
+                 <div class = "text-center ">
+                     <button class="show_btn ">Show Details</button>
+                </div>
             </div>
         `;
         popularGrid.appendChild(card);
