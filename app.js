@@ -44,6 +44,10 @@ app.use(express.static(path.join(__dirname, 'transport part')));
 app.get("/transportbooking",(req,res)=>{
       res.sendFile(__dirname + "/./transport part/index.html");
 })
+app.use(express.static(path.join(__dirname, 'Blogs')));
+app.get("/blogs",(req,res)=>{
+      res.sendFile(__dirname + "/./Blogs/blog.html");
+})
 app.use(express.static(path.join(__dirname, 'Login & Registration')));
 app.get("/login",(req,res)=>{
       res.sendFile(__dirname + "/./Login & Registration/LoginPage.html");
