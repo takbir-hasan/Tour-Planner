@@ -232,7 +232,7 @@ footer a:hover {
 }
 
 /* Grid View for Suggestions */
-#suggestions,
+/* #suggestions,
 #results {
     margin: auto;
 }
@@ -266,7 +266,7 @@ footer a:hover {
         flex: 0 0 32%;
         max-width: 32%;
     }
-}
+} */
 
 /* Add this CSS to your existing stylesheet */
 
@@ -365,14 +365,19 @@ footer a:hover {
     /* font-size: 12px; */
     font-weight: 400;
 }
-.place_txt{
+
+.popular__card img {
+    width: 100%;
+    height: auto;
+}
+
+.place_txt {
     font-size: 18px;
-    
+
 }
 
 /* card button decoration show details */
-.show_btn
-{
+.show_btn {
     color: white;
     background-color: #0D1456;
     width: auto;
@@ -391,7 +396,23 @@ footer a:hover {
     /* Increase font size */
 }
 
-.popular__card img {
-    width: 100%;
-    height: auto;
+@media (max-width: 720px) {
+    .popular__grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .popular__card__header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .popular__card__header h4 {
+        font-size: 1rem;
+    }
+
+    .popular__content p {
+        font-size: 14px;
+    }
 }
