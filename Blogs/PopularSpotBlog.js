@@ -31,7 +31,7 @@ const places = [
     {
         name: "Kuakata",
         location: "Kuakata, Putuakhali",
-        image: "nature2.jpg",
+        image: "nature5.jpg",
         info: "Kuakata, located in Patuakhali, is one of the few places in the world where you can witness both sunrise and sunset over the sea. Known as the ** Daughter of the Sea **, Kuakata offers a stunning 18 km long beach with serene waters and vast stretches of sandy shoreline.",
         link: "https://beautifulbangladesh.gov.bd/district-destination/patuakhali/sea-beaches/20"
     },
