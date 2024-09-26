@@ -112,7 +112,7 @@
       }
     });
 
-    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    document.getElementById('registrationForm').addEventListener('submit', async function(event) {
       event.preventDefault();
 
       const fullName = document.getElementById('fullName').value;
@@ -177,47 +177,53 @@
         };
 
         localStorage.setItem('fullName', fullName);
-        localStorage.setItem('username', username);
+      
         localStorage.setItem('email', email);
         localStorage.setItem('phoneNumber', phoneNumber);
         localStorage.setItem('gender', gender);
         localStorage.setItem('address', address);
-        localStorage.setItem('password', password);
-        localStorage.setItem('role', role);
+       
+       
         localStorage.setItem('photo', photo);
 
-        fetch('/upload', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Role:', data.role);
-          let redirectUrl = '/';
-          switch(data.role) {
-            case 'user':
-              redirectUrl = '/user-success';
-              break;
-            case 'transport-driver':
-              redirectUrl = '/transport-driver-success';
-              break;
-            case 'guide':
-              redirectUrl = '/guide-success';
-              break;
-            case 'hotel-manager':
-              redirectUrl = '/hotel-manager-success';
-              break;
-            default:
-              redirectUrl = '/';
+        try {
+          const response = await fetch('/upload', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData),
+          });
+
+          if (response.ok) {
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+            localStorage.setItem('role', role);
+            
+              const data = await response.json();
+              const role = data.role;
+
+              localStorage.setItem('role',role);
+
+              if (role === 'user') {
+                  window.location.href = '/user-success';
+              } else if (role === 'transport-driver') {
+                  window.location.href = '/transport-driver-success';
+              } else if (role === 'guide') {
+                  window.location.href = '/guide-success';
+              } else if (role === 'hotel-manager') {
+                  window.location.href = '/hotel-manager-success';
+              } else {
+                  alert('Unknown role. Please contact support.');
+              }
+          } else {
+              const errorData = await response.json();
+              alert(errorData.message);
           }
-          window.location.href = redirectUrl;
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
+      } catch (error) {
+          alert('Error Sign un. Please try again later.');
+      }
+       
       }
     });
   </script>

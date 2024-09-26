@@ -88,8 +88,7 @@ app.get('/editguideservice', (req, res) => {
 //signup
 app.post('/upload', async (req, res) => {
   try {
-    // console.log('Form submission received');
-    // console.log('Body:', req.body);
+  
     const existingUser = await User.findOne({
       $or: [
         { email: req.body.email },
@@ -109,7 +108,7 @@ app.post('/upload', async (req, res) => {
       if (existingUser.phoneNumber === req.body.phoneNumber) {
         errorMessage += 'Phone number already exists. ';
       }
-      return res.status(400).json({ error: errorMessage });
+      return res.status(401).json({ message: errorMessage });
     }
     const user = new User({
       fullname: req.body.fullName,
