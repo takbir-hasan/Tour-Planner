@@ -19,7 +19,11 @@ document.getElementById('resetPasswordForm').addEventListener('submit', function
         responseMessage.style.color = 'red';
         return;
     }
-
+    if (newPassword.length <= 6) {
+        responseMessage.textContent = 'Password must be at least 6 characters long.';
+        responseMessage.style.color = 'red';
+        return;
+    }
     if (newPassword !== confirmPassword) {
         responseMessage.textContent = 'Passwords do not match.';
         responseMessage.style.color = 'red';
