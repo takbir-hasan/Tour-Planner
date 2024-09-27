@@ -184,9 +184,28 @@ app.put('/reset-password/:id/:token', async (req, res) => {
 //signup
 app.post('/upload', async (req, res) => {
   try {
-    // console.log('Form submission received');
-    // console.log('Body:', req.body);
+  
+    const existingUser = await User.findOne({
+      $or: [
+        { email: req.body.email },
+        { username: req.body.username },
+        { phoneNumber: req.body.phoneNumber }
+      ]
+    });
 
+    if (existingUser) {
+      let errorMessage = 'Account creation failed: ';
+      if (existingUser.email === req.body.email) {
+        errorMessage += 'Email already exists. ';
+      }
+      if (existingUser.username === req.body.username) {
+        errorMessage += 'Username already exists. ';
+      }
+      if (existingUser.phoneNumber === req.body.phoneNumber) {
+        errorMessage += 'Phone number already exists. ';
+      }
+      return res.status(401).json({ message: errorMessage });
+    }
     const user = new User({
       fullname: req.body.fullName,
       username: req.body.username,
