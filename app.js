@@ -28,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.json());
 
 
 
@@ -109,18 +110,12 @@ app.post('/forgetPassword', async (req, res) => {
 
     // Generate password reset token
     const resetToken = crypto.randomBytes(32).toString('hex');
-    console.log('cryto pass ', resetToken);
     // Hash the reset token using bcrypt
     const hashedResetToken = await bcrypt.hash(resetToken, saltRounds);
-    console.log('create password ', hashedResetToken);
     // Store the hashed token and expiration time in the user model
     user.resetPasswordToken = hashedResetToken;
     user.resetPasswordExpire = Date.now() + 10 * 60 * 1000; // Token expires in 10 minutes
     await user.save();
-    
-    console.log("resetToken", resetToken);
-    console.log('Hashed token stored:', user.resetPasswordToken);
-    console.log('expire time :', user.resetPasswordExpire);
 
     // Send reset email with token
     const resetUrl = `http://localhost:3000/reset-password/${user._id}/${resetToken}`;
@@ -156,7 +151,6 @@ app.post('/forgetPassword', async (req, res) => {
 app.put('/reset-password/:id/:token', async (req, res) => {
   const { id, token } = req.params; // Extract token from the URL
   const { newPassword } = req.body; // Get new password from the request body
-  console.log('received token', token);
 
   try {
     // Find the user by ID
@@ -173,22 +167,11 @@ app.put('/reset-password/:id/:token', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid or expired token' });
     }
 
-    // Hash the new password before saving
-    // const salt = await bcrypt.genSalt(10);
-    // const hashedPassword = await bcrypt.hash(newPassword, salt);
-    // console.log('hashedpass: ', hashedPassword);
-
     user.password = newPassword;
-   
-    // Update the user's password
-    // user.password = hashedPassword;
-    // user.confirmPassword = hashedPassword;
+
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
-    // await user.save();
     await user.save();
-
-    console.log('updated password:', user.password);
 
     res.status(200).json({ success: true, message: 'Password updated successfully' });
   } catch (err) {
@@ -196,7 +179,6 @@ app.put('/reset-password/:id/:token', async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
-
 
 
 //signup
@@ -755,7 +737,7 @@ app.get('/api/Transportbookings/:username', async (req, res) => {
   const username = req.params.username;
   try {
     const bookings = await transportBookingHistory.find({ user: username });
-    
+
     res.status(200).json(bookings);
   } catch (error) {
     res.status(500).json({ message: error.message });
