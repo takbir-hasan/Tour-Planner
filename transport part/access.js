@@ -134,7 +134,7 @@ $(document).ready(function () {
         image: transportImage,
         serviceProvider: serviceProvider
       };
-      console.log('Stringified Booking Data:', JSON.stringify(bookingData));
+      // console.log('Stringified Booking Data:', JSON.stringify(bookingData));
      // alert(bookingData.user +" "+ bookingData.transportName +" "+ bookingData.place +" "+ bookingData.date +" "+ bookingData.passengers +" "+ bookingData.price +" "+ bookingData.rating);
 
       // Example: Make AJAX request to book transport
@@ -155,7 +155,7 @@ $(document).ready(function () {
               url: `/api/transportBooking/delete/${transportId}`,
               method: 'DELETE',
               success: function (deleteResponse) {
-                  console.log('transport booking deleted from database:', deleteResponse);
+                  // console.log('transport booking deleted from database:', deleteResponse);
                   const button = $(event.target);
                   button.closest('.card').remove(); // Remove the card from UI
                   button.text('Booked').addClass('disabled').attr('disabled', 'disabled');

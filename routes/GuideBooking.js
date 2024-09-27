@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const GuideBookingHistory = require('../models/guideBookingHistory');
 const Guide = require('../models/guide.model');
+const User = require("../models/user.model");
+const nodemailer = require('nodemailer');
 
 router.post('/book', async (req, res) => {
   try {
     const { user, guideName, place, date, price, rating = 0, image, serviceProvider } = req.body;
 
-    console.log('Booking Data Received:', req.body);
+    // console.log('Booking Data Received:', req.body);
 
     // Validate data
     if (!user || !guideName || !place || !date || !price ) {
@@ -30,7 +32,34 @@ router.post('/book', async (req, res) => {
 
     // Save booking
     const savedBooking = await newBooking.save();
-    console.log('Booking saved successfully:', savedBooking);
+    // console.log('Booking saved successfully:', savedBooking);
+    const person = await User.findOne({
+      username:
+        serviceProvider
+    })
+    // email sent
+    const message = ` <h2>Your Booking Confirmation</h2>
+                <p>Thank you for booking your Guide with us!</p>
+                <p><strong>Transport Name:</strong> ${savedBooking.user}</p>
+                <p><strong>Location:</strong> ${savedBooking.guideName}</p>
+                <p><strong>Date:</strong> ${savedBooking.date}</p>
+                <p><strong>Place:</strong> ${savedBooking.place}</p>
+                <p>We look forward to providing you with the best service!</p>
+                `;
+
+    const transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        user: 'searchbinary696@gmail.com',
+        pass: 'xfxtxomunurvchmc'
+      }
+    });
+
+    await transporter.sendMail({
+      to: person.email,
+      subject: 'Guide Booking Confirmation ',
+      html: message
+    });
 
     res.status(201).json({ message: 'Guide booking successful', booking: savedBooking });
   } catch (error) {
