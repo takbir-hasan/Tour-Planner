@@ -25,6 +25,8 @@ The UI is easy to understand. Users can easily use the website without any confu
    - Express
    - MongoDB
    - Bcrypt
+   - Crypto
+   - Nodemailer
 
 2. **Clone the Repository:**
 
