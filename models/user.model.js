@@ -9,10 +9,6 @@ const userSchema = mongoose.Schema({
             type: String,
             require: true
       },
-      userId: {
-            type: String,
-            require: true
-      },
       email: {
             type: String,
             require: true,
@@ -88,18 +84,5 @@ userSchema.pre('save', async function (next) {
       }
 })
 
-// userSchema.pre('save', async function (next) {
-//       if (!this.isModified('password')) {
-//           return next();
-//       }
-  
-//       try {
-//           const salt = await bcrypt.genSalt(10);
-//           this.password = await bcrypt.hash(this.password, salt);
-//           next();
-//       } catch (err) {
-//           next(err);
-//       }
-//   });  
 
 module.exports = mongoose.model("user", userSchema)
