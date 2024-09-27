@@ -55,7 +55,7 @@ Other: BootStrap, npm, Bcrypt
 
 **Blogs On Popular Places:**  
 
-![Home Page](/screenshots/blog.png)  
+![Bolgs](/screenshots/blog.png)  
 
 **Hotel Booking:**  
 
