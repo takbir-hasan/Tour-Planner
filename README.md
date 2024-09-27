@@ -53,6 +53,10 @@ Other: BootStrap, npm, Bcrypt
 
 ![Home Page](/screenshots/Home.png)  
 
+**Blogs On Popular Places:**  
+
+![Home Page](/screenshots/blog.png)  
+
 **Hotel Booking:**  
 
 ![Hotel Booking](/screenshots/Hotel.png)  
