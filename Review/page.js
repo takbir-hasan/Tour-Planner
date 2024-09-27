@@ -1,3 +1,4 @@
+require("dotenv").config();
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById('reviewForm');
 
