@@ -846,7 +846,7 @@ app.post(`/review`, async (req, res) => {
   const { username, rating, review } = req.body;
   try {
     console.log('Searching for user:', username);
-    const user = await User.findOne({ username }).select('-password');
+    const user = await User.findOne({ username });
     if (!user)
       return res.status(404).json({ error: 'User not found' });
     console.log(' Got the user:', username);
