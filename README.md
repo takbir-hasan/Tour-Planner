@@ -53,7 +53,7 @@ Other: BootStrap, npm, Bcrypt
 
 ![Home Page](/screenshots/Home.png)  
 
-**Blogs On Popular Places:**  
+**Popular Places:**  
 
 ![Bolgs](/screenshots/Blog.png)  
 
