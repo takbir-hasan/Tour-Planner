@@ -842,7 +842,7 @@ app.get('/api/TransportManagerInfo/:username', async (req, res) => {
 });
 
 // review update
-app.post('/review', async (req, res) => {
+app.post(`${process.env.URL}/review`, async (req, res) => {
   const { username, rating, review } = req.body;
   try {
     console.log('Searching for user:', username);
