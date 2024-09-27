@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 review: review    
             };
     
-          const response = await fetch(`/review`, {
+          const response = await fetch(`${process.env.URL}/review`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
