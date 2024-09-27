@@ -38,28 +38,28 @@ router.post('/book', async (req, res) => {
         serviceProvider
     })
     // email sent
-    const message = ` <h2>Your Booking Confirmation</h2>
-                <p>Thank you for booking your Guide with us!</p>
-                <p><strong>Transport Name:</strong> ${savedBooking.user}</p>
-                <p><strong>Location:</strong> ${savedBooking.guideName}</p>
-                <p><strong>Date:</strong> ${savedBooking.date}</p>
-                <p><strong>Place:</strong> ${savedBooking.place}</p>
-                <p>We look forward to providing you with the best service!</p>
-                `;
+    const message = `
+    <h2>Booking Confirm</h2>
+         <p><strong>${savedBooking.user}</strong>, booked you!</p>
+         <p><strong>Date:</strong> ${savedBooking.date}</p>
+         <p><strong>Place:</strong> ${savedBooking.place}</p>
+         <p>We look forward to providing you with the best service!</p>
+`;
 
-    const transporter = nodemailer.createTransport({
-      service: 'Gmail',
-      auth: {
-        user: 'searchbinary696@gmail.com',
-        pass: 'xfxtxomunurvchmc'
-      }
-    });
 
-    await transporter.sendMail({
-      to: person.email,
-      subject: 'Guide Booking Confirmation ',
-      html: message
-    });
+const transporter = nodemailer.createTransport({
+service: 'gmail',
+auth: {
+ user: process.env.Gmail,
+ pass: process.env.Gmail_Password
+}
+});
+
+await transporter.sendMail({
+to: person.email,
+subject: 'Guide Booking Confirmation',
+html: message
+});
 
     res.status(201).json({ message: 'Guide booking successful', booking: savedBooking });
   } catch (error) {

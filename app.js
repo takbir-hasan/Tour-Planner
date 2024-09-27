@@ -57,7 +57,7 @@ app.get("/forgetPassword", (req, res) => {
   res.sendFile(__dirname + "/./Forget Password/forgetPassword.html");
 })
 app.use(express.static(path.join(__dirname, 'Reset password')));
-app.get('/reset-password/:id/:token', (req, res) => {
+app.get(`/reset-password/:id/:token`, (req, res) => {
   res.sendFile(__dirname + '/./Reset password/resetPassword.html');
 });
 app.use(express.static(path.join(__dirname, 'Login & Registration')));
@@ -118,7 +118,7 @@ app.post('/forgetPassword', async (req, res) => {
     await user.save();
 
     // Send reset email with token
-    const resetUrl = `http://localhost:3000/reset-password/${user._id}/${resetToken}`;
+    const resetUrl = `${process.env.URL}/reset-password/${user._id}/${resetToken}`;
 
     const message = `
           <h1>You requested a password reset</h1>
@@ -127,10 +127,10 @@ app.post('/forgetPassword', async (req, res) => {
       `;
 
     const transporter = nodemailer.createTransport({
-      service: 'Gmail',
+      service: 'gmail',
       auth: {
-        user: 'searchbinary696@gmail.com',
-        pass: 'xfxtxomunurvchmc'
+        user: process.env.Gmail,
+        pass: process.env.Gmail_Password,
       }
     });
 

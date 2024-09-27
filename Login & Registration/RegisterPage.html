@@ -196,14 +196,12 @@
           });
 
           if (response.ok) {
+            const data = await response.json();
+              const role = data.role;
+
             localStorage.setItem('username', username);
             localStorage.setItem('password', password);
             localStorage.setItem('role', role);
-            
-              const data = await response.json();
-              const role = data.role;
-
-              localStorage.setItem('role',role);
 
               if (role === 'user') {
                   window.location.href = '/user-success';
@@ -221,7 +219,7 @@
               alert(errorData.message);
           }
       } catch (error) {
-          alert('Error Sign un. Please try again later.');
+          alert('Error Sign up. Please try again later.');
       }
        
       }

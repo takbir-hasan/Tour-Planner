@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
-      localStorage.setItem('username',username);
-      localStorage.setItem('password',password);
+     
     
       
       try {
@@ -19,9 +18,12 @@ document.addEventListener('DOMContentLoaded', function() {
           });
 
           if (response.ok) {
+
               const data = await response.json();
               const role = data.role;
 
+              localStorage.setItem('username',username);
+              localStorage.setItem('password',password);
               localStorage.setItem('role',role);
 
               if (role === 'user') {

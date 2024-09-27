@@ -44,29 +44,28 @@ router.post('/book', async (req, res) => {
     const person = await User.findOne({username:
       serviceProvider
     })
+
     // email sent
-    const message = `
-           <h2>Your Booking Confirmation</h2>
-                <p>Thank you for booking your Hotel with us!</p>
-                <p><strong>Transport Name:</strong> ${savedBooking.user}</p>
-                <p><strong>Location:</strong> ${savedBooking.hotelName}</p>
-                <p><strong>Date:</strong> ${savedBooking.checkInDate}</p>
-                <p><strong>Date:</strong> ${savedBooking.checkOutDate}</p>
+     const message = `
+           <h2>Booking Confirm</h2>
+                <p><strong>${savedBooking.user}</strong>, booked you!</p>
+                <p><strong>Date:</strong> ${savedBooking.date}</p>
                 <p><strong>Place:</strong> ${savedBooking.place}</p>
                 <p>We look forward to providing you with the best service!</p>
       `;
 
+
     const transporter = nodemailer.createTransport({
-      service: 'Gmail',
+      service: 'gmail',
       auth: {
-        user: 'searchbinary696@gmail.com',
-        pass: 'xfxtxomunurvchmc'
+        user: process.env.Gmail,
+        pass: process.env.Gmail_Password
       }
     });
 
     await transporter.sendMail({
       to: person.email,
-      subject: 'Hotel Booking Confirmation ',
+      subject: 'Hotel Booking Confirmation',
       html: message
     });
 
