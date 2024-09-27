@@ -49,7 +49,8 @@ router.post('/book', async (req, res) => {
      const message = `
            <h2>Booking Confirm</h2>
                 <p><strong>${savedBooking.user}</strong>, booked you!</p>
-                <p><strong>Date:</strong> ${savedBooking.date}</p>
+                <p><strong>Checkin Date:</strong> ${savedBooking.checkInDate}</p>
+                <p><strong>Checkout Date:</strong> ${savedBooking.checkOutDate}</p>
                 <p><strong>Place:</strong> ${savedBooking.place}</p>
                 <p>We look forward to providing you with the best service!</p>
       `;
