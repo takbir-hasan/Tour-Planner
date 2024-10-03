@@ -59,15 +59,6 @@ Other: BootStrap, npm, Bcrypt
 
 ![Bolgs](/screenshots/Blog.png)  
 
-**Registration:**  
-
-![Home Page](/screenshots/Registration.png)  
-
-**Login:**  
-
-![Bolgs](/screenshots/Login.png)  
-
-
 **Hotel Booking:**  
 
 ![Hotel Booking](/screenshots/Hotel.png)  
